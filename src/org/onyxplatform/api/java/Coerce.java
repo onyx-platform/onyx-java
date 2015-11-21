@@ -4,7 +4,7 @@ import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.PersistentVector;
 
-public class Coerce {
+class Coerce {
     
     private final static IFn kw;
     
@@ -40,6 +40,39 @@ public class Coerce {
         }
         
         return coerceLifecycles.invoke(entries);
+    }
+    
+    public static Object coerceFlowConditions(FlowConditions fcs) {
+        IFn coerceFlowConditions = Clojure.var("onyx.interop", "coerce-flow-conditions");
+        PersistentVector entries = PersistentVector.EMPTY;
+        
+        for (Object entry : fcs.entries) {
+            entries = entries.cons(((FlowConditionEntry) entry).toMap());
+        }
+        
+        return coerceFlowConditions.invoke(entries);
+    }
+    
+    public static Object coerceWindows(Windows windows) {
+        IFn coerceWindows = Clojure.var("onyx.interop", "coerce-windows");
+        PersistentVector entries = PersistentVector.EMPTY;
+        
+        for (Object entry : windows.windowEntries) {
+            entries = entries.cons(((WindowEntry) entry).toMap());
+        }
+        
+        return coerceWindows.invoke(entries);
+    }
+    
+    public static Object coerceTriggers(Triggers triggers) {
+        IFn coerceTriggers = Clojure.var("onyx.interop", "coerce-triggers");
+        PersistentVector entries = PersistentVector.EMPTY;
+        
+        for (Object entry : triggers.triggerEntries) {
+            entries = entries.cons(((TriggerEntry) entry).toMap());
+        }
+        
+        return coerceTriggers.invoke(entries);
     }
     
     public static Object coerceTaskScheduler(TaskScheduler ts) {

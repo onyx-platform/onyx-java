@@ -90,21 +90,15 @@ public class OnyxJava {
         IFn require = Clojure.var("clojure.core", "require"); 
         require.invoke(Clojure.read("onyx.temp"));
         
-        System.out.println("Up");
         Object env = API.startEnv(envConfig);
-        System.out.println("Env up");
         Object peerGroup = API.startPeerGroup(peerConfig);
-        System.out.println("Group up");
         Object peers = API.startPeers(3, peerGroup);
-        
         
         API.submitJob(peerConfig, job);     
         
-//        API.shutdownPeers(peers);
-//        API.shutdownPeerGroup(peerGroup);
-//        API.shutdownEnv(env);
-        
-        System.out.println("Done!");
+        API.shutdownPeers(peers);
+        API.shutdownPeerGroup(peerGroup);
+        API.shutdownEnv(env);
     }
     
 }
