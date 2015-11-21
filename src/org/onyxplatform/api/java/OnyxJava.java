@@ -1,7 +1,6 @@
 package org.onyxplatform.api.java;
 
-import clojure.java.api.Clojure;
-import clojure.lang.IFn;
+import java.util.Arrays;
 
 public class OnyxJava {
 
@@ -10,9 +9,9 @@ public class OnyxJava {
         envConfig = envConfig.addParameter("zookeeper/address", "127.0.0.1:2188");
         envConfig = envConfig.addParameter("zookeeper/server?", true);
         envConfig = envConfig.addParameter("zookeeper.server/port", 2188);
-        //envConfig = envConfig.addParameter("onyx.bookkeeper/server?", true);
-        //envConfig = envConfig.addParameter("onyx.bookkeeper/local-quorum?", true);
-        //envConfig = envConfig.addParameter("onyx.bookkeeper/local-quorum-ports", Arrays.asList(3196, 3197, 3198));
+        envConfig = envConfig.addParameter("onyx.bookkeeper/server?", true);
+        envConfig = envConfig.addParameter("onyx.bookkeeper/local-quorum?", true);
+        envConfig = envConfig.addParameter("onyx.bookkeeper/local-quorum-ports", Arrays.asList(3196, 3197, 3198));
         envConfig = envConfig.addParameter("onyx/id", "my-id");
         
         PeerConfiguration peerConfig = new PeerConfiguration();
@@ -87,14 +86,11 @@ public class OnyxJava {
         job = job.addCatalog(catalog);
         job = job.addLifecycles(lifecycles);
         
-        IFn require = Clojure.var("clojure.core", "require"); 
-        require.invoke(Clojure.read("onyx.temp"));
-        
         Object env = API.startEnv(envConfig);
         Object peerGroup = API.startPeerGroup(peerConfig);
         Object peers = API.startPeers(3, peerGroup);
         
-        API.submitJob(peerConfig, job);     
+        //API.submitJob(peerConfig, job);     
         
         API.shutdownPeers(peers);
         API.shutdownPeerGroup(peerGroup);
