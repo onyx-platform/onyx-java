@@ -1,34 +1,17 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.PersistentVector;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-public class FlowConditions {
-    
-    public final PersistentVector entries;
-    
+public class FlowConditions 
+	extends OnyxVector
+{
     public FlowConditions() {
-        entries = PersistentVector.EMPTY;
+	    super();
     }
     
-    private FlowConditions(PersistentVector ents) {
-        entries = ents;
+    private FlowConditions(FlowConditions fc) {
+	    super (fc.vContents);
     }
     
-    public FlowConditions addCondition(FlowConditionEntry ent) {
-        return new FlowConditions(entries.cons(ent));
+    public void addCondition(FlowCondition ent) {
+	    addElement( ent );
     }
-    
-    public List<Map<String, Object>> toList() {
-        return new ArrayList(entries);
-    }
-    
-    @Override
-    public String toString() {
-        return Arrays.toString(entries.toArray());
-    }
-    
 }

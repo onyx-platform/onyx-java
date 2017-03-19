@@ -3,19 +3,19 @@ package org.onyxplatform.api.java;
 import clojure.lang.PersistentHashMap;
 import java.util.Map;
 
-public class PeerConfiguration 
+public class Lifecycle
 	extends OnyxEntity
 {
-	protected static String coerceKw = "peer-config";
+	protected static String coerceKw = "catalog-entry";
 
-    	public PeerConfiguration () {
+    	public Lifecycle() {
 	    	super();
     	}
     	
-    	private PeerConfiguration(PeerConfiguration cfg) {
-	    	super( cfg.entry );
-	}
-
+    	private Lifecycle(Lifecycle c) {
+	    	super( c.entry );
+    	}
+	
 	protected PersistentHashMap coerce(Map<String, Object> jMap) {
 		return (PersistentHashMap) super.castTypesFn.invoke( coerceKw, jMap);
 	}

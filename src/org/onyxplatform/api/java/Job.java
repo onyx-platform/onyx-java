@@ -1,57 +1,136 @@
 package org.onyxplatform.api.java;
 
-public class Job {
+import clojure.java.api.Clojure;
+import clojure.lang.IFn;
+import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentArrayMap;
+import clojure.lang.PersistentVector;
+import java.util.Map;
 
-    public final TaskScheduler taskScheduler;
-    public final Workflow workflow;
-    public final Catalog catalog;
-    public final Lifecycles lifecycles;
-    public final FlowConditions flowConditions;
-    public final Windows windows;
-    public final Triggers triggers;
+public class Job 
+	implements OnyxNames
+{
+    protected final static IFn kwFn;
+
+    static {
+
+	IFn requireFn = Clojure.var(CORE, Require);
+	kwFn = Clojure.var(CORE, Keyword);
+    }
+
+    public TaskScheduler taskScheduler;
+    public Workflow workflow;
+    public Catalog catalog;
+    public Lifecycles lifecycles;
+    public FlowConditions flowConditions;
+    public Windows windows;
+    public Triggers triggers;
     
     public Job(TaskScheduler ts) {
         taskScheduler = ts;
-        workflow = null;
-        catalog = null;
-        lifecycles = null;
-        flowConditions = null;
-        windows = null;
-        triggers = null;
+        workflow = new Workflow();
+        catalog = new Catalog();
+        lifecycles = new Lifecycles();
+        flowConditions = new FlowConditions();
+        windows = new Windows();
+        triggers = new Triggers();
     }
-    
-    private Job(TaskScheduler ts, Workflow wf, Catalog cat, Lifecycles lfcs, FlowConditions fcs, Windows ws, Triggers trs) {
-        taskScheduler = ts;
-        workflow = wf;
-        catalog = cat;
-        lifecycles = lfcs;
-        flowConditions = fcs;
-        windows = ws;
-        triggers = trs;
+
+    public Job(Job j) {
+	    taskScheduler = j.taskScheduler;
+	    workflow = j.workflow;
+	    catalog = j.catalog;
+	    flowConditions = j.flowConditions;
+	    windows = j.windows;
+	    triggers = j.triggers;
     }
-    
-    public Job addWorkflow(Workflow wf) {
-        return new Job(taskScheduler, wf, catalog, lifecycles, flowConditions, windows, triggers);
+
+
+    public void addWorkflow(Workflow wf) {
+	    workflow = wf;
     }
-    
-    public Job addCatalog(Catalog cat) {
-        return new Job(taskScheduler, workflow, cat, lifecycles, flowConditions, windows, triggers);
+
+    public void addWorkflowEdge(String srcTask, String dstTask) {
+	    workflow.addEdge(srcTask, dstTask);
     }
-    
-    public Job addLifecycles(Lifecycles lfcs) {
-        return new Job(taskScheduler, workflow, catalog, lifecycles, flowConditions, windows, triggers);
+   
+
+    public void addCatalog(Catalog cat) {
+	    catalog = cat;
     }
-    
-    public Job addFlowConditions(FlowConditions fcs) {
-        return new Job(taskScheduler, workflow, catalog, lifecycles, fcs, windows, triggers);
+
+    public void addCatalogTask(Task t) {
+	    catalog.addTask(t);
     }
+
     
-    public Job addWindows(Windows ws) {
-        return new Job(taskScheduler, workflow, catalog, lifecycles, flowConditions, ws, triggers);
+    public void addLifecycles(Lifecycles lfcs) {
+	    lifecycles = lfcs;
     }
-    
-    public Job addTriggers(Triggers trs) {
-        return new Job(taskScheduler, workflow, catalog, lifecycles, flowConditions, windows, trs);
+
+    public void addLifecycle(Lifecycle lf) {
+	    lifecycles.addCall(lf);
     }
+   
+
+    public void addFlowConditions(FlowConditions fcs) {
+	    flowConditions = fcs;
+    }
+
+    public void addFlowCondition(FlowCondition fc) {
+	    flowConditions.addCondition(fc);
+    }
+
     
+    public void addWindows(Windows ws) {
+	    windows = ws;
+    }
+
+    public void addWindow(Window w) {
+	    windows.addWindow(w);
+    }
+   
+
+    public void addTriggers(Triggers trs) {
+	    triggers = trs;
+    }
+
+    public void addTrigger(Trigger t) {
+	    triggers.addTrigger(t);
+    }
+
+    public PersistentArrayMap toCljMap() {
+
+	PersistentArrayMap coercedJob = PersistentArrayMap.EMPTY;
+
+	Object coercedTaskScheduler = taskScheduler.toCljString();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("task-scheduler"), 
+							    coercedTaskScheduler );
+
+	PersistentVector coercedWorkflow = workflow.cljGraph();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("workflow"), 
+			                                    coercedWorkflow );
+
+	PersistentVector coercedCatalog = catalog.toCljVector();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("catalog"), 
+							    coercedCatalog );
+
+	PersistentVector coercedLifecycles = lifecycles.toCljVector();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("lifecycles"), 
+							    coercedLifecycles );
+
+	PersistentVector coercedFlowConditions = flowConditions.toCljVector();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("flow-conditions"), 
+							    coercedFlowConditions );
+
+	PersistentVector coercedWindows = windows.toCljVector();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("windows"), 
+							    coercedWindows );
+
+	PersistentVector coercedTriggers = triggers.toCljVector();
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("triggers"), 
+							    coercedTriggers );
+
+	return coercedJob;
+    }
 }

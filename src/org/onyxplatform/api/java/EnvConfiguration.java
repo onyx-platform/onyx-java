@@ -3,29 +3,20 @@ package org.onyxplatform.api.java;
 import clojure.lang.PersistentHashMap;
 import java.util.Map;
 
-public class EnvConfiguration {
+public class EnvConfiguration 
+	extends OnyxEntity
+{
+	protected static String coerceKw = "env-config";
 
-    private final PersistentHashMap config;
+    	public EnvConfiguration () {
+	    	super();
+    	}
     
-    public EnvConfiguration () {
-        config = PersistentHashMap.EMPTY;
-    }
-    
-    private EnvConfiguration(PersistentHashMap cfg) {
-        config = cfg;
-    }
-    
-    public EnvConfiguration addParameter(String param, Object arg) {
-        return new EnvConfiguration ((PersistentHashMap) config.assoc(param, arg));
-    }
-    
-    public Map<String, Object> toMap() {
-        return config;
-    }
-    
-    @Override
-    public String toString() {
-        return config.toString();
-    }
-    
+    	private EnvConfiguration(EnvConfiguration cfg) {
+	    	super( cfg.entry );
+    	}
+	
+    	protected PersistentHashMap coerce(Map<String, Object> jMap) {
+		return (PersistentHashMap) super.castTypesFn.invoke( coerceKw, jMap);
+    	}
 }

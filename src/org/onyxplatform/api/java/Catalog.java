@@ -1,34 +1,17 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.PersistentVector;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-public class Catalog {
-    
-    public final PersistentVector tasks;
-    
+public class Catalog 
+	extends OnyxVector
+{
     public Catalog() {
-        tasks = PersistentVector.EMPTY;
+	    super();
     }
     
-    private Catalog(PersistentVector ts) {
-        tasks = ts;
+    private Catalog(Catalog c) {
+	    super(c.vContents);
     }
     
-    public Catalog addTask(Task task) {
-        return new Catalog(tasks.cons(task));
+    public void addTask(Task task) {
+	    addElement( task );
     }
-    
-    public List<Map<String, Object>> toList() {
-        return new ArrayList(tasks);
-    }
-    
-    @Override
-    public String toString() {
-        return Arrays.toString(tasks.toArray());
-    }
-    
 }
