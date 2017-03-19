@@ -1,9 +1,14 @@
 package org.onyxplatform.api.java;
 
-public enum TaskScheduler {
-       
+import clojure.java.api.Clojure;
+import clojure.lang.IFn;
+
+public enum TaskScheduler 
+	implements OnyxNames
+{
     BALANCED("onyx.task-scheduler/balanced"),
     PERCENTAGE("onyx.task-scheduler/percentage");
+
     
     private final String strRepr;
 
@@ -15,5 +20,10 @@ public enum TaskScheduler {
     public String toString() {
         return strRepr;
     }
-    
+
+    public Object toCljString() {
+	IFn requireFn = Clojure.var(CORE, Require);
+	IFn kwFn = Clojure.var(CORE, Keyword);
+	return kwFn.invoke(strRepr);
+    }
 }
