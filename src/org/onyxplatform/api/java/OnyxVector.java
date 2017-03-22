@@ -59,8 +59,6 @@ public class OnyxVector
 
 		PersistentVector v = PersistentVector.EMPTY;
 
-		// Iterate each entity
-		// coercing
 		for (Object e : vContents) {
 			OnyxEntity oe = (OnyxEntity) e;
 			v = v.cons( oe.toCljMap() );
