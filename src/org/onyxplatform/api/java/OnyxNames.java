@@ -1,5 +1,11 @@
 package org.onyxplatform.api.java;
 
+/**
+ * This interface represents the base of the onyx-java package.
+ * It's purpose is simply to abstract the use of and centralize the location of
+ * onyx keywords. This interface is implemented by any base classes which
+ * specify interop of Java and Clojure types or behaviors.
+ */
 public interface OnyxNames {
 
 
@@ -18,7 +24,7 @@ public interface OnyxNames {
 	public static final String ShutdownPeers 	= "shutdown-peers";
 	public static final String SubmitJob 		= "submit-job";
 
-	
+
 
 	public static final String INTEROP 		= "onyx.interop";
 	public static final String CastTypes 		= "cast-types";

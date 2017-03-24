@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * This class should serve as a base for any Onyx concept that is represented
+ * only by a vector of Onyx maps. Implementors include things like workflows.
+ */
 public class OnyxVector
 {
 	protected PersistentVector vContents;
@@ -22,7 +27,7 @@ public class OnyxVector
 	/**
 	 * Constructs a new OnyxVector object with an initial contents vector set
 	 * to an existing vector passed in the signature.
-	 * @param  PersistentVector pv    the existing vector to use as this
+	 * @param  PersistentVector pv    existing vector to use as this
 	 *                          vector object's initial content vector
 	 * @return                  new OnyxVector object with initial content vector
 	 */
@@ -33,7 +38,7 @@ public class OnyxVector
 	/**
 	 * Creates a new ArrayList by converting the object's existing content
 	 * vector. Does not alter the existing content vector.
-	 * @return the newly created ArrayList representation of the
+	 * @return newly created ArrayList representation of the
 	 *             object content vector
 	 */
    	public List<Map<String, Object>> toList() {
@@ -52,7 +57,7 @@ public class OnyxVector
 	/**
 	 * Iterates over the existing content vector, ensuring each constituent
 	 * map is a Clojure PersistentHashMap in a new PersistentVector container.
-	 * @return the new PersistentVector container containing guaranteed
+	 * @return new PersistentVector container containing guaranteed
 	 * PersistentHashMap entities
 	 */
 	protected PersistentVector toCljVector() {
@@ -68,8 +73,8 @@ public class OnyxVector
 	}
 
 		/**
-		 * Produces without modification a string representation of the
-		 * contents of the content vector
+		 * Produces a string representation of the
+		 * contents of the content vector without modifying the actual vector.
 		 * @return string representation of the content vector
 		 */
     	@Override
