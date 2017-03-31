@@ -7,7 +7,7 @@ import java.util.Map;
 
 
 /**
- * This class should serve as a base for any Onyx concept that is represented
+ * Serves as a base for any Onyx concept that is represented
  * only by a map. Implementors include things like Tasks, LifecycleCall,
  * FlowConditionEntry, WindowEntry, etc.
  */
@@ -18,8 +18,6 @@ public abstract class OnyxEntity
 	 * Classwide functionality
 	 */
 	protected final static IFn castTypesFn;
-	protected final static IFn kwFn;
-
 
 	/**
 	 * Initializes classwide onyx typecasting as castTypesFn by initializing
@@ -29,8 +27,6 @@ public abstract class OnyxEntity
 	 */
 	static {
 		IFn requireFn = Clojure.var(CORE, Require);
-		kwFn = Clojure.var(CORE, Keyword);
-
 		requireFn.invoke(Clojure.read(INTEROP));
 		castTypesFn = Clojure.var(INTEROP, CastTypes);
 	}
