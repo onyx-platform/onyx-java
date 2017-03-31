@@ -1,7 +1,7 @@
 package org.onyxplatform.api.java;
 
 /**
- * Lifecycles are a set of Lifecycle objects that can be applied to
+ * Lifecycles objects are a set of Lifecycle objects that can be applied to
  * Tasks running as part of a job.
  * Lifecycles derive from OnyxVector.
  */
