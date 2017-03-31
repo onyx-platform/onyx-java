@@ -60,7 +60,7 @@ public abstract class OnyxEntity implements OnyxNames
 
 	/**
 	 * Creates a clojure PersistentHashMap from a java Map made of string-object
-	 * key value pairs based on a the implementor's specification.
+	 * key value pairs based on the implementor's specification.
 	 * @param  Map<String, Object>       jMap java Map to be converted
 	 * @return             new PersistentHashMap representation of the java Map
 	 */
@@ -80,10 +80,11 @@ public abstract class OnyxEntity implements OnyxNames
 
 
 	/**
-	 * Returns a casted java Map representation of the existing
+	 * Returns a Java Map representation of the existing
 	 * PersistentHashMap content 'entry'.
-	 * @return casted representation of existing PersistentHashMap 'entry'
+	 * @return Java Map representation of existing PersistentHashMap 'entry'
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> toMap() {
 		return (Map<String, Object>) entry;
 	}
@@ -92,7 +93,7 @@ public abstract class OnyxEntity implements OnyxNames
 	/**
 	 * Creates a clojure PersistentHashMap of the content Map by using the
 	 * implementor specific coerce method.
-	 * @return the PersistentHashMap coerced
+	 * @return clojure PHM representation of content map
 	 */
 	public PersistentHashMap toCljMap() {
 		return coerce( toMap() );
