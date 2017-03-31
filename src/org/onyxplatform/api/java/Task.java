@@ -11,6 +11,7 @@ public class Task
 
     	public Task() {
 			super();
+
     	}
 
     	private Task(PersistentHashMap ent) {
@@ -18,6 +19,6 @@ public class Task
     	}
 
     	protected PersistentHashMap coerce(Map<String, Object> jMap) {
-		return (PersistentHashMap) super.castTypesFn.invoke( coerceKw, jMap);
+			return (PersistentHashMap) super.castTypesFn.invoke(coerceKw,jMap);
     	}
 }

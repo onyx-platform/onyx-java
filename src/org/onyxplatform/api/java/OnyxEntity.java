@@ -11,8 +11,7 @@ import java.util.Map;
  * only by a map. Implementors include things like Tasks, LifecycleCall,
  * FlowConditionEntry, WindowEntry, etc.
  */
-public abstract class OnyxEntity
-	implements OnyxNames
+public abstract class OnyxEntity implements OnyxNames
 {
 	/**
 	 * Classwide functionality
@@ -23,7 +22,7 @@ public abstract class OnyxEntity
 	 * Initializes classwide onyx typecasting as castTypesFn by initializing
 	 * clojure-java interoperability via the onyx library.
 	 * This allows type conversion between java maps and vectors and clojure
-	 * persistenthashmaps and persistentvectors, required by onyx.
+	 * PersistentHashMaps and PersistentVectors, required by onyx.
 	 */
 	static {
 		IFn requireFn = Clojure.var(CORE, Require);
