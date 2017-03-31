@@ -31,6 +31,7 @@ public interface OnyxNames {
 	public static final String ShutdownEnv 		= "shutdown-env";
 
 	public static final String StartPeers 		= "start-peers";
+	public static final String ShutdownPeer		= "shutdown-peer";
 	public static final String ShutdownPeers 	= "shutdown-peers";
 
 	public static final String StartPeerGroup 	= "start-peer-group";
