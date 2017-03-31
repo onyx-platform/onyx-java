@@ -34,7 +34,7 @@ public class FlowCondition extends OnyxEntity
 	/**
 	 * Coerces FlowCondition object content map into proper onyx FlowCondition.
 	 * Returns the onyx representation without altering the existing content map.
-	 * @param  Map<String, Object>       jMap Content map to coerce
+	 * @param  Map<String, Object>       jMap content map to coerce
 	 * @return             onyx representation of content map
 	 */
 	protected PersistentHashMap coerce(Map<String, Object> jMap) {
