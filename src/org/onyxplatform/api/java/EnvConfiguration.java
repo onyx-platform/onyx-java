@@ -3,6 +3,11 @@ package org.onyxplatform.api.java;
 import clojure.lang.PersistentHashMap;
 import java.util.Map;
 
+/**
+ * An EnvConfiguration (environment configuration) specifies how a development
+ * environment should be initialized, which uses an in-memory implementation
+ * of zookeeper.
+ */
 public class EnvConfiguration extends OnyxEntity
 {
 	protected static String coerceKw = "env-config";
