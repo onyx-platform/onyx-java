@@ -14,7 +14,7 @@ public class OnyxJava {
         envConfig.addParameter("onyx.bookkeeper/local-quorum?", true);
         envConfig.addParameter("onyx.bookkeeper/local-quorum-ports", Arrays.asList(3196, 3197, 3198));
         envConfig.addParameter("onyx/id", "my-id");
-        
+
         PeerConfiguration peerConfig = new PeerConfiguration();
         peerConfig.addParameter("zookeeper/address", "127.0.0.1:2188");
         peerConfig.addParameter("onyx.peer/job-scheduler", "onyx.job-scheduler/greedy");
@@ -33,7 +33,7 @@ public class OnyxJava {
 
         job.addWorkflowEdge("read-input", "increment-number");
         job.addWorkflowEdge("increment-number", "write-output");
-        
+
         Task task1 = new Task();
         task1.addParameter("onyx/name", "read-input");
         task1.addParameter("onyx/type", "input");
@@ -60,15 +60,15 @@ public class OnyxJava {
         task3.addParameter("onyx/max-peers", 1);
         task3.addParameter("onyx/batch-size", 20);
         task3.addParameter("onyx/type", "output");
-        
+
 	job.addCatalogTask(task3);
-                  
+
         Lifecycle inputInject = new Lifecycle();
         inputInject.addParameter("lifecycle/task", "read-input");
         inputInject.addParameter("lifecycle/calls", "onyx.temp/in-calls");
 
 	job.addLifecycle(inputInject);
-        
+
         Lifecycle inputCAS = new Lifecycle();
         inputCAS.addParameter("lifecycle/task", "read-input");
         inputCAS.addParameter("lifecycle/calls", "onyx.plugin.core-async/reader-calls");
@@ -78,7 +78,7 @@ public class OnyxJava {
         Lifecycle outputInject = new Lifecycle();
         outputInject.addParameter("lifecycle/task", "write-output");
         outputInject.addParameter("lifecycle/calls", "onyx.temp/out-calls");
-      
+
 	job.addLifecycle(outputInject);
 
         Lifecycle outputCAS = new Lifecycle();
@@ -86,16 +86,16 @@ public class OnyxJava {
         outputCAS.addParameter("lifecycle/calls", "onyx.plugin.core-async/writer-calls");
 
 	job.addLifecycle(outputCAS);
-        
+
         Object env = API.startEnv(envConfig);
         Object peerGroup = API.startPeerGroup(peerConfig);
         Object peers = API.startPeers(3, peerGroup);
-        
-        API.submitJob(peerConfig, job);     
-        
+
+        API.submitJob(peerConfig, job);
+
         API.shutdownPeers(peers);
         API.shutdownPeerGroup(peerGroup);
         API.shutdownEnv(env);
     }
-    
+
 }
