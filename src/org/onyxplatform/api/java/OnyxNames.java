@@ -40,6 +40,9 @@ public interface OnyxNames {
 	Job Control
 	 */
 	public static final String SubmitJob 		= "submit-job";
+	public static final String KillJob 		= "kill-job";
+	public static final String AwaitJobCompletion = "await-job-completion";
+	public static final String CollectGarbage = "gc";
 
 	/**
 	 * Generic TypeCasting
