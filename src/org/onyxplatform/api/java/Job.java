@@ -7,15 +7,13 @@ import clojure.lang.PersistentArrayMap;
 import clojure.lang.PersistentVector;
 import java.util.Map;
 
-public class Job 
-	implements OnyxNames
+public class Job implements OnyxNames
 {
     protected final static IFn kwFn;
 
     static {
-
-	IFn requireFn = Clojure.var(CORE, Require);
-	kwFn = Clojure.var(CORE, Keyword);
+		IFn requireFn = Clojure.var(CORE, Require);
+		kwFn = Clojure.var(CORE, Keyword);
     }
 
     public TaskScheduler taskScheduler;
@@ -25,7 +23,7 @@ public class Job
     public FlowConditions flowConditions;
     public Windows windows;
     public Triggers triggers;
-    
+
     public Job(TaskScheduler ts) {
         taskScheduler = ts;
         workflow = new Workflow();
@@ -53,7 +51,7 @@ public class Job
     public void addWorkflowEdge(String srcTask, String dstTask) {
 	    workflow.addEdge(srcTask, dstTask);
     }
-   
+
 
     public void addCatalog(Catalog cat) {
 	    catalog = cat;
@@ -63,7 +61,7 @@ public class Job
 	    catalog.addTask(t);
     }
 
-    
+
     public void addLifecycles(Lifecycles lfcs) {
 	    lifecycles = lfcs;
     }
@@ -71,7 +69,7 @@ public class Job
     public void addLifecycle(Lifecycle lf) {
 	    lifecycles.addCall(lf);
     }
-   
+
 
     public void addFlowConditions(FlowConditions fcs) {
 	    flowConditions = fcs;
@@ -81,7 +79,7 @@ public class Job
 	    flowConditions.addCondition(fc);
     }
 
-    
+
     public void addWindows(Windows ws) {
 	    windows = ws;
     }
@@ -89,7 +87,7 @@ public class Job
     public void addWindow(Window w) {
 	    windows.addWindow(w);
     }
-   
+
 
     public void addTriggers(Triggers trs) {
 	    triggers = trs;
@@ -104,31 +102,31 @@ public class Job
 	PersistentArrayMap coercedJob = PersistentArrayMap.EMPTY;
 
 	Object coercedTaskScheduler = taskScheduler.toCljString();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("task-scheduler"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("task-scheduler"),
 							    coercedTaskScheduler );
 
 	PersistentVector coercedWorkflow = workflow.cljGraph();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("workflow"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("workflow"),
 			                                    coercedWorkflow );
 
 	PersistentVector coercedCatalog = catalog.toCljVector();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("catalog"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("catalog"),
 							    coercedCatalog );
 
 	PersistentVector coercedLifecycles = lifecycles.toCljVector();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("lifecycles"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("lifecycles"),
 							    coercedLifecycles );
 
 	PersistentVector coercedFlowConditions = flowConditions.toCljVector();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("flow-conditions"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("flow-conditions"),
 							    coercedFlowConditions );
 
 	PersistentVector coercedWindows = windows.toCljVector();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("windows"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("windows"),
 							    coercedWindows );
 
 	PersistentVector coercedTriggers = triggers.toCljVector();
-	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("triggers"), 
+	coercedJob = (PersistentArrayMap) coercedJob.assoc( kwFn.invoke("triggers"),
 							    coercedTriggers );
 
 	return coercedJob;
