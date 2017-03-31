@@ -15,7 +15,7 @@ public class FlowCondition extends OnyxEntity
 
 	/**
 	 * Creates a new FlowCondition object using OnyxEntity superconstructor.
-	 * @return new FlowCondition object.
+	 * @return new FlowCondition object
 	 */
 	public FlowCondition() {
     	entry = PersistentHashMap.EMPTY;
@@ -32,7 +32,7 @@ public class FlowCondition extends OnyxEntity
 	}
 
 	/**
-	 * Coerces FlowConditions object content map into proper onyx FlowCondition.
+	 * Coerces FlowCondition object content map into proper onyx FlowCondition.
 	 * Returns the onyx representation without altering the existing content map.
 	 * @param  Map<String, Object>       jMap Content map to coerce
 	 * @return             onyx representation of content map
