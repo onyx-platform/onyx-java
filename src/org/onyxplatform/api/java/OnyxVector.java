@@ -1,7 +1,6 @@
 package org.onyxplatform.api.java;
 
 import clojure.lang.PersistentVector;
-
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +8,8 @@ import java.util.Map;
 
 
 /**
- * This class should serve as a base for any Onyx concept that is represented
- * only by a vector of Onyx maps. Implementors include things like workflows.
+ * Serves as a base for any Onyx concept that is represented by a vector of
+ * onyx maps, e.g. workflows.
  */
 public class OnyxVector
 {
@@ -26,20 +25,18 @@ public class OnyxVector
 
 	/**
 	 * Constructs a new OnyxVector object with an initial contents vector set
-	 * to an existing vector passed in the signature.
-	 * @param  PersistentVector pv    existing vector to use as this
-	 *                          vector object's initial content vector
-	 * @return                  new OnyxVector object with initial content vector
+	 * to an existing passed vector
+	 * @param  PersistentVector pv    existing vector to use as content vector
+	 * @return                  new OnyxVector object
 	 */
 	protected OnyxVector(PersistentVector pv) {
 		vContents = pv;
 	}
 
 	/**
-	 * Creates a new ArrayList by converting the object's existing content
-	 * vector. Does not alter the existing content vector.
-	 * @return newly created ArrayList representation of the
-	 *             object content vector
+	 * Creates a new ArrayList by converting the existing content
+	 * vector (does not alter the existing content vector).
+	 * @return newly created ArrayList representation of the content vector
 	 */
    	public List<Map<String, Object>> toList() {
         	return new ArrayList(vContents);
@@ -50,8 +47,8 @@ public class OnyxVector
 	 * it to the end of the content vector. The object should represent a map.
 	 * @param Object o object to be added to the existing content vector
 	 */
-	protected void addElement( Object o) {
-	    vContents = vContents.cons( o );
+	protected void addElement(Object o) {
+	    vContents = vContents.cons(o);
 	}
 
 	/**
@@ -66,19 +63,19 @@ public class OnyxVector
 
 		for (Object e : vContents) {
 			OnyxEntity oe = (OnyxEntity) e;
-			v = v.cons( oe.toCljMap() );
+			v = v.cons(oe.toCljMap());
 		}
 
 		return v;
 	}
 
-		/**
-		 * Produces a string representation of the
-		 * contents of the content vector without modifying the actual vector.
-		 * @return string representation of the content vector
-		 */
-    	@Override
-    	public String toString() {
-        	return Arrays.toString(vContents.toArray());
-    	}
+	/**
+	 * Produces a string representation of the
+	 * contents of the content vector without modifying the actual vector.
+	 * @return string representation of the content vector
+	 */
+	@Override
+	public String toString() {
+    	return Arrays.toString(vContents.toArray());
+	}
 }
