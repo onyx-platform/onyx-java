@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Lifecycle extends OnyxEntity
 {
-	protected static String coerceKw = "catalog-entry";
+	protected static String coerceKw = OnyxLifecycleEntry;
 
 	/**
 	 * Creates a new Lifecycle object using OnyxEntity superconstructor.
@@ -33,7 +33,7 @@ public class Lifecycle extends OnyxEntity
 	 * @return           new Lifecycle object
 	 */
 	private Lifecycle(Lifecycle c) {
-    	super( c.entry );
+    	super(c.entry);
 	}
 
 	/**

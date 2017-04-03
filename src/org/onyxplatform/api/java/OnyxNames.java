@@ -25,15 +25,27 @@ public interface OnyxNames {
 	public static final String PeerConfig 			= "peer-config";
 
 	/**
+	 * Task Scheduling
+	 */
+	public static final String BalancedTaskSchedule		= "onyx.task-scheduler/balanced";
+	public static final String PercentTaskSchedule		= "onyx.task-scheduler/percentage";
+
+	/**
 	 * Onyx Components
 	 */
-	public static final String OnyxTaskScheduler	= "task-scheduler";
-	public static final String OnyxWorkflow			= "workflow";
-	public static final String OnyxCatalog			= "catalog";
-	public static final String OnyxLifecycles		= "lifecycles";
-	public static final String OnyxFlowConditions	= "flow-conditions";
-	public static final String OnyxWindows			= "windows";
-	public static final String OnyxTriggers			= "triggers";
+	public static final String OnyxTaskScheduler		= "task-scheduler";
+	public static final String OnyxWorkflow				= "workflow";
+	public static final String OnyxWorkflowEntry		= "workflow-entry";
+	public static final String OnyxCatalog				= "catalog";
+	public static final String OnyxCatalogEntry			= "catalog-entry";
+	public static final String OnyxLifecycles			= "lifecycles";
+	public static final String OnyxLifecycleEntry		= "lifecycle-entry";
+	public static final String OnyxFlowConditions		= "flow-conditions";
+	public static final String OnyxFlowConditionsEntry	= "flow-conditions-entry";
+	public static final String OnyxWindows				= "windows";
+	public static final String OnyxWindowEntry			= "window-entry";
+	public static final String OnyxTriggers				= "triggers";
+	public static final String OnyxTriggerEntry			= "trigger-entry";
 
 	/**
 	 * Environment and Peer Control

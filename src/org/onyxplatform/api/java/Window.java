@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Window extends OnyxEntity
 {
-	protected static String coerceKw = "window-entry";
+	protected static String coerceKw = OnyxWindowEntry;
 
 	/**
 	 * Creates a new Window object using OnyxEntity superconstructor.

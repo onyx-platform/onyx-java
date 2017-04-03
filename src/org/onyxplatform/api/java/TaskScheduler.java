@@ -10,8 +10,8 @@ import clojure.lang.IFn;
  */
 public enum TaskScheduler implements OnyxNames
 {
-    BALANCED("onyx.task-scheduler/balanced"),
-    PERCENTAGE("onyx.task-scheduler/percentage");
+    BALANCED(BalancedTaskSchedule),
+    PERCENTAGE(PercentTaskSchedule);
 
     private final String strRepr;
 

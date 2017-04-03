@@ -27,9 +27,9 @@ public class Lifecycles extends OnyxVector
 
     /**
      * Adds an existing Lifecycle to the Lifecycles content vector.
-     * @param Lifecycle cs Lifecycle to add to the Lifecycles contents.
+     * @param Lifecycle cs Lifecycle to add to the Lifecycles contents
      */
     public void addCall(Lifecycle cs) {
-	    vContents = vContents.cons(cs);
+	    addElement(cs);
     }
 }

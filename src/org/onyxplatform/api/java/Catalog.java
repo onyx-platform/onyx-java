@@ -14,16 +14,16 @@ public class Catalog extends OnyxVector
     }
 
 	/**
-	 * Creates a new catalog from an existing catalog.
-	 * @param  Catalog c             existing catalog to use for new catalog
-	 * @return         new catalog object
+	 * Creates a new Catalog from an existing Catalog.
+	 * @param  Catalog c             existing Catalog to use for new Catalog
+	 * @return         new Catalog object
 	 */
     private Catalog(Catalog c) {
 	    super(c.vContents);
     }
 
 	/**
-	 * Adds an existing task to the catalog.
+	 * Adds an existing Task object to the catalog.
 	 * @param Task task task object to be added to the catalog
 	 */
     public void addTask(Task task) {

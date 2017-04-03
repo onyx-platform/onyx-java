@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class EnvConfiguration extends OnyxEntity
 {
-	protected static String coerceKw = "env-config";
+	protected static String coerceKw = EnvConfig;
 
 		/**
 		 * Calls empty superconstructor for OnyxEntity

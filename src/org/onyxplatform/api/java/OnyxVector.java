@@ -36,8 +36,12 @@ public class OnyxVector
 	/**
 	 * Creates a new ArrayList by converting the existing content
 	 * vector (does not alter the existing content vector).
+	 * Note: This method causes two compiler complaints, but because of the
+	 * package architecture, any aberrant behavior will be caught and handled
+	 * either in clojure during coercion or in a higher order nested behavior.
 	 * @return newly created ArrayList representation of the content vector
 	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
    	public List<Map<String, Object>> toList() {
         	return new ArrayList(vContents);
     	}

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Task extends OnyxEntity
 {
-	protected static String coerceKw = "catalog-entry";
+	protected static String coerceKw = OnyxCatalogEntry;
 
 	/**
 	 * Creates a new Task object using OnyxEntity superconstructor.

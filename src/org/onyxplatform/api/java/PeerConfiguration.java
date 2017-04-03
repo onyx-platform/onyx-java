@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class PeerConfiguration extends OnyxEntity
 {
-	protected static String coerceKw = "peer-config";
+	protected static String coerceKw = PeerConfig;
 
 	/**
 	 * Creates a new PeerConfiguration object using OnyxEntity superconstructor.

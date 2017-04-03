@@ -71,8 +71,16 @@ public class Job implements OnyxNames
      * Sets the Job Workflow to the passed Workflow object.
      * @param Workflow wf Workflow object to be added
      */
-    public void addWorkflow(Workflow wf) {
+    public void setWorkflow(Workflow wf) {
 	    workflow = wf;
+    }
+
+    /**
+     * Returns the current Job Workflow object.
+     * @return Workflow object
+     */
+    public Workflow getWorkflow(){
+        return workflow;
     }
 
     /**
@@ -88,8 +96,16 @@ public class Job implements OnyxNames
      * Sets the Job Catalog to the passed Catalog object.
      * @param Catalog cat Catalog object to be added
      */
-    public void addCatalog(Catalog cat) {
+    public void setCatalog(Catalog cat) {
 	    catalog = cat;
+    }
+
+    /**
+     * Returns the current Job Catalog object.
+     * @return Catalog object
+     */
+    public Catalog getCatalog(){
+        return catalog;
     }
 
     /**
@@ -104,8 +120,16 @@ public class Job implements OnyxNames
      * Sets the Job Lifecycles to the passed Lifecycles object.
      * @param Lifecycles lfcs Lifecycles object to be added
      */
-    public void addLifecycles(Lifecycles lfcs) {
+    public void setLifecycles(Lifecycles lfcs) {
 	    lifecycles = lfcs;
+    }
+
+    /**
+     * Returns the current Job Lifecycles object.
+     * @return Lifecycles object
+     */
+    public Lifecycles getLifecycles(){
+        return lifecycles;
     }
 
     /**
@@ -120,8 +144,16 @@ public class Job implements OnyxNames
      * Sets the Job FlowConditions to the passed FlowConditions object.
      * @param FlowConditions fcs FlowConditions to be added
      */
-    public void addFlowConditions(FlowConditions fcs) {
+    public void setFlowConditions(FlowConditions fcs) {
 	    flowConditions = fcs;
+    }
+
+    /**
+     * Returns the current Job FlowConditions object.
+     * @return FlowConditions object
+     */
+    public FlowConditions getFlowConditions(){
+        return flowConditions;
     }
 
     /**
@@ -136,8 +168,16 @@ public class Job implements OnyxNames
      * Sets the Job Windows to the passed Windows object.
      * @param Windows ws Windows to be added
      */
-    public void addWindows(Windows ws) {
+    public void setWindows(Windows ws) {
 	    windows = ws;
+    }
+
+    /**
+     * Returns the current Job Windows object.
+     * @return Windows object
+     */
+    public Windows getWindows(){
+        return windows;
     }
 
     /**
@@ -152,8 +192,16 @@ public class Job implements OnyxNames
      * Sets the Job Triggers to the passed Triggers object.
      * @param Triggers trs Triggers to be added
      */
-    public void addTriggers(Triggers trs) {
+    public void setTriggers(Triggers trs) {
 	    triggers = trs;
+    }
+
+    /**
+     * Returns the current Job Triggers object.
+     * @return Triggers object
+     */
+    public Triggers getTriggers(){
+        return triggers;
     }
 
     /**

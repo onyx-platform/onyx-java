@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Trigger extends OnyxEntity
 {
-	protected static String coerceKw = "trigger-entry";
+	protected static String coerceKw = OnyxTriggerEntry;
 
 	/**
 	 * Creates a new Trigger object using OnyxEntity superconstructor.

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class FlowCondition extends OnyxEntity
 {
-	protected static String coerceKw = "flow-conditions-entry";
+	protected static String coerceKw = OnyxFlowConditionsEntry;
 
 	/**
 	 * Creates a new FlowCondition object using OnyxEntity superconstructor.

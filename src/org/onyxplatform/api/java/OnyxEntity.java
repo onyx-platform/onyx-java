@@ -96,7 +96,7 @@ public abstract class OnyxEntity implements OnyxNames
 	 * @return clojure PHM representation of content map
 	 */
 	public PersistentHashMap toCljMap() {
-		return coerce( toMap() );
+		return coerce(toMap());
 	}
 
 

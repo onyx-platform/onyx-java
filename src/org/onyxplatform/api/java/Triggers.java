@@ -30,6 +30,6 @@ public class Triggers extends OnyxVector
 	 * @param Trigger te Trigger to add to the Triggers content
 	 */
     public void addTrigger(Trigger te) {
-	    addElement( te );
+	    addElement(te);
     }
 }
