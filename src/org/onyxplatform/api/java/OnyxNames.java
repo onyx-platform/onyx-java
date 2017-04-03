@@ -25,6 +25,17 @@ public interface OnyxNames {
 	public static final String PeerConfig 			= "peer-config";
 
 	/**
+	 * Onyx Components
+	 */
+	public static final String OnyxTaskScheduler	= "task-scheduler";
+	public static final String OnyxWorkflow			= "workflow";
+	public static final String OnyxCatalog			= "catalog";
+	public static final String OnyxLifecycles		= "lifecycles";
+	public static final String OnyxFlowConditions	= "flow-conditions";
+	public static final String OnyxWindows			= "windows";
+	public static final String OnyxTriggers			= "triggers";
+
+	/**
 	 * Environment and Peer Control
 	 */
 	public static final String StartEnv 			= "start-env";
