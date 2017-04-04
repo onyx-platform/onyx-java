@@ -1,10 +1,15 @@
-(defproject onyx-java "0.8.1-SNAPSHOT"
-  :description "The Java API for Onyx"
-  :url "https://github.com/onyx-platform/onyx-java"
+(defproject onyx-java "0.9.15-SNAPSHOT"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :source-paths []
-  :java-source-paths ["src"]
-  ;:javac-options ["-Xlint:unchecked"]
+            :url "https://github.com/onyx-platform/onyx-java"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.onyxplatform/onyx "0.10.0-beta7"] ])
+                 [org.clojure/core.async "0.2.371"]
+                 [clj-stacktrace "0.2.8"]
+                 [org.onyxplatform/onyx "0.9.15"]
+                 [com.stuartsierra/component "0.2.3"]]
+  :source-paths []
+  :java-source-paths ["src/org/onyxplatform/api/java/"]
+  :profiles {:uberjar {:aot :all}
+             :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
+                   :plugins [[lein-update-dependency "0.1.2"]
+                             [lein-pprint "1.1.1"]
+                             [lein-set-version "0.4.1"]] }})
