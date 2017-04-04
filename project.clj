@@ -8,6 +8,7 @@
                  [com.stuartsierra/component "0.2.3"]]
   :source-paths []
   :java-source-paths ["src/org/onyxplatform/api/java/"]
+  :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
                    :plugins [[lein-update-dependency "0.1.2"]
