@@ -1,6 +1,7 @@
 package org.onyxplatform.api.java;
 
 import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentArrayMap;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public class EnvConfiguration extends OnyxEntity
 		 * Calls empty superconstructor for OnyxEntity
 		 * @return newly created EnvConfiguration object
 		 */
-    	public EnvConfiguration () {
+    	public EnvConfiguration() {
     	}
 
 		/**
@@ -36,7 +37,7 @@ public class EnvConfiguration extends OnyxEntity
 		 * @param  Map<String, Object>       jMap content map to coerce
 		 * @return             object representing onyx version of envConfig
 		 */
-    	protected PersistentHashMap coerce(Map<String, Object> jMap) {
-			return (PersistentHashMap) castTypesFn.invoke(coerceKw, jMap);
+    	protected PersistentArrayMap coerce(Map<String, Object> jMap) {
+			return (PersistentArrayMap) castTypesFn.invoke(coerceKw, jMap);
     	}
 }

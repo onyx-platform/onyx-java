@@ -1,6 +1,6 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentArrayMap;
 import java.util.Map;
 
 /**
@@ -16,7 +16,7 @@ public class PeerConfiguration extends OnyxEntity
 	 * Creates a new PeerConfiguration object using OnyxEntity superconstructor.
 	 * @return new PeerConfiguration object
 	 */
-	public PeerConfiguration () {
+	public PeerConfiguration() {
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class PeerConfiguration extends OnyxEntity
 	 * @param  Map<String, Object>       jMap Content map to coerce
 	 * @return             onyx representation of content map
 	 */
-	protected PersistentHashMap coerce(Map<String, Object> jMap) {
-		return (PersistentHashMap) castTypesFn.invoke(coerceKw, jMap);
+	protected PersistentArrayMap coerce(Map<String, Object> jMap) {
+		return (PersistentArrayMap) castTypesFn.invoke(coerceKw, jMap);
 	}
 }

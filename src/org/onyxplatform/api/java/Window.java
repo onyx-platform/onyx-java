@@ -1,6 +1,7 @@
 package org.onyxplatform.api.java;
 
 import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentArrayMap;
 import java.util.Map;
 
 /**
@@ -39,7 +40,7 @@ public class Window extends OnyxEntity
 	 * @param  Map<String, Object>       jMap content map to coerce
 	 * @return             onyx representation of content map
 	 */
-	protected PersistentHashMap coerce(Map<String, Object> jMap) {
-		return (PersistentHashMap) castTypesFn.invoke(coerceKw, jMap);
+	protected PersistentArrayMap coerce(Map<String, Object> jMap) {
+		return (PersistentArrayMap) castTypesFn.invoke(coerceKw, jMap);
 	}
 }

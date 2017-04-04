@@ -1,6 +1,6 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.PersistentHashMap;
+import clojure.lang.PersistentArrayMap;
 import java.util.Map;
 
 /**
@@ -18,17 +18,16 @@ public class FlowCondition extends OnyxEntity
 	 * @return new FlowCondition object
 	 */
 	public FlowCondition() {
-    	entry = PersistentHashMap.EMPTY;
 	}
 
 	/**
-	 * Creates a new FlowCondition object using an existing content map.
+	 * Creates a new FlowCondition object using an existing FlowCondition.
 	 * Uses OnyxEntity superconstructor.
 	 * @param  PersistentHashMap ent           existing map to use for new FlowCondition
 	 * @return                  new FlowCondition object
 	 */
-	private FlowCondition(PersistentHashMap ent) {
-    	entry = ent;
+	private FlowCondition(FlowCondition flowCondition) {
+    	entry = flowCondition.entry;
 	}
 
 	/**
@@ -37,7 +36,8 @@ public class FlowCondition extends OnyxEntity
 	 * @param  Map<String, Object>       jMap content map to coerce
 	 * @return             onyx representation of content map
 	 */
-	protected PersistentHashMap coerce(Map<String, Object> jMap) {
-		return (PersistentHashMap) castTypesFn.invoke(coerceKw, jMap);
+	protected PersistentArrayMap coerce(Map<String, Object> jMap) {
+		return (PersistentArrayMap) castTypesFn.invoke(coerceKw, jMap);
 	}
+
 }
