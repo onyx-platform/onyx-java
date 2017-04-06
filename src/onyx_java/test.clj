@@ -1,6 +1,6 @@
 ;;useage: for a specific class named "Entity" with a edn spec named "Entity.edn",
 ;;run (prepare-object "Entity").
-;;to get the clojure map, run (get-clojure map "Entity")
+;;to get the clojure map, run (get-clojure-map "Entity")
 ;;all entities can be loaded simultaneously and will be held as atoms in
 ;;a map for further use and investigation.
 
