@@ -6,8 +6,13 @@
                  [clj-stacktrace "0.2.8"]
                  [org.onyxplatform/onyx "0.9.15"]
                  [com.stuartsierra/component "0.2.3"]]
+  :source-paths ["src"]
   :java-source-paths ["src/org/onyxplatform/api/java/"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
+  :resource-paths ["test/resources"]
+  :repl-options {:init-ns onyx-java.test
+                 :caught clj-stacktrace.repl/pst+ }
+  :main ^:skip-aot onyx-java.test
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
                    :plugins [[lein-update-dependency "0.1.2"]
