@@ -1,8 +1,20 @@
+;;THIS IS CURRENTLY UNDER DEVELOPMENT, ALTHOUGH ANY INSTRUCTIONS PUT HERE WILL WORK.
+;;use: cd into the main directory. run 'lein repl'. the default namespace should
+;currently be onyx-java.test/
 ;;useage: for a specific class named "Entity" with a edn spec named "Entity.edn",
 ;;run (prepare-object "Entity").
 ;;to get the clojure map, run (get-clojure-map "Entity")
 ;;all entities can be loaded simultaneously and will be held as atoms in
 ;;a map for further use and investigation.
+;;as an example: try copying/pasting the following (in lein repl):
+;; -------
+;; (prepare-object "PeerConfiguration")
+;; (get-clojure-map "PeerConfiguration")
+;; -----
+;; you should see the onyx corrected version of the PeerConfiguration model.
+;; when we actually test these entities, we will be testing against another
+;; module pulled and assembled directly from the onyx model, so if the model
+;; changes, it is what will allow knowledge that tests have broken.
 
 (ns onyx-java.test
     (:gen-class))
@@ -47,7 +59,7 @@
     (eval `(fn [~@args] (new ~(symbol classname) ~@args)))))
 
 (defn get-class [classpath]
-    (let [class-factory (make-factory classpath)]
+    (let [class-factory (meta-factory classpath)]
     (class-factory)))
 
 (defn get-object! [classpath]
