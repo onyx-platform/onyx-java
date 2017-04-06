@@ -1,4 +1,6 @@
 ;;THIS IS CURRENTLY UNDER DEVELOPMENT, ALTHOUGH ANY INSTRUCTIONS PUT HERE WILL WORK.
+;;ULTIMATELY EVERYTHING WILL BE MOVED TO THE PROPER DIRECTORY AND ALL FUNCTIONALITY
+;;WILL BE PROPERLY SORTED.
 ;;use: cd into the main directory. run 'lein repl'. the default namespace should
 ;currently be onyx-java.test/
 ;;useage: for a specific class named "Entity" with a edn spec named "Entity.edn",
