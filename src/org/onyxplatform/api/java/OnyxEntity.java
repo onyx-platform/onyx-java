@@ -3,7 +3,7 @@ package org.onyxplatform.api.java;
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.PersistentHashMap;
-import clojure.lang.PersistentArrayMap;
+import clojure.lang.IPersistentMap;
 import java.util.Map;
 
 
@@ -66,7 +66,7 @@ public abstract class OnyxEntity implements OnyxNames
 	 * @return             new PersistentHashMap representation of the java Map
 	 */
 	//protected abstract PersistentHashMap coerce(Map<String, Object> jMap);
-	protected abstract PersistentArrayMap coerce(Map<String, Object> jMap);
+	protected abstract IPersistentMap coerce(Map<String, Object> jMap);
 
 
 	/**
@@ -97,7 +97,7 @@ public abstract class OnyxEntity implements OnyxNames
 	 * implementor specific coerce method.
 	 * @return clojure PAM representation of content map
 	 */
-	public PersistentArrayMap toCljMap() {
+	public IPersistentMap toCljMap() {
 		return coerce(toMap());
 	}
 
