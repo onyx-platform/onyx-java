@@ -26,15 +26,19 @@
    :keyword (fn [x] (keyword x))
    :vector (fn [x] (vec x))})
 
+(defn check-choices [choices value]
+    (if (boolean (some #{:all} (flatten choices))) value
+        (if (some #{value} choices) value nil)))
+
 (defn cast-types [section m]
   (let [section* (keyword section)]
     (reduce-kv
      (fn [m* k v]
        (let [k* (keyword k)
              type (get-in model [section* :model k* :type])
-             choices (get-in model [section* :model k* :choices])
-             required (not (get-in model [section* :model k* :optional?]))
-             v* ((get casts type identity) v)]
+             choices (get-in model [section* :model k* :choices] [:all])
+             required (not (get-in model [section* :model k* :optional?] true))
+             v* (check-choices choices ((get casts type identity) v))]
          (assoc m* k* v*)))
      {}
      m)))
