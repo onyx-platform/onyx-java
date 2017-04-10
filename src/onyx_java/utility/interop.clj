@@ -16,10 +16,12 @@
   :name onyx-java.IPipeline
   :methods [[writeBatch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]])
 
+(defn boolean_string [y] (if (= (type y) java.lang.String) (read-string y) y))
+
 (def casts
-  {:boolean (fn [x] x)
-   :integer (fn [x] x)
-   :string (fn [x] x)
+  {:boolean (fn [x] (boolean (boolean_string x)))
+   :integer (fn [x] (Integer/parseInt (re-find #"\A-?\d+" x)))
+   :string (fn [x] (str x))
    :any (fn [x] x)
    :keyword (fn [x] (keyword x))
    :vector (fn [x] (vec x))})
@@ -30,6 +32,8 @@
      (fn [m* k v]
        (let [k* (keyword k)
              type (get-in model [section* :model k* :type])
+             choices (get-in model [section* :model k* :choices])
+             required (not (get-in model [section* :model k* :optional?]))
              v* ((get casts type identity) v)]
          (assoc m* k* v*)))
      {}
