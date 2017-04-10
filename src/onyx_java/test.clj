@@ -24,3 +24,6 @@
 (defn get-clojure-map [classname]
     (let [object-name (help/get-object-name classname)]
     (entity/get-clojure-map object-name object-map)))
+
+(defn prepare-objects [classnames]
+    (map prepare-object classnames))
