@@ -16,10 +16,10 @@
   :name onyx-java.IPipeline
   :methods [[writeBatch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]])
 
-(defn boolean_string [y] (if (= (type y) java.lang.String) (read-string y) y))
+(defn boolean-string [y] (if (= (type y) java.lang.String) (read-string y) y))
 
 (def casts
-  {:boolean (fn [x] (boolean (boolean_string x)))
+  {:boolean (fn [x] (boolean (boolean-string x)))
    :integer (fn [x] (Integer/parseInt (re-find #"\A-?\d+" x)))
    :string (fn [x] (str x))
    :any (fn [x] x)
