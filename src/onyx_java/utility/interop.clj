@@ -28,10 +28,21 @@
 
 (defn check-choices [choices value]
     (if (boolean (some #{:all} (flatten choices))) value
-        (if (some #{value} choices) value nil)))
+        (if (some #{value} choices) value (throw (Exception. "Not a valid choice.")))))
+
+(defn get-required-keymap [section]
+    (let [required-keys (vec (keys (filter (fn [[k v]] (and (-> v :optional? not)
+                                    (not (contains? v :deprecated-version))))
+                                    (get-in model [section :model]))))]
+     (apply merge (map #(hash-map % nil) required-keys))))
+
+(defn update-required-keymap [required-keymap keyword]
+    ;(println keyword)
+    (if (boolean (some #{keyword} (keys required-keymap))) (assoc required-keymap keyword true) required-keymap))
 
 (defn cast-types [section m]
   (let [section* (keyword section)]
+        ;required-keymap (get-required-keymap section*)]
     (reduce-kv
      (fn [m* k v]
        (let [k* (keyword k)
