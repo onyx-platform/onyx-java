@@ -21,6 +21,6 @@
 
 
 ;; Turn edn into java-safe vectors
-(defn get-parameter-vectors [spec-file]
+(defn get-test-parameter-vectors [spec-file]
     (prepare-java-entries (map-to-vectors
         (read-spec-map spec-file))))
