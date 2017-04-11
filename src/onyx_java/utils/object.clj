@@ -1,4 +1,4 @@
-(ns onyx-java.utility.object
+(ns onyx-java.utils.object
     (:gen-class))
 
 ;; These vars should be defined where they are being used.

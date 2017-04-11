@@ -1,5 +1,5 @@
-(ns onyx-java.utility.interop
-  (:gen-class :name onyx-java.utility.interop
+(ns onyx-java.utils.interop
+  (:gen-class :name onyx-java.utils.interop
               :methods [^:static [write_batch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]
                         ^:static [read_batch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]])
   (:require [onyx.information-model :refer [model]]))

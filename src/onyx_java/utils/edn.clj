@@ -1,4 +1,4 @@
-(ns onyx-java.utility.edn
+(ns onyx-java.utils.edn
     (:gen-class))
 
 

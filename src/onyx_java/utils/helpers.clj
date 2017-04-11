@@ -1,4 +1,4 @@
-(ns onyx-java.utility.helpers
+(ns onyx-java.utils.helpers
     (:gen-class))
 
 (def replace-pattern "{*}")

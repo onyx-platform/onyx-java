@@ -1,6 +1,6 @@
 (ns onyx-java.wrapper.entity
     (:gen-class)
-    (:require [onyx-java.utility.object :as o]))
+    (:require [onyx-java.utils.object :as o]))
 
 
 ;; Wrapped behaviors

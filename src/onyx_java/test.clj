@@ -1,8 +1,8 @@
 (ns onyx-java.test
     (:gen-class)
-    (:require [onyx-java.utility.helpers :as help]
+    (:require [onyx-java.utils.helpers :as help]
               [onyx-java.wrapper.entity :as entity]
-              [onyx-java.utility.edn :as edn]))
+              [onyx-java.utils.edn :as edn]))
 
 ;; Used by edn required stuff
 (def spec-input-pattern "test/resources/entity_conversion_test/source/{*}.edn")
