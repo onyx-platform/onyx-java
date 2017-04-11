@@ -63,11 +63,11 @@
                         (assoc m* k* v*)))
                     {}
                     m)]
-    ;(def missing (required-keywords required-keymap new-map))
-    ;(if (not missing)
-    ;    new-map
-    ;    (apply merge (map #(hash-map % "KEY-ERROR") missing)))
-    new-map))
+    (def missing (required-keywords required-keymap new-map))
+    (if (not missing)
+        new-map
+        (apply merge (map #(hash-map % "KEY-ERROR") missing)))
+    ))
 
 (defn coerce-workflow [workflow]
   (mapv #(mapv (fn [v] (keyword v)) %) workflow))
