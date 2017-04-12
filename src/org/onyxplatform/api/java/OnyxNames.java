@@ -13,7 +13,7 @@ public interface OnyxNames {
 	 */
 	public static final String CORE 				= "clojure.core";
 	//public static final String INTEROP 				= "onyx.interop";
-	public static final String INTEROP				= "onyx-java.utility.interop";
+	public static final String INTEROP				= "onyx-java.utils.interop";
 	public static final String API 					= "onyx.api";
 
 	public static final String Require 				= "require";
