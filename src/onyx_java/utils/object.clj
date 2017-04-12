@@ -1,11 +1,6 @@
 (ns onyx-java.utils.object
     (:gen-class))
 
-;; These vars should be defined where they are being used.
-    ;; (def class-pattern "org.onyxplatform.api.java.{class}")
-    ;; (def replace-classname-pattern "{class}")
-    ;; (def object-map {})
-
 
 ;; Class factory creation
 (defn class-factory [classpath & types]
