@@ -2,7 +2,8 @@
   (:gen-class :name onyx-java.utils.interop
               :methods [^:static [write_batch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]
                         ^:static [read_batch [clojure.lang.IPersistentMap] clojure.lang.IPersistentMap]])
-  (:require [onyx.information-model :refer [model]]))
+  (:require [onyx.information-model :refer [model]]
+            [clojure.set :refer [difference]]))
 
 (defn -write_batch
   [event]
@@ -29,10 +30,7 @@
 
 (defn check-choices [choices value]
     (if (boolean (some #{:all} (flatten choices))) value
-        (if (some #{value} choices)
-            value
-            "CHOICE-ERROR"
-            )))
+        (if (some #{value} choices) value "CHOICE-ERROR")))
 
 (defn get-required-keymap [section]
     (let [required-keys (vec (keys (filter (fn [[k v]] (and (-> v :optional? not)

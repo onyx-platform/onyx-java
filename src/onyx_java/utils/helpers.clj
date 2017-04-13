@@ -20,5 +20,11 @@
 (defn get-unique-id []
     (java.util.UUID/UUID/randomUUID))
 
-(defn update-key-value [keymap key value]
-    )
+(defn strip-first-last [s]
+    (subs s 1 (- (count s) 1)))
+
+(defn strip-base [baseclass]
+    (last (clojure.string/split (last (clojure.string/split baseclass #" ")) #"\.")))
+
+(defn list-directory-files [directory]
+    (vec (.list (clojure.java.io/file directory))))

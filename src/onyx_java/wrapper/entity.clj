@@ -34,30 +34,15 @@
     ;; Adds an arbitrary number of parameters to an entity derived object.
     ;; Parameters should be of the form [[k1 v1] [k2 v2] [k3 v3]]
     (def add (add-parameter-factory object-name object-map))
-    (map add parameter-vectors))
+    (dorun (map add parameter-vectors)))
 
-(defn get-clojure-map [object-name object-map]
+(defn get-clojure-map [object-map object-name]
     ;; Converts the entity content map into its clojure corrected form
     ;; and returns the result.
     (.toCljMap (deref (get-in object-map [object-name :ref]))))
 
-
-;; Helper functions
-
-(defn get-entries-by-type [object-type object-map]
-    (vec (filter (fn [[k v]] (= (get v :type) object-type)) object-map)))
-
-(defn get-entry-names-by-type [object-type object-map]
-    (vec (map key (get-entries-by-type object-type))))
-
-(defn get-entry-values-by-type [object-type object-map]
-    (vec (map val (get-entries-by-type object-type))))
-
-(defn get-entries-by-source [spec-name object-map]
-    (vec (filter (fn [[k v]] (= (get v :source) spec-name)) object-map)))
-
-(defn get-entry-names-by-source [source object-map]
-    (vec (map key (get-entries-by-source source object-map))))
-
-(defn get-entry-values-by-source [source object-map]
-    (vec (map val (get-entries-by-source source object-map))))
+(defn get-clojure-entry [object-map]
+    ;; Converts the entity content map into its clojure corrected form
+    ;; and returns the result.
+    (fn [object-name]
+        (hash-map object-name (get-clojure-map object-map object-name))))

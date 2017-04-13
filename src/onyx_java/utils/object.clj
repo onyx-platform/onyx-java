@@ -21,3 +21,21 @@
     ;; Uses the object-factory previously defined to create a persistent
     ;; object (persistence using clojure thread safe atom behavior)
     (atom (object-factory classpath)))
+
+;; Object creation
+
+(defn create-object [classpath]
+    ;; Creates a new object
+    (make-object! classpath))
+
+;; Ancestry tracing
+
+(defn get-direct-base [atom]
+    ;; returns the immediate superclass or interface of the passed
+    ;; object (object stored as atom)
+    (last (bases (type (deref atom)))))
+
+(defn get-all-supers [atom]
+    ;; returns all superclasses and interfaces of the passed
+    ;; object (object stored as atom)
+    (supers (type (deref atom))))

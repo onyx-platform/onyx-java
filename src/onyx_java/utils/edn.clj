@@ -1,5 +1,6 @@
 (ns onyx-java.utils.edn
-    (:gen-class))
+    (:gen-class)
+    (:require [onyx-java.utils.helpers :as help]))
 
 
 
@@ -21,6 +22,17 @@
 
 
 ;; Turn edn into java-safe vectors
-(defn get-test-parameter-vectors [spec-file]
+(defn get-entity-params [spec-file]
     (prepare-java-entries (map-to-vectors
         (read-spec-map spec-file))))
+
+(defn get-specs-from-edn [filenames]
+    (let [replace-fn (fn [fname] (clojure.string/replace fname ".edn" ""))]
+    (map replace-fn filenames)))
+
+(defn get-edn-from-spec [directory filename]
+    (clojure.string/join [directory filename ".edn"]))
+
+(defn get-specs [directory] (
+    let [filenames (help/list-directory-files directory)]
+    (vec (get-specs-from-edn filenames))))
