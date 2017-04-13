@@ -4,8 +4,8 @@
               [clojure.test :refer [deftest is]]))
 
 
-(def input-dir "test/resources/entity_conversion_test/source/")
-(def compare-dir "test/resources/entity_conversion_test/target/")
+(def input-dir "test/resources/onyx_simple/source/")
+(def compare-dir "test/resources/onyx_simple/target/")
 
 (deftest entity-coercion-test
     (let [input input-dir
