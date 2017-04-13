@@ -51,7 +51,7 @@
 
 (defn cast-types [section m]
   (let [section* (keyword section)
-        required-keymap (get-required-keymap section*)
+        ;required-keymap (get-required-keymap section*)
         new-map (reduce-kv
                     (fn [m* k v]
                         (let [k* (keyword k)
@@ -61,10 +61,11 @@
                         (assoc m* k* v*)))
                     {}
                     m)]
-    (def missing (required-keywords required-keymap new-map))
-    (if (not missing)
-        new-map
-        (apply merge (map #(hash-map % "KEY-ERROR") missing)))
+    ;(def missing (required-keywords required-keymap new-map))
+    ;(if (not missing)
+    ;    new-map
+    ;    (apply merge (map #(hash-map % "KEY-ERROR") missing)))
+    new-map
     ))
 
 (defn coerce-workflow [workflow]
