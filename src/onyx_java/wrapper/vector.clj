@@ -11,22 +11,22 @@
             "Triggers" "Trigger"
             "Windows" "Window")))
 
+(defn add-entity-factory [vector]
+ (let [vec-type (get (val vector) :class)
+       vec-ref (get (val vector) :ref)]
+       (fn [entity] (let [object-ref (get (val entity) :ref)]
+        (case vec-type
+            "Catalog" (.addTask (deref vec-ref) (deref object-ref))
+            "FlowConditions" (.addCondition (deref vec-ref) (deref object-ref))
+            "Lifecycles" (.addCall (deref vec-ref) (deref object-ref))
+            "Triggers" (.addTrigger (deref vec-ref) (deref object-ref))
+            "Windows" (.addWindow (deref vec-ref) (deref object-ref)))))))
 
-(defn add-parameter-factory [object-name object-map]
-    ;; Creates a parameter adding factory for an object created from the
-    ;; specified classname.
-    (let [c object-name]
-    (fn [parameter-vector] (.addParameter (deref (get-in object-map [c :ref]))
-        (get parameter-vector 0) (get parameter-vector 1)))))
+(defn add-entities [vector-with-entities]
+    (let [vector (first vector-with-entities)
+          entities (last vector-with-entities)
+          adder (add-entity-factory vector)]
+        (dorun (map adder entities))))
 
-(defn add-parameter [object-name object-map parameter-vector]
-    ;; Adds a single parameter to an entity derived object.
-    ;; Parameters should be of the form [key value]
-    (def add (add-parameter-factory object-name object-map))
-    (add parameter-vector))
-
-(defn add-parameters [object-name object-map parameter-vectors]
-    ;; Adds an arbitrary number of parameters to an entity derived object.
-    ;; Parameters should be of the form [[k1 v1] [k2 v2] [k3 v3]]
-    (def add (add-parameter-factory object-name object-map))
-    (dorun (map add parameter-vectors)))
+(defn add-all-entities [vectors-with-entities]
+    (dorun (map add-entities vectors-with-entities)))

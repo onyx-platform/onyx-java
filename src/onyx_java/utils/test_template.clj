@@ -3,8 +3,8 @@
     (:require [onyx-java.utils.persistence :as persistence]
               [onyx-java.utils.edn :as edn]
               [onyx-java.utils.filter :as filter]
-              [onyx-java.wrapper.entity :as entity]))
-
+              [onyx-java.wrapper.entity :as entity]
+              [onyx-java.wrapper.vector :as vector]))
 
 (def class-pattern "org.onyxplatform.api.java.{*}")
 
@@ -17,7 +17,6 @@
             class-pattern
             master-map
             (edn/get-specs directory)))))
-
 
 (defn coerce-entities [object-map]
     (let [entities (filter/filter-by-base object-map "OnyxEntity")
@@ -38,3 +37,12 @@
                            vectors (edn/get-entity-params edn)]
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
+
+(defn add-vector-entities [object-map dir]
+    (let [entities (filter/base-compare-map
+              (filter/filter-by-base object-map "OnyxEntity"))
+          vectors (filter/base-compare-map
+              (filter/filter-by-base object-map "OnyxVector"))
+          adder (fn [vector]
+                    (let [ent-type (vector/get-entity-type vector)
+                          v-ents (filter/filter-by-class entities )]))]))
