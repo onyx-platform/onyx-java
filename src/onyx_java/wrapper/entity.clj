@@ -1,6 +1,5 @@
 (ns onyx-java.wrapper.entity
-    (:gen-class)
-    (:require [onyx-java.utils.object :as o]))
+    (:gen-class))
 
 
 (defn add-parameter-factory [object-name object-map]
