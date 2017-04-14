@@ -23,9 +23,9 @@
           baseclass (help/strip-base (str (obj/get-direct-base (:ref object))))]
           (assoc {} name
               (add-key
-                  (add-key
-                      (add-key object :source spec)
-                  :class classname)
+              (add-key
+              (add-key object :source spec)
+              :class classname)
               :base baseclass)))))
 
 (defn create-map [class-pattern object-map specs]
