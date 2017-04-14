@@ -1,0 +1,10 @@
+{
+    :onyx/name :question-output
+    :onyx/plugin :onyx.plugin.core-async/output
+    :onyx/type :output
+    :onyx/medium :core.async
+    :onyx/max-peers 1
+    :onyx/batch-timeout 10
+    :onyx/batch-size 50
+    :onyx/doc "Writes segments to a core.async channel"
+}

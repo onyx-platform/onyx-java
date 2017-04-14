@@ -1,0 +1,7 @@
+{
+    "onyx/name" "loud"
+    "onyx/fn" "onyx-java.resource.functions/loud"
+    "onyx/type" "function"
+    "onyx/batch-timeout" "10"
+    "onyx/batch-size" "50"
+}

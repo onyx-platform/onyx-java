@@ -38,11 +38,16 @@
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
 
-(defn add-vector-entities [object-map dir]
+(defn associate-vectors-entities [object-map]
     (let [entities (filter/base-compare-map
-              (filter/filter-by-base object-map "OnyxEntity"))
+                    (filter/filter-by-base object-map "OnyxEntity"))
           vectors (filter/base-compare-map
-              (filter/filter-by-base object-map "OnyxVector"))
+                    (filter/filter-by-base object-map "OnyxVector"))
           adder (fn [vector]
-                    (let [ent-type (vector/get-entity-type vector)
-                          v-ents (filter/filter-by-class entities )]))]))
+                (let [e-type (vector/get-entity-type vector)
+                    vector-entities (filter/filter-by-class entities e-type)]
+                    (vector vector vector-entities)))]
+     (map adder vectors)))
+
+(defn add-vector-entities [object-map]
+    (let []))
