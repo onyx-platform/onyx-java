@@ -18,7 +18,7 @@ public class Triggers extends OnyxVector
 	 * Creates a new Triggers object using an existing Triggers
 	 * object (uses the existing trigger collection as content).
 	 * Uses OnyxVector superconstructor.
-	 * @param  Triggers ts            existing Triggers object to use for content
+	 * @param  Triggers ts         existing Triggers object to use for content
 	 * @return          new Triggers object
 	 */
     private Triggers(Triggers ts) {
