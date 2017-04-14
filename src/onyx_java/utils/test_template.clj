@@ -8,6 +8,7 @@
 
 (def class-pattern "org.onyxplatform.api.java.{*}")
 
+
 (defn create-master-map [directory]
     ;; loads every spec in the given directory as an instance based on the
     ;; associated org.onyxplatform.api.java class, provided the class exists,
@@ -38,16 +39,12 @@
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
 
-(defn associate-vectors-entities [object-map]
-    (let [entities (filter/base-compare-map
-                    (filter/filter-by-base object-map "OnyxEntity"))
-          vectors (filter/base-compare-map
-                    (filter/filter-by-base object-map "OnyxVector"))
+(defn add-vectors-entities [object-map]
+    (let [entities (filter/filter-by-base object-map "OnyxEntity")
+          vectors (filter/filter-by-base object-map "OnyxVector")
           adder (fn [vector]
-                (let [e-type (vector/get-entity-type vector)
-                    vector-entities (filter/filter-by-class entities e-type)]
-                    (vector vector vector-entities)))]
-     (map adder vectors)))
-
-(defn add-vector-entities [object-map]
-    (let []))
+                (let [ent-type (vector/get-entity-type vector)
+                    vector-entities (filter/filter-by-class entities ent-type)]
+                    [vector vector-entities]))
+          vector-entity-array (map adder vectors)]
+          (vector/add-all-entities vector-entity-array)))

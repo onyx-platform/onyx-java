@@ -12,7 +12,7 @@
     (into [] map))
 
 (defn keyword-to-string [keyword]
-    (subs (str keyword) 1))
+    (subs (str keyword) 0))
 
 (defn prepare-java-entry [entry-vector]
     (assoc entry-vector 0 (keyword-to-string (first entry-vector))))

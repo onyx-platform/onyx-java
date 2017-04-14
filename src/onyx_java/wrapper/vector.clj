@@ -3,7 +3,7 @@
 
 
 (defn get-entity-type [vector]
-    (let [v-name (get (val vector) :class)]
+    (let [v-name ((val vector) :class)]
         (case v-name
             "Catalog" "Task"
             "FlowConditions" "FlowCondition"
@@ -12,9 +12,9 @@
             "Windows" "Window")))
 
 (defn add-entity-factory [vector]
- (let [vec-type (get (val vector) :class)
-       vec-ref (get (val vector) :ref)]
-       (fn [entity] (let [object-ref (get (val entity) :ref)]
+ (let [vec-type ((val vector) :class)
+       vec-ref ((val vector) :ref)]
+       (fn [entity] (let [object-ref ((val entity) :ref)]
         (case vec-type
             "Catalog" (.addTask (deref vec-ref) (deref object-ref))
             "FlowConditions" (.addCondition (deref vec-ref) (deref object-ref))
