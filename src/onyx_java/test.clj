@@ -21,5 +21,5 @@
           output output-dir
           master-map (t/create-master-map input)
           params (t/add-entity-params master-map input)
-          entities (t/add-vectors-entities master-map)]
+          entities (t/add-vector-entities master-map)]
     master-map))

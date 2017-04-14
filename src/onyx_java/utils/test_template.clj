@@ -39,7 +39,7 @@
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
 
-(defn add-vectors-entities [object-map]
+(defn add-vector-entities [object-map]
     (let [entities (filter/filter-by-base object-map "OnyxEntity")
           vectors (filter/filter-by-base object-map "OnyxVector")
           adder (fn [vector]
