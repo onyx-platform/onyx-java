@@ -3,20 +3,6 @@
     (:require [onyx-java.utils.object :as o]))
 
 
-;; Wrapped behaviors
-
-(defn create-object [classpath]
-    ;; Creates a new object
-    (o/make-object! classpath))
-
-(defn create-persistent-object [classpath classname spec-name object-name object-map]
-    ;; Creates an object that hangs around by adding it to the passed
-    ;; object map. Currently this does fully qualified conversions
-    ;; (i.e, this function auto converts 'Entity' to 'fully.qualified.Entity')
-    (assoc object-map object-name {:ref (create-object classpath)
-                                   :type classname
-                                   :source spec-name}))
-
 (defn add-parameter-factory [object-name object-map]
     ;; Creates a parameter adding factory for an object created from the
     ;; specified classname.
