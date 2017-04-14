@@ -28,45 +28,16 @@
    :keyword (fn [x] (keyword x))
    :vector (fn [x] (vec x))})
 
-(defn check-choices [choices value]
-    (if (boolean (some #{:all} (flatten choices))) value
-        (if (some #{value} choices) value "CHOICE-ERROR")))
-
-(defn get-required-keymap [section]
-    (let [required-keys (vec (keys (filter (fn [[k v]] (and (-> v :optional? not)
-                                    (not (contains? v :deprecated-version))))
-                                    (get-in model [section :model]))))]
-     (apply merge (map #(hash-map % nil) required-keys))))
-
-(defn update-required-keymap [required-keymap keyword]
-    (if (boolean (some #{keyword} (keys required-keymap)))
-        (assoc required-keymap keyword true)
-        required-keymap))
-
-(defn required-keywords [required existing]
-    (let [missing (clojure.set/difference (set (keys required)) (set (keys existing)))]
-    (if (= 0 (count missing))
-        nil
-        missing)))
-
 (defn cast-types [section m]
-  (let [section* (keyword section)
-        ;required-keymap (get-required-keymap section*)
-        new-map (reduce-kv
-                    (fn [m* k v]
-                        (let [k* (keyword k)
-                        type (get-in model [section* :model k* :type])
-                        choices (get-in model [section* :model k* :choices] [:all])
-                        v* (check-choices choices ((get casts type identity) v))]
-                        (assoc m* k* v*)))
-                    {}
-                    m)]
-    ;(def missing (required-keywords required-keymap new-map))
-    ;(if (not missing)
-    ;    new-map
-    ;    (apply merge (map #(hash-map % "KEY-ERROR") missing)))
-    new-map
-    ))
+  (let [section* (keyword section)]
+    (reduce-kv
+     (fn [m* k v]
+       (let [k* (keyword k)
+             type (get-in model [section* :model k* :type])
+             v* ((get casts type identity) v)]
+         (assoc m* k* v*)))
+     {}
+     m)))
 
 (defn coerce-workflow [workflow]
   (mapv #(mapv (fn [v] (keyword v)) %) workflow))
