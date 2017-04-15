@@ -137,7 +137,7 @@ public class Job implements OnyxNames
      * @param Lifecycle lf Lifecycle to be added to Job Lifecycles
      */
     public void addLifecycle(Lifecycle lf) {
-	    lifecycles.addCall(lf);
+	    lifecycles.addLifecycle(lf);
     }
 
     /**

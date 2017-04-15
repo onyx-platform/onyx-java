@@ -18,7 +18,7 @@
         (case vec-type
             "Catalog" (.addTask (deref vec-ref) (deref object-ref))
             "FlowConditions" (.addCondition (deref vec-ref) (deref object-ref))
-            "Lifecycles" (.addCall (deref vec-ref) (deref object-ref))
+            "Lifecycles" (.addLifecycle (deref vec-ref) (deref object-ref))
             "Triggers" (.addTrigger (deref vec-ref) (deref object-ref))
             "Windows" (.addWindow (deref vec-ref) (deref object-ref)))))))
 

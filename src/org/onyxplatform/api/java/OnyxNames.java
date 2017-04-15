@@ -12,6 +12,8 @@ public interface OnyxNames {
 	 * Interop
 	 */
 	public static final String CORE 				= "clojure.core";
+	//The following INTEROP has been replaced because of missing type coercion
+	//in the core clj file.
 	//public static final String INTEROP 				= "onyx.interop";
 	public static final String INTEROP				= "onyx-java.utils.interop";
 	public static final String API 					= "onyx.api";
@@ -28,8 +30,8 @@ public interface OnyxNames {
 	/**
 	 * Task Scheduling
 	 */
-	public static final String BalancedTaskSchedule		= "onyx.task-scheduler/balanced";
-	public static final String PercentTaskSchedule		= "onyx.task-scheduler/percentage";
+	public static final String BalancedTaskSchedule	= "onyx.task-scheduler/balanced";
+	public static final String PercentTaskSchedule	= "onyx.task-scheduler/percentage";
 
 	/**
 	 * Onyx Components
@@ -41,6 +43,7 @@ public interface OnyxNames {
 	public static final String OnyxCatalogEntry			= "catalog-entry";
 	public static final String OnyxLifecycles			= "lifecycles";
 	public static final String OnyxLifecycleEntry		= "lifecycle-entry";
+	public static final String OnyxLifecycleCall		= "lifecycle-calls";
 	public static final String OnyxFlowConditions		= "flow-conditions";
 	public static final String OnyxFlowConditionsEntry	= "flow-conditions-entry";
 	public static final String OnyxWindows				= "windows";
