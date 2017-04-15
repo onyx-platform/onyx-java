@@ -1,0 +1,4 @@
+{
+    :lifecycle/task :question-output
+    :lifecycle/calls :onyx.plugin.core-async/writer-calls
+}

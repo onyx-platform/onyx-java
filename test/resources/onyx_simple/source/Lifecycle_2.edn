@@ -1,0 +1,4 @@
+{
+    "lifecycle/task" "in"
+    "lifecycle/calls" "onyx.plugin.core-async/reader-calls"
+}
