@@ -223,7 +223,7 @@ public class Job implements OnyxNames
     	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxTaskScheduler),
     							                           coercedTaskScheduler);
 
-    	PersistentVector coercedWorkflow = workflow.cljGraph();
+    	PersistentVector coercedWorkflow = workflow.toCljGraph();
     	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxWorkflow),
     			                                           coercedWorkflow);
 
