@@ -4,7 +4,9 @@
     :onyx/batch-timeout 10
     :onyx/max-peers 1
     :onyx/doc "Reads segments from a core.async channel"
-    :onyx/batch-size 50, :onyx/type :input, :onyx/name :in
+    :onyx/batch-size 50
+    :onyx/type :input
+    :onyx/name :in
 }
 {
     :onyx/batch-timeout 10
