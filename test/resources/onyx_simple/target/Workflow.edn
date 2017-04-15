@@ -1,0 +1,8 @@
+[
+    [:in :split-by-spaces]
+    [:split-by-spaces :mixed-case]
+    [:mixed-case :loud]
+    [:mixed-case :question]
+    [:loud :loud-output]
+    [:question :question-output]
+]

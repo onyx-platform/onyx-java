@@ -66,3 +66,21 @@
                     [vector vector-entities]))
           vector-entity-array (map adder vectors)]
           (vector/add-all-entities vector-entity-array)))
+
+(defn coerce-workflow [object-map]
+    (let []))
+
+(defn add-workflow-edges [object-map dir]
+    (let []))
+
+(defn get-expected-workflow [object-map dir]
+    (let []))
+
+(defn add-job-components [object-map]
+    (let []))
+
+(defn coerce-job [object-map]
+    (let []))
+
+(defn get-expected-job [object-map]
+    (let []))
