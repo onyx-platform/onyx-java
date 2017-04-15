@@ -61,7 +61,7 @@ public class OnyxVector
 	 * @return new PersistentVector container containing guaranteed
 	 * PersistentHashMap entities
 	 */
-	protected PersistentVector toCljVector() {
+	public PersistentVector toCljVector() {
 
 		PersistentVector v = PersistentVector.EMPTY;
 
