@@ -69,7 +69,7 @@ public final class Workflow implements OnyxNames
 	 * Returns the onyx representation without altering the existing edge variable.
 	 * @return onyx qualified Workflow object
 	 */
-	public PersistentVector cljGraph() {
+	public PersistentVector toCljGraph() {
 		IFn coerceWorkflow = Clojure.var(INTEROP, CoerceWorkflow);
 		return (PersistentVector) coerceWorkflow.invoke(edges);
 	}
