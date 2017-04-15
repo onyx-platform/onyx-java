@@ -39,6 +39,18 @@
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
 
+(defn get-expected-vectors [object-map dir]
+  (let [entities (filter/filter-by-base object-map "OnyxVector")]
+      (filter/make-comparison-map entities (filter/output-compare-fn dir))))
+
+(defn vector-frequency [object-map]
+    (let [freq-fcn (fn [entry]
+                    (let [k (key entry)
+                          v (val entry)
+                          freq (frequencies v)]
+                          {k freq}))]
+    (apply merge (map freq-fcn object-map))))
+
 (defn coerce-vectors [object-map]
   (let [vectors (filter/filter-by-base object-map "OnyxVector")
         names (keys vectors)

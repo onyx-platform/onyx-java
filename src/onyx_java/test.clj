@@ -16,11 +16,13 @@
           expected-map (t/get-expected-entities master-map output)]
     (is (= coerced-map expected-map))))
 
-(defn vector-coercion-test []
+(deftest vector-coercion-test
     (let [input input-dir
           output output-dir
           master-map (t/create-master-map input)
           params (t/add-entity-params master-map input)
           entities (t/add-vector-entities master-map)
-          coerced-map (t/coerce-vectors master-map)]
-    coerced-map))
+          coerced-map (t/coerce-vectors master-map)
+          expected-map (t/get-expected-vectors master-map output)]
+    (is (= (t/vector-frequency coerced-map)
+           (t/vector-frequency expected-map)))))
