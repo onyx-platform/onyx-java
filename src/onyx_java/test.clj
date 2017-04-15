@@ -3,7 +3,6 @@
     (:require [onyx-java.utils.test-template :as t]
               [clojure.test :refer [deftest is]]))
 
-
 (def input-dir "test/resources/onyx_simple/source/")
 (def output-dir "test/resources/onyx_simple/target/")
 
