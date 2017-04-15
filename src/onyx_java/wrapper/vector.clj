@@ -30,3 +30,14 @@
 
 (defn add-all-entities [vectors-with-entities]
     (dorun (map add-entities vectors-with-entities)))
+
+(defn get-clojure-vector [object-map object-name]
+    ;; Converts the entity content map into its clojure corrected form
+    ;; and returns the result.
+    (.toCljVector (deref (get-in object-map [object-name :ref]))))
+
+(defn get-clojure-entry [object-map]
+    ;; Converts the entity content map into its clojure corrected form
+    ;; and returns the result.
+    (fn [object-name]
+        (hash-map object-name (get-clojure-vector object-map object-name))))
