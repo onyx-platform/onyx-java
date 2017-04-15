@@ -1,1 +1,56 @@
-[]
+[{
+    :onyx/medium :core.async
+    :onyx/plugin :onyx.plugin.core-async/input
+    :onyx/batch-timeout 10
+    :onyx/max-peers 1
+    :onyx/doc "Reads segments from a core.async channel"
+    :onyx/batch-size 50, :onyx/type :input, :onyx/name :in
+}
+{
+    :onyx/batch-timeout 10
+    :onyx/batch-size 50
+    :onyx/type :function
+    :onyx/fn :onyx-java.resource.functions/mixed-case
+    :onyx/name :mixed-case
+}
+{
+    :onyx/batch-timeout 10
+    :onyx/batch-size 50
+    :onyx/type :function
+    :onyx/fn :onyx-java.resource.functions/split-by-spaces
+    :onyx/name :split-by-spaces
+}
+{
+    :onyx/batch-timeout 10
+    :onyx/batch-size 50
+    :onyx/type :function
+    :onyx/fn :onyx-java.resource.functions/loud
+    :onyx/name :loud
+}
+{
+    :onyx/batch-timeout 10
+    :onyx/batch-size 50
+    :onyx/type :function
+    :onyx/fn :onyx-java.resource.functions/question
+    :onyx/name :question
+}
+{
+    :onyx/medium :core.async
+    :onyx/plugin :onyx.plugin.core-async/output
+    :onyx/batch-timeout 10
+    :onyx/max-peers 1
+    :onyx/doc "Writes segments to a core.async channel"
+    :onyx/batch-size 50
+    :onyx/type :output
+    :onyx/name :loud-output
+}
+{
+    :onyx/medium :core.async
+    :onyx/plugin :onyx.plugin.core-async/output
+    :onyx/batch-timeout 10
+    :onyx/max-peers 1
+    :onyx/doc "Writes segments to a core.async channel"
+    :onyx/batch-size 50
+    :onyx/type :output
+    :onyx/name :question-output
+}]
