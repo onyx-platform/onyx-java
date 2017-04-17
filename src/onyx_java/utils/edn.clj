@@ -2,9 +2,6 @@
     (:gen-class)
     (:require [onyx-java.utils.helpers :as help]))
 
-
-
-;; Helper functions
 (defn read-spec-map [spec]
     (read-string (slurp spec)))
 
@@ -20,11 +17,12 @@
 (defn prepare-java-entries [keyword-vectors]
     (vec (map prepare-java-entry keyword-vectors)))
 
-
-;; Turn edn into java-safe vectors
-(defn get-entity-params [spec-file]
+(defn read-map-edn [spec-file]
     (prepare-java-entries (map-to-vectors
         (read-spec-map spec-file))))
+
+(defn read-vector-edn [spec-file]
+    (read-string (slurp spec-file)))
 
 (defn get-specs-from-edn [filenames]
     (let [replace-fn (fn [fname] (clojure.string/replace fname ".edn" ""))]

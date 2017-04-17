@@ -4,7 +4,8 @@
               [onyx-java.utils.edn :as edn]
               [onyx-java.utils.filter :as filter]
               [onyx-java.wrapper.entity :as entity]
-              [onyx-java.wrapper.vector :as vector]))
+              [onyx-java.wrapper.vector :as vector]
+              [onyx-java.wrapper.workflow :as workflow]))
 
 (def class-pattern "org.onyxplatform.api.java.{*}")
 
@@ -35,7 +36,7 @@
           adder (fn [entity]
                     (let [source (val entity)
                            edn (edn/get-edn-from-spec dir source)
-                           vectors (edn/get-entity-params edn)]
+                           vectors (edn/read-map-edn edn)]
                 (entity/add-parameters (key entity) object-map vectors)))]
           (dorun (map adder entities))))
 
@@ -67,14 +68,24 @@
           vector-entity-array (map adder vectors)]
           (vector/add-all-entities vector-entity-array)))
 
-(defn coerce-workflow [object-map]
-    (let []))
+(defn coerce-workflows [object-map]
+    (let [workflows (filter/filter-by-class object-map "Workflow")
+          names (keys workflows)
+          mapper (workflow/get-clojure-entry workflows)]
+          (apply merge (map mapper names))))
 
 (defn add-workflow-edges [object-map dir]
-    (let [workflow (filter/filter-by-class object-map)]))
+    (let [workflows (filter/filter-by-class object-map "Workflow")
+          adder (fn [workflow]
+                    (let [source (get (val workflow) :source)
+                          edn (edn/get-edn-from-spec dir source)
+                          edges (edn/read-vector-edn edn)]
+                (workflow/add-edges (key workflow) object-map edges)))]
+                (dorun (map adder workflows))))
 
-(defn get-expected-workflow [object-map dir]
-    (let []))
+(defn get-expected-workflows [object-map dir]
+    (let [workflows (filter/filter-by-class object-map "Workflow")]
+    (filter/make-comparison-map workflows (filter/output-compare-fn dir))))
 
 (defn add-job-components [object-map]
     (let []))

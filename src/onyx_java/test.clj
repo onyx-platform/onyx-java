@@ -26,13 +26,13 @@
     (is (= (t/vector-frequency coerced-map)
            (t/vector-frequency expected-map)))))
 
-(defn workflow-coercion-test []
+(deftest workflow-coercion-test
     (let [input input-dir
           output output-dir
           master-map (t/create-master-map input)
           edges (t/add-workflow-edges master-map input)
-          coerced-map (t/coerce-workflow master-map)
-          expected-map (t/get-expected-workflow master-map)]
+          coerced-map (t/coerce-workflows master-map)
+          expected-map (t/get-expected-workflows master-map output)]
           (is (= (t/vector-frequency coerced-map)
                  (t/vector-frequency expected-map)))))
 
