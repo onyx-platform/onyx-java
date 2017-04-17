@@ -5,9 +5,9 @@
               [onyx-java.wrapper.entity :as entity]
               [onyx-java.utils.edn :as edn]))
 
-(defn make-instance [classpath]
+(defn make-instance-map [class-map]
     ;; Creates a test object as a map with one keyval of the object ref
-    (assoc {} :ref (obj/create-object classpath)))
+    (assoc {} :ref (obj/create-object! class-map)))
 
 (defn add-key [m k v]
     (assoc m k v))
@@ -15,21 +15,51 @@
 (defn add-entry [object-map]
     (fn [entry] (into object-map entry)))
 
-(defn make-entry [class-pattern] (fn [spec]
-    (let [classname (help/prepare-class-string spec)
-          classpath (help/qualify-string class-pattern classname)
-          name (help/get-map-key classname)
-          object (make-instance classpath)
-          baseclass (help/strip-base (str (obj/get-direct-base (:ref object))))]
-          (assoc {} name
-              (add-key
-              (add-key
-              (add-key object :source spec)
-              :class classname)
-              :base baseclass)))))
+(defn get-object-name [data-map classname]
+    (if (contains? data-map :name)
+        (data-map :name)
+        (help/get-map-key classname)))
 
-(defn create-map [class-pattern object-map specs]
-    (let [entry-maker (make-entry class-pattern)
-          entry-adder (add-entry object-map)
-          entries (map entry-maker specs)]
+(defn get-class-type [data-map]
+    (if (contains? data-map :type)
+        (data-map :type) "class"))
+
+(defn get-constructor-params [data-map]
+    (if (contains? data-map :params)
+        (data-map :params) []))
+
+(defn parse-spec [spec-vec]
+    (let [spec-map {}
+          specpath (first spec-vec)
+          specname (last spec-vec)
+          data (edn/read-spec-map specpath)
+          classname (help/prepare-class-string specname)
+          classpath (help/qualify-class (get data :namespace) classname)
+          classparams (get-constructor-params data)
+          objectname (get-object-name data classname)
+          classtype (get-class-type data)]
+        (-> spec-map
+            (assoc :class classname)
+            (assoc :path classpath)
+            (assoc :type classtype)
+            (assoc :source specname)
+            (assoc :name objectname)
+            (assoc :params classparams))))
+
+(defn make-entry [spec-vec]
+    (let [spec-map (parse-spec spec-vec)
+          object-map (make-instance-map spec-map)
+          baseclass (help/strip-base (str (obj/get-direct-base (:ref object-map))))
+          name (spec-map :name)]
+          (-> object-map
+              (assoc :class (spec-map :class))
+              (assoc :path (spec-map :path))
+              (assoc :type (spec-map :type))
+              (assoc :source (spec-map :source))
+              (assoc :base baseclass))
+          (assoc {} name object-map)))
+
+(defn create-map [object-map spec-vecs]
+    (let [entries (map make-entry spec-vecs)
+          entry-adder (add-entry object-map)]
           (map entry-adder entries)))

@@ -7,18 +7,17 @@
               [onyx-java.wrapper.vector :as vector]
               [onyx-java.wrapper.workflow :as workflow]))
 
-(def class-pattern "org.onyxplatform.api.java.{*}")
+;(def class-pattern "org.onyxplatform.api.java.{*}")
 
 
-(defn create-master-map [directory]
-    ;; loads every spec in the given directory as an instance based on the
-    ;; associated org.onyxplatform.api.java class, provided the class exists,
-    ;; and holds a reference to each in a master map.
-    (let [master-map {}]
-    (apply merge (persistence/create-map
-            class-pattern
-            master-map
-            (edn/get-specs directory)))))
+(defn create-master-map [dir]
+    ;; Creates a 'master' map of objects, built from
+    ;; constructors, which are built from specs defined in the given directory.
+    (let [master {}
+          specvec-maker (edn/specvec-maker dir)
+          specs (edn/get-specs dir)
+          spec-vecs (map specvec-maker specs)]
+    (apply merge (persistence/create-map master spec-vecs))))
 
 (defn coerce-entities [object-map]
     (let [entities (filter/filter-by-base object-map "OnyxEntity")

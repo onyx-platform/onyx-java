@@ -10,23 +10,17 @@
     (eval `(fn [~@args] (new ~(symbol classpath) ~@args)))))
 
 ;; Object factory creation
-(defn object-factory [classpath]
+(defn create-object [classpath]
     ;; Uses the class-factory to create an object factory for a class
     ;; using the class's public, default, no-argument constructor.
-    (let [object-factory (class-factory classpath)]
-    (object-factory)))
+    (class-factory classpath))
 
 ;; Atomic object construction
-(defn make-object! [classpath]
-    ;; Uses the object-factory previously defined to create a persistent
-    ;; object (persistence using clojure thread safe atom behavior)
-    (atom (object-factory classpath)))
+(defn create-object! [class-map]
+    (let [object-maker (create-object (class-map :path))]
+        (println (class-map :path))
+        (atom (object-maker))))
 
-;; Object creation
-
-(defn create-object [classpath]
-    ;; Creates a new object
-    (make-object! classpath))
 
 ;; Ancestry tracing
 

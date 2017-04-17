@@ -1,7 +1,6 @@
 (ns onyx-java.utils.helpers
     (:gen-class))
 
-(def replace-pattern "{*}")
 (def class-splitter-regex #"_")
 
 (defn prepare-class-string [class-string]
@@ -9,9 +8,8 @@
     ;; file so the class can be loaded using the dynamic classloader.)
     (first (clojure.string/split class-string class-splitter-regex)))
 
-(defn qualify-string [original qualification]
-    ;; Fully qualifies a package class using the given class name.
-    (clojure.string/replace original replace-pattern qualification))
+(defn qualify-class [classpath classname]
+    (str classpath "." classname))
 
 (defn get-map-key [seed]
     ;; Generate a unique identifier that still retains the seed for readability.

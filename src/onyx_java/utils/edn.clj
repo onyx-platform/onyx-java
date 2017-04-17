@@ -31,6 +31,9 @@
 (defn get-edn-from-spec [directory filename]
     (clojure.string/join [directory filename ".edn"]))
 
-(defn get-specs [directory] (
-    let [filenames (help/list-directory-files directory)]
-    (vec (get-specs-from-edn filenames))))
+(defn get-specs [dir] (
+    let [fnames (help/list-directory-files dir)]
+    (vec (get-specs-from-edn fnames))))
+
+(defn specvec-maker [dir]
+    (fn [spec] [(str dir spec ".edn") spec]))

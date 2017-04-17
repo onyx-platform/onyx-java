@@ -4,7 +4,7 @@
               [onyx-java.utils.object :as o]
               [clojure.test :refer [deftest is]]))
 
-(def construct-dir "test/resources/onyx_simple/construct")
+(def construct-dir "test/resources/onyx_simple/construct/")
 (def input-dir "test/resources/onyx_simple/source/")
 (def output-dir "test/resources/onyx_simple/target/")
 
