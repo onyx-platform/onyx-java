@@ -5,8 +5,6 @@
 ;;(required params, choice limitations, etc. not currently used.)
 
 (defn check-choices [choices value]
-    (println choices)
-    (println value)
     (if (boolean (some #{:all} (flatten choices))) value
         (if (some #{value} (flatten choices)) value "CHOICE-ERROR")))
 
