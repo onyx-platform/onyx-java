@@ -41,7 +41,7 @@
       (fn [key]
           (assoc t key (get-in s [key :source])))))
 
-(defn base-compare-map [object-map]
+(defn object-compare-map [object-map]
   ;; Prepares a base comparison map for use in comparison making,
   ;; producing a new map consisting of the original keyset
   ;; and a reduced valueset distilled to only the production classname.
@@ -57,7 +57,7 @@
   ;; and this function will return a new map containing the original keys
   ;; along with the newly transformed vals.
   ;; Please note: convert-fn must take a map-entry as the only argument.
-    (let [base-map (base-compare-map object-map)
+    (let [base-map (object-compare-map object-map)
           output {}
           convert convert-fn
           add-map (fn [entry] (assoc output (key entry) (convert entry)))

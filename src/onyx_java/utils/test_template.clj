@@ -30,7 +30,7 @@
         (filter/make-comparison-map entities (filter/output-compare-fn dir))))
 
 (defn add-entity-params [object-map dir]
-    (let [entities (filter/base-compare-map
+    (let [entities (filter/object-compare-map
             (filter/filter-by-base object-map "OnyxEntity"))
           adder (fn [entity]
                     (let [source (val entity)
@@ -71,7 +71,7 @@
     (let []))
 
 (defn add-workflow-edges [object-map dir]
-    (let []))
+    (let [workflow (filter/filter-by-class object-map)]))
 
 (defn get-expected-workflow [object-map dir]
     (let []))
