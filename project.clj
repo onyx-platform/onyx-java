@@ -10,9 +10,9 @@
   :java-source-paths ["src/org/onyxplatform/api/java/"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
   :resource-paths ["test/resources"]
-  :repl-options {:init-ns onyx-java.entity-test
+  :repl-options {:init-ns onyx-java.main
                  :caught clj-stacktrace.repl/pst+ }
-  :main ^:skip-aot onyx-java.entity-test
+  :main ^:skip-aot onyx-java.main
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
                    :plugins [[lein-update-dependency "0.1.2"]
