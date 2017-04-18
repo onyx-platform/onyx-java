@@ -1,3 +1,0 @@
-{
-    :lifecycle/before-task-start "inject-in-ch"
-}

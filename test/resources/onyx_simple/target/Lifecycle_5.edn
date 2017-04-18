@@ -1,6 +1,0 @@
-{
-    :lifecycle/task :question-output
-    :lifecycle/calls :onyx-simple.onyx.lifecycle/out-calls
-    :core.async/id "lifecycle5"
-    :lifecycle/doc "Lifecycle for writing to a core.async chan"
-}
