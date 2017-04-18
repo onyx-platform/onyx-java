@@ -13,13 +13,13 @@
 ;; Object factory creation
 (defn create-class [class-map]
     (let [classpath (class-map :path)
-          class-factory (class-factory classpath)]
-        (class-factory)))
+          object-maker (class-factory classpath)]
+        (object-maker)))
 
 (defn create-enum [class-map]
     (let [classpath (class-map :path)
           type (first (first (class-map :params)))]
-          (eval `(fn [] (. ~(symbol classpath) ~(symbol type))))))
+          ((eval `(fn [] (. ~(symbol classpath) ~(symbol type)))))))
 
 
 ;; Atomic object construction

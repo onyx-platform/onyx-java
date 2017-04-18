@@ -5,14 +5,10 @@
               [onyx-java.utils.filter :as filter]
               [onyx-java.wrapper.entity :as entity]
               [onyx-java.wrapper.vector :as vector]
-              [onyx-java.wrapper.workflow :as workflow]))
-
-;(def class-pattern "org.onyxplatform.api.java.{*}")
-
+              [onyx-java.wrapper.workflow :as workflow]
+              [onyx-java.wrapper.scheduler :as scheduler]))
 
 (defn create-master-map [dir]
-    ;; Creates a 'master' map of objects, built from
-    ;; constructors, which are built from specs defined in the given directory.
     (let [master {}
           specvec-maker (edn/specvec-maker dir)
           specs (edn/get-specs dir)
@@ -85,6 +81,16 @@
 (defn get-expected-workflows [object-map dir]
     (let [workflows (filter/filter-by-class object-map "Workflow")]
     (filter/make-comparison-map workflows (filter/output-compare-fn dir))))
+
+(defn coerce-schedulers [object-map]
+    (let [schedulers (filter/filter-by-class object-map "TaskScheduler")
+          names (keys schedulers)
+          mapper (scheduler/get-clojure-entry schedulers)]
+    (apply merge (map mapper names))))
+
+(defn get-expected-schedulers [object-map dir]
+    (let [schedulers (filter/filter-by-class object-map "TaskScheduler")]
+    (filter/make-comparison-map schedulers (filter/output-compare-fn dir))))
 
 (defn add-job-components [object-map]
     (let []))

@@ -41,6 +41,14 @@
           (is (= (t/vector-frequency coerced-map)
                  (t/vector-frequency expected-map)))))
 
+(deftest scheduler-coercion-test
+    (let [construct construct-dir
+          output output-dir
+          master-map (t/create-master-map construct)
+          coerced-map (t/coerce-schedulers master-map)
+          expected-map (t/get-expected-schedulers master-map output)]
+          (is (= coerced-map expected-map))))
+
 (defn job-coercion-test []
     (let [construct construct-dir
           input input-dir
