@@ -85,7 +85,6 @@ public abstract class OnyxEntity implements OnyxNames
 		entry = (IPersistentMap) entry.assoc(param, arg);
 	}
 
-
 	/**
 	 * Returns a Java Map representation of the existing
 	 * PersistentHashMap content 'entry'.
