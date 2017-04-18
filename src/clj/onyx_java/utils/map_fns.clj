@@ -7,9 +7,15 @@
   (let [ent (OnyxEntity.)
         ks (keys m) ]
     (reduce 
+      ; Strip keywords, convert everything else to a string.
       (fn [ent k]
-        (let [n (name k)
-              v (get m k) ]
+        (let [n (if (keyword? k) 
+                  (name k)
+                  (str k))
+              rv (get m k)
+              v (if (keyword? rv)
+                  (name rv)
+                  (str rv)) ]
           ; Side-effectful
           (.addParameter ent n v)))
       ent

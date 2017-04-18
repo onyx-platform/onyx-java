@@ -36,6 +36,10 @@ public class Lifecycle extends OnyxEntity
     	super(c.entry);
 	}
 
+	public Lifecycle(OnyxEntity e) {
+		super(e);
+	}
+
 	/**
 	 * Coerces Lifecycle object content map into proper onyx Lifecycle.
 	 * Returns the onyx representation without altering the existing content map.
