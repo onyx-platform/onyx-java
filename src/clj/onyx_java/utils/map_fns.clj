@@ -5,7 +5,7 @@
 
 
 (defn to-entity-map [^IPersistentMap m]
-  (let [ent ()
+  (let [ent (OnyxEntity.)
         ks (keys m) ]
     (reduce 
       (fn [k]

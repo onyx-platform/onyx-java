@@ -42,7 +42,7 @@ public abstract class OnyxEntity implements OnyxNames
 	 * Constructs a new OnyxEntity object with an empty contents map.
 	 * @return new OnyxEntity object
 	 */
-	protected OnyxEntity() {
+	public OnyxEntity() {
 		entry = PersistentHashMap.EMPTY;
 	}
 
@@ -54,12 +54,12 @@ public abstract class OnyxEntity implements OnyxNames
 	 *                           		to use as this object's content map
 	 * @return                   new OnyxEntity object with initial content map
 	 */
-	protected OnyxEntity(IPersistentMap m) {
+	public OnyxEntity(IPersistentMap m) {
 		entry = m;
 	}
 
 
-	protected OnyxEntity(OnyxEntity ent) {
+	public OnyxEntity(OnyxEntity ent) {
 		entry = ent.entry;
 	}
 
