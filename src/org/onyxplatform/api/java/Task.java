@@ -26,8 +26,13 @@ public class Task extends OnyxEntity
 	 * @param  PersistentHashMap ent           existing map to use for new Task
 	 * @return                   new Task object
 	 */
-	private Task(Task task) {
-    	super(task.entry);
+	public Task(Task task) {
+    		super(task.entry);
+	}
+
+
+	public Task(OnyxEntity e) {
+		super(e);
 	}
 
 	/**

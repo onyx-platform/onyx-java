@@ -12,7 +12,8 @@
   :resource-paths ["test/resources"]
   :repl-options {:init-ns onyx-java.main
                  :caught clj-stacktrace.repl/pst+ }
-  :main ^:skip-aot onyx-java.main
+  :prep-tasks  [["compile"] "javac" "compile"]
+  :main ^:skip-aot onyx-java.entity-test
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
                    :plugins [[lein-update-dependency "0.1.2"]

@@ -35,7 +35,7 @@ public abstract class OnyxEntity implements OnyxNames
 	/**
 	 * Instance specific functionality
 	 */
-	protected PersistentHashMap entry;
+	protected IPersistentMap entry;
 
 
 	/**
@@ -54,8 +54,13 @@ public abstract class OnyxEntity implements OnyxNames
 	 *                           		to use as this object's content map
 	 * @return                   new OnyxEntity object with initial content map
 	 */
-	protected OnyxEntity(PersistentHashMap ent) {
-		entry = ent;
+	protected OnyxEntity(IPersistentMap m) {
+		entry = m;
+	}
+
+
+	protected OnyxEntity(OnyxEntity ent) {
+		entry = ent.entry;
 	}
 
 
@@ -77,7 +82,7 @@ public abstract class OnyxEntity implements OnyxNames
 	 * @param Object arg   value to associate with the added key
 	 */
 	public void addParameter(String param, Object arg) {
-		entry = (PersistentHashMap) entry.assoc(param, arg);
+		entry = (IPersistentMap) entry.assoc(param, arg);
 	}
 
 
