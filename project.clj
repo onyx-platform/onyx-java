@@ -10,7 +10,7 @@
   :java-source-paths ["src/org/onyxplatform/api/java/"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
   :resource-paths ["test/resources"]
-  :repl-options {:init-ns onyx-java.test
+  :repl-options {:init-ns onyx-java.entity-test
                  :caught clj-stacktrace.repl/pst+ }
   :main ^:skip-aot onyx-java.test
   :prep-tasks  [["compile"] "javac" "compile"]

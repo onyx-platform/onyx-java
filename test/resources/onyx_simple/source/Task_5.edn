@@ -1,7 +1,0 @@
-{
-    "onyx/name" "question"
-    "onyx/fn" "onyx-java.resource.functions/question"
-    "onyx/type" "function"
-    "onyx/batch-timeout" "10"
-    "onyx/batch-size" "50"
-}
