@@ -12,6 +12,7 @@ public interface OnyxNames {
 	 * Interop
 	 */
 	public static final String CORE 				= "clojure.core";
+
 	//The following INTEROP has been replaced because of missing type coercion
 	//in the core clj file.
 	//public static final String INTEROP 				= "onyx.interop";
@@ -86,4 +87,17 @@ public interface OnyxNames {
 	public static final String CoerceFlowConditions = "coerce-flow-conditions";
 	public static final String CoerceWindows 		= "coerce-windows";
 	public static final String CoerceTriggers 		= "coerce-triggers";
+
+
+	/**
+	 * Utilities
+	 */
+	public static final String ASYNC_CATALOG        = "onyx-java.utils.async-catalog";
+	public static final String AsyncCatalogIn 	= "in-catalog";
+	public static final String AsyncCatalogOut 	= "out-catalog";
+
+	public static final String ASYNC_LIFECYCLES     = "onyx-java.utils.async-lifecycles";
+	public static final String AsyncLifecycleIn 	= "in-lifecycles";
+	public static final String AsyncLifecycleOut 	= "out-lifecycles";
+
 }

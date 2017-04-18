@@ -13,6 +13,7 @@
   :repl-options {:init-ns onyx-java.test
                  :caught clj-stacktrace.repl/pst+ }
   :main ^:skip-aot onyx-java.test
+  :prep-tasks  [["compile"] "javac" "compile"]
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.10"]]
                    :plugins [[lein-update-dependency "0.1.2"]
