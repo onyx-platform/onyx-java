@@ -1,7 +1,0 @@
-{
-    "onyx/name" "mixed-case"
-    "onyx/fn" "onyx-java.resource.functions/mixed-case"
-    "onyx/type" "function"
-    "onyx/batch-timeout" "10"
-    "onyx/batch-size" "50"
-}

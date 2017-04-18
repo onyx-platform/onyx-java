@@ -1,7 +1,0 @@
-{
-    :namespace "org.onyxplatform.api.java"
-    :params [["TaskScheduler"
-             {:type "enum"
-              :namespace "org.onyxplatform.api.java"
-              :params [["BALANCED"]]}]]
-}

@@ -1,5 +1,0 @@
-{
-    "lifecycle/task" "in"
-    "core.async/id" "lifecycle1"
-    "lifecycle/calls" "onyx-simple.onyx.lifecycle/in-calls"
-}

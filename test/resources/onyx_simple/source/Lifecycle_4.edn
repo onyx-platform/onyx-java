@@ -1,4 +1,0 @@
-{
-    "lifecycle/task" "loud-output"
-    "lifecycle/calls" "onyx.plugin.core-async/writer-calls"
-}
