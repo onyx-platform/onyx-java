@@ -5,12 +5,9 @@
               [onyx-java.wrapper.entity :as entity]
               [onyx-java.utils.edn :as edn]))
 
-(defn make-instance-map [class-map]
+(defn make-instance-map! [class-map]
     ;; Creates a test object as a map with one keyval of the object ref
     (assoc {} :ref (obj/create-object! class-map)))
-
-(defn add-key [m k v]
-    (assoc m k v))
 
 (defn add-entry [object-map]
     (fn [entry] (into object-map entry)))
@@ -24,9 +21,25 @@
     (if (contains? data-map :type)
         (data-map :type) "class"))
 
+(defn assemble-params [param-vecs]
+    (let [class-mapper
+            (fn [param]
+                (str ((last param) :namespace) '. (first param)))
+          obj-mapper
+            (fn [param]
+                (let [obj-map (last param)
+                    obj-map (assoc obj-map
+                    :path (str ((last param) :namespace) '. (first param)))]
+                (obj/create-object obj-map)))
+          classes (vec (map class-mapper param-vecs))
+          objects (vec (map obj-mapper param-vecs))]
+        {:types classes :objects objects}))
+
 (defn get-constructor-params [data-map]
-    (if (contains? data-map :params)
-        (data-map :params) []))
+    (case (data-map :type)
+        "enum" (data-map :params)
+        (if (contains? data-map :params)
+            (assemble-params (data-map :params)) nil)))
 
 (defn parse-spec [spec-vec]
     (let [spec-map {}
@@ -48,7 +61,7 @@
 
 (defn make-entry [spec-vec]
     (let [spec-map (parse-spec spec-vec)
-          object-map (make-instance-map spec-map)
+          object-map (make-instance-map! spec-map)
           baseclass (help/strip-base (str (obj/get-direct-base (:ref object-map))))
           name (spec-map :name)
           object-map (-> object-map

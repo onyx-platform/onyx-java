@@ -11,12 +11,26 @@
 
 
 ;; Object factory creation
-(defn create-class [class-map]
-    (let [classpath (class-map :path)
-          object-maker (class-factory classpath)]
-        (object-maker)))
+(defn get-object-maker [classpath type-string]
+    (if (= (count type-string) 0)
+        (class-factory classpath)
+        (class-factory classpath type-string)))
 
-(defn create-enum [class-map]
+(defn create-class-object [class-map]
+    (let [classpath (class-map :path)
+          types (get-in class-map [:params :types])
+          objects (get-in class-map [:params :objects])
+          type-string (clojure.string/join " " types)
+          object-maker (get-object-maker classpath type-string)]
+        (if (= (count type-string) 0)
+            (object-maker)
+            ;please note - we need to alter the following (first objects) if
+            ;we want this function to work with constructors with more than a
+            ;single argument. i'm shelving this for now due to it working for
+            ;our purposes.
+            (object-maker (first objects)))))
+
+(defn create-enum-object [class-map]
     (let [classpath (class-map :path)
           type (first (first (class-map :params)))]
           ((eval `(fn [] (. ~(symbol classpath) ~(symbol type)))))))
@@ -25,9 +39,15 @@
 ;; Atomic object construction
 (defn create-object! [class-map]
     (let [obj (case (class-map :type)
-                "class" (create-class class-map)
-                "enum" (create-enum class-map))]
+                "class" (create-class-object class-map)
+                "enum" (create-enum-object class-map))]
     (atom obj)))
+
+(defn create-object [class-map]
+    (let [obj (case (class-map :type)
+                "class" (create-class-object class-map)
+                "enum" (create-enum-object class-map))]
+    obj))
 
 ;; Ancestry tracing
 
