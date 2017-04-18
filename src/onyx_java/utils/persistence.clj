@@ -50,13 +50,13 @@
     (let [spec-map (parse-spec spec-vec)
           object-map (make-instance-map spec-map)
           baseclass (help/strip-base (str (obj/get-direct-base (:ref object-map))))
-          name (spec-map :name)]
-          (-> object-map
-              (assoc :class (spec-map :class))
-              (assoc :path (spec-map :path))
-              (assoc :type (spec-map :type))
-              (assoc :source (spec-map :source))
-              (assoc :base baseclass))
+          name (spec-map :name)
+          object-map (-> object-map
+                        (assoc :class (spec-map :class))
+                        (assoc :path (spec-map :path))
+                        (assoc :type (spec-map :type))
+                        (assoc :source (spec-map :source))
+                        (assoc :base baseclass))]
           (assoc {} name object-map)))
 
 (defn create-map [object-map spec-vecs]

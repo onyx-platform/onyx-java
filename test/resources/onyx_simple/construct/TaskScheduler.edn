@@ -1,0 +1,5 @@
+{
+    :namespace "org.onyxplatform.api.java"
+    :type "enum"
+    :params [["BALANCED"]]
+}

@@ -9,18 +9,25 @@
   (let [args (map #(with-meta (symbol (str "x" %2)) {:tag %1}) types (range))]
     (eval `(fn [~@args] (new ~(symbol classpath) ~@args)))))
 
+
 ;; Object factory creation
-(defn create-object [classpath]
-    ;; Uses the class-factory to create an object factory for a class
-    ;; using the class's public, default, no-argument constructor.
-    (class-factory classpath))
+(defn create-class [class-map]
+    (let [classpath (class-map :path)
+          class-factory (class-factory classpath)]
+        (class-factory)))
+
+(defn create-enum [class-map]
+    (let [classpath (class-map :path)
+          type (first (first (class-map :params)))]
+          (eval `(fn [] (. ~(symbol classpath) ~(symbol type))))))
+
 
 ;; Atomic object construction
 (defn create-object! [class-map]
-    (let [object-maker (create-object (class-map :path))]
-        (println (class-map :path))
-        (atom (object-maker))))
-
+    (let [obj (case (class-map :type)
+                "class" (create-class class-map)
+                "enum" (create-enum class-map))]
+    (atom obj)))
 
 ;; Ancestry tracing
 
