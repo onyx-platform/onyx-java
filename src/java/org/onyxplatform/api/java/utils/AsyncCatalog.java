@@ -36,11 +36,10 @@ public class AsyncCatalog implements OnyxNames {
 
 	public static void addOutput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
-		IPersistentMap outCat = (IPersistentMap) inFn.invoke(name, batchSize, batchTimeout);
+		IPersistentMap outCat = (IPersistentMap) outFn.invoke(name, batchSize, batchTimeout);
 		OnyxEntity e = MapFns.toEntityMap(outCat);
 		Task outTask = new Task(e);
 		catalog.addTask(outTask);
 	}
-
 }
 
