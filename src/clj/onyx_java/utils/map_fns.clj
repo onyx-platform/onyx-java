@@ -13,17 +13,16 @@
     (reduce 
       ; Strip keywords, convert everything else to a string.
       (fn [ent k]
-        (println "ent=" ent)
-        (println "k=" k)
         (let [n (if (keyword? k) 
                   (name k)
                   (str k))
-              rv (get m k)
-              v (if (keyword? rv)
-                  (name rv)
-                  (str rv)) ]
+              bv (get m k "MISSING")
+              v (if (keyword? bv)
+                  (name bv)
+                  bv) ]
           ; Side-effectful
-          (.addParameter ent n v)))
+          (.addParameter ent n v)
+          ent))
       ent
       ks)
     ent))
