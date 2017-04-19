@@ -3,9 +3,6 @@ package org.onyxplatform.api.java;
 import clojure.lang.PersistentVector;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 
 /**
  * Serves as a base for any Onyx concept that is represented by a vector of
@@ -19,7 +16,7 @@ public class OnyxVector
 	 * Constructs a new OnyxVector object with an empty contents vector.
 	 * @return new OnyxVector object with an empty content vector
 	 */
-	protected OnyxVector() {
+	public OnyxVector() {
 		vContents = PersistentVector.EMPTY;
 	}
 
@@ -29,48 +26,30 @@ public class OnyxVector
 	 * @param  PersistentVector pv    existing vector to use as content vector
 	 * @return                  new OnyxVector object
 	 */
-	protected OnyxVector(PersistentVector pv) {
+	public OnyxVector(PersistentVector pv) {
 		vContents = pv;
 	}
 
+	public OnyxVector(OnyxVector ov) {
+		vContents = ov.vContents;
+	}
+
 	/**
-	 * Creates a new ArrayList by converting the existing content
+	 * Creates a new PersistentVector by cloning the existing content
 	 * vector (does not alter the existing content vector).
-	 * Note: This method causes two compiler complaints, but because of the
-	 * package architecture, any aberrant behavior will be caught and handled
-	 * either in clojure during coercion or in a higher order nested behavior.
-	 * @return newly created ArrayList representation of the content vector
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
-   	public List<Map<String, Object>> toList() {
-        	return new ArrayList(vContents);
+   	public PersistentVector toVector() {
+		//return PersistentVector.create(vContents);
+		// TODO: do a deep copy or just send it back as ref?
+		return null;
     	}
 
 	/**
 	 * Adds an existing object to the content vector of the object, appending
-	 * it to the end of the content vector. The object should represent a map.
-	 * @param Object o object to be added to the existing content vector
+	 * it to the end of the content vector. 
 	 */
-	protected void addElement(Object o) {
+	protected void addElement(OnyxMap o) {
 	    vContents = vContents.cons(o);
-	}
-
-	/**
-	 * Iterates over the existing content vector, ensuring each constituent
-	 * map is a Clojure PersistentHashMap in a new PersistentVector container.
-	 * @return new PersistentVector container containing guaranteed
-	 * PersistentHashMap entities
-	 */
-	public PersistentVector toCljVector() {
-
-		PersistentVector v = PersistentVector.EMPTY;
-
-		for (Object e : vContents) {
-			OnyxEntity oe = (OnyxEntity) e;
-			v = v.cons(oe.toCljMap());
-		}
-
-		return v;
 	}
 
 	/**
@@ -80,6 +59,6 @@ public class OnyxVector
 	 */
 	@Override
 	public String toString() {
-    	return Arrays.toString(vContents.toArray());
+    		return Arrays.toString(vContents.toArray());
 	}
 }

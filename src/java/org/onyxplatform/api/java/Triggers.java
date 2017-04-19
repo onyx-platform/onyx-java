@@ -21,8 +21,12 @@ public class Triggers extends OnyxVector
 	 * @param  Triggers ts         existing Triggers object to use for content
 	 * @return          new Triggers object
 	 */
-    private Triggers(Triggers ts) {
+    public Triggers(Triggers ts) {
 	    super(ts.vContents);
+    }
+
+    public Triggers(OnyxVector ov) {
+	    super(ov);
     }
 
 	/**

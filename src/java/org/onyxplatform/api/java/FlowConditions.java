@@ -22,8 +22,12 @@ public class FlowConditions extends OnyxVector
 	 *                        				new FlowConditions object
 	 * @return                new FlowConditions object
 	 */
-    private FlowConditions(FlowConditions fc) {
+    public FlowConditions(FlowConditions fc) {
 	    super(fc.vContents);
+    }
+
+    public FlowConditions(OnyxVector ov) {
+	    super(ov);
     }
 
 	/**

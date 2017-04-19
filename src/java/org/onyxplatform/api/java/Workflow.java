@@ -17,13 +17,13 @@ import java.util.Map;
  */
 public final class Workflow implements OnyxNames
 {
-
-	protected PersistentVector edges;
+	protected final static IFn kwFn;
 
     static {
-		IFn requireFn = Clojure.var(CORE, Require);
-		requireFn.invoke(Clojure.read(INTEROP));
+		kwFn = Clojure.var(CORE, Keyword);
     }
+
+	protected PersistentVector edges;
 
 	/**
 	 * Creates a new Workflow object with an empty set of edges.
@@ -52,7 +52,10 @@ public final class Workflow implements OnyxNames
 	 * @param String dstTask name of dependent task
 	 */
 	public void addEdge(String srcTask, String dstTask) {
-    	PersistentVector pair = PersistentVector.create(srcTask, dstTask);
+
+		Object sKw = kwFn.invoke(srcTask);
+		Object dKw = kwFn.invoke(dstTask);
+    		PersistentVector pair = PersistentVector.create(sKw, dKw);
 		edges = edges.cons(pair);
 	}
 
@@ -60,17 +63,8 @@ public final class Workflow implements OnyxNames
 	 * Returns a Java array representation of the Workflow edges content vector.
 	 * This method does not alter the existing PersistentVector edge container.
 	 */
-	public Object[] graph() {
-		return edges.toArray();
-	}
-
-	/**
-	 * Coerces Workflow object edge contents into proper onyx workflow.
-	 * Returns the onyx representation without altering the existing edge variable.
-	 * @return onyx qualified Workflow object
-	 */
-	public PersistentVector toCljGraph() {
-		IFn coerceWorkflow = Clojure.var(INTEROP, CoerceWorkflow);
-		return (PersistentVector) coerceWorkflow.invoke(edges);
+	public PersistentVector graph() {
+		// TODO: Deep copy here?
+		return edges;
 	}
 }

@@ -2,7 +2,6 @@ package org.onyxplatform.api.java;
 
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
-import clojure.lang.PersistentArrayMap;
 
 /**
  * Simple public facing user API mirroring all functionality of underlaying
@@ -27,8 +26,8 @@ public class API implements OnyxNames {
      */
     public static Object startEnv(EnvConfiguration envConfig) {
         IFn startEnv = Clojure.var(API, StartEnv);
-        Object coercedConfig = envConfig.toCljMap();
-        return startEnv.invoke(coercedConfig);
+        Object config = envConfig.toMap();
+        return startEnv.invoke(config);
     }
 
     /**
@@ -43,8 +42,8 @@ public class API implements OnyxNames {
      */
     public static Object startPeerGroup(PeerConfiguration peerConfig) {
         IFn startPeerGroup = Clojure.var(API, StartPeerGroup);
-        Object coercedConfig = peerConfig.toCljMap();
-        return startPeerGroup.invoke(coercedConfig);
+        Object config = peerConfig.toMap();
+        return startPeerGroup.invoke(config);
     }
 
     /**
@@ -127,9 +126,9 @@ public class API implements OnyxNames {
      */
     public static boolean submitJob(PeerConfiguration peerConfig, Job job) {
         IFn submitJob = Clojure.var(API, SubmitJob);
-	    Object coercedJob = job.toCljMap();
-        Object coercedConfig = peerConfig.toCljMap();
-        return (boolean) submitJob.invoke(coercedConfig, coercedJob);
+	Object j = job.toArray();
+        Object c = peerConfig.toMap();
+        return (boolean) submitJob.invoke(c, j);
     }
 
     /**
@@ -143,8 +142,8 @@ public class API implements OnyxNames {
      */
     public static boolean killJob(PeerConfiguration peerConfig, String jobID) {
         IFn killJob = Clojure.var(API, KillJob);
-        Object coercedConfig = peerConfig.toCljMap();
-        return (boolean) killJob.invoke(coercedConfig, jobID);
+        Object config = peerConfig.toMap();
+        return (boolean) killJob.invoke(config, jobID);
     }
 
     /**
@@ -156,7 +155,7 @@ public class API implements OnyxNames {
      */
     public static boolean collectGarbage(PeerConfiguration peerConfig) {
         IFn collectGarbage = Clojure.var(API, CollectGarbage);
-        Object coercedConfig = peerConfig.toCljMap();
+        Object coercedConfig = peerConfig.toMap();
         return (boolean) collectGarbage.invoke(coercedConfig);
     }
 
@@ -169,7 +168,7 @@ public class API implements OnyxNames {
      */
     public static boolean awaitJobCompletion(PeerConfiguration peerConfig, String jobID) {
         IFn awaitJobCompletion = Clojure.var(API, AwaitJobCompletion);
-        Object coercedConfig = peerConfig.toCljMap();
-        return (boolean) awaitJobCompletion.invoke(coercedConfig, jobID);
+        Object config = peerConfig.toMap();
+        return (boolean) awaitJobCompletion.invoke(config, jobID);
     }
 }

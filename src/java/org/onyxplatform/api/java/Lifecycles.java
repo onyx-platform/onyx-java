@@ -21,8 +21,13 @@ public class Lifecycles extends OnyxVector
      *                              contents to use for new Lifecycles object
      * @return            new Lifecycles object
      */
-    private Lifecycles(Lifecycles ls) {
+    public Lifecycles(Lifecycles ls) {
 	    super(ls.vContents);
+    }
+
+
+    public Lifecycles(OnyxVector ov) {
+	    super(ov);
     }
 
     /**

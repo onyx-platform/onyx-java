@@ -213,39 +213,34 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Coerces the Job to a proper onyx Job. Returns the Coerced Job.
-     * @return proper onyx Job.
+     * Returns the fully described Job.
+     * @return onyx Job.
      */
-    public PersistentArrayMap toCljMap() {
-    	PersistentArrayMap coercedJob = PersistentArrayMap.EMPTY;
-    	Object coercedTaskScheduler = taskScheduler.toCljString();
+    public PersistentArrayMap toArray() {
 
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxTaskScheduler),
-    							                           coercedTaskScheduler);
+    	PersistentArrayMap job = PersistentArrayMap.EMPTY;
 
-    	PersistentVector coercedWorkflow = workflow.toCljGraph();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxWorkflow),
-    			                                           coercedWorkflow);
+    	Object s = taskScheduler.schedule();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxTaskScheduler), s);
 
-    	PersistentVector coercedCatalog = catalog.toCljVector();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxCatalog),
-    							                           coercedCatalog );
+    	PersistentVector wf = workflow.graph();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxWorkflow), wf);
 
-    	PersistentVector coercedLifecycles = lifecycles.toCljVector();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxLifecycles),
-    							                           coercedLifecycles);
+    	PersistentVector c = catalog.toVector();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxCatalog), c);
 
-    	PersistentVector coercedFlowConditions = flowConditions.toCljVector();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxFlowConditions),
-    							                           coercedFlowConditions);
+    	PersistentVector l = lifecycles.toVector();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxLifecycles), l);
 
-    	PersistentVector coercedWindows = windows.toCljVector();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxWindows),
-    							                           coercedWindows);
+    	PersistentVector fc = flowConditions.toVector();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxFlowConditions), fc);
 
-    	PersistentVector coercedTriggers = triggers.toCljVector();
-    	coercedJob = (PersistentArrayMap) coercedJob.assoc(kwFn.invoke(OnyxTriggers),
-    							                           coercedTriggers);
-    	return coercedJob;
+    	PersistentVector w = windows.toVector();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxWindows), w);
+
+    	PersistentVector t = triggers.toVector();
+    	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxTriggers), t);
+
+    	return job;
     }
 }

@@ -1,42 +1,37 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.IPersistentMap;
-import java.util.Map;
-
 /**
  * A peer configuration specifies the set of system parameters that
  * will be used for all peers on a given machine.
- * PeerConfiguration derives from OnyxEntity.
+ * PeerConfiguration derives from OnyxMap.
  */
-public class PeerConfiguration extends OnyxEntity
+public class PeerConfiguration extends OnyxMap
 {
-	protected static String coerceKw = PeerConfig;
-
 	/**
-	 * Creates a new PeerConfiguration object using OnyxEntity superconstructor.
+	 * Creates a new PeerConfiguration object using OnyxMap superconstructor.
 	 * @return new PeerConfiguration object
 	 */
 	public PeerConfiguration() {
+		super();
 	}
 
 	/**
 	 * Creates a new PeerConfiguration object using an exsiting content map
-	 * from an exsiting peer configuration. Uses OnyxEntity superconstructor.
+	 * from an exsiting peer configuration. Uses OnyxMap superconstructor.
 	 * @param  PeerConfiguration cfg           existing PeerConfiguration object
 	 * @return                   new PeerConfiguration object
 	 */
-	private PeerConfiguration(PeerConfiguration cfg) {
-    	super(cfg.entry);
+	public PeerConfiguration(PeerConfiguration cfg) {
+    		super(cfg.entry);
 	}
 
 	/**
-	 * Coerces PeerConfiguration object content map into
-	 * proper onyx PeerConfiguration. Returns the onyx representation without
-	 * altering the existing content map.
-	 * @param  Map<String, Object>       jMap Content map to coerce
-	 * @return             onyx representation of content map
+	 * Creates a new PeerConfiguration object using an exsiting content map
+	 * from an exsiting peer configuration. Uses OnyxMap superconstructor.
+	 * @param  PeerConfiguration cfg           existing PeerConfiguration object
+	 * @return                   new PeerConfiguration object
 	 */
-	protected IPersistentMap coerce(Map<String, Object> jMap) {
-		return (IPersistentMap) castTypesFn.invoke(coerceKw, jMap);
+	public PeerConfiguration(OnyxMap m) {
+    		super(m);
 	}
 }

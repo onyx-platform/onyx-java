@@ -7,7 +7,7 @@ import clojure.lang.PersistentArrayMap;
 import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.OnyxNames;
-import org.onyxplatform.api.java.OnyxEntity;
+import org.onyxplatform.api.java.OnyxMap;
 import org.onyxplatform.api.java.Catalog;
 import org.onyxplatform.api.java.Task;
 
@@ -29,7 +29,7 @@ public class AsyncCatalog implements OnyxNames {
 	public static void addInput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
 		IPersistentMap inCat = (IPersistentMap) inFn.invoke(name, batchSize, batchTimeout);
-		OnyxEntity e = MapFns.toEntityMap(inCat);
+		OnyxMap e = MapFns.toOnyxMap(inCat);
 		Task inTask = new Task(e);
 		catalog.addTask(inTask);
 	}
@@ -37,7 +37,7 @@ public class AsyncCatalog implements OnyxNames {
 	public static void addOutput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
 		IPersistentMap outCat = (IPersistentMap) outFn.invoke(name, batchSize, batchTimeout);
-		OnyxEntity e = MapFns.toEntityMap(outCat);
+		OnyxMap e = MapFns.toOnyxMap(outCat);
 		Task outTask = new Task(e);
 		catalog.addTask(outTask);
 	}

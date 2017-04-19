@@ -7,36 +7,30 @@ import java.util.Map;
  * Triggers are a feature that interact with Windows.
  * Windows capture and bucket data over time.
  * Triggers let you release the captured data over a variety stimuli.
- * Triggers derive from OnyxEntity.
+ * Triggers derive from OnyxMap.
  */
-public class Trigger extends OnyxEntity
+public class Trigger extends OnyxMap 
 {
-	protected static String coerceKw = OnyxTriggerEntry;
-
 	/**
-	 * Creates a new Trigger object using OnyxEntity superconstructor.
+	 * Creates a new Trigger object using OnyxMap superconstructor.
 	 * @return new Trigger object
 	 */
 	public Trigger() {
+		super();
 	}
 
 	/**
 	 * Creates a new Trigger object using an existing Trigger objects content.
-	 * Uses OnyxEntity superconstructor.
+	 * Uses OnyxMap superconstructor.
 	 * @param  Trigger e             existing trigger to use for new Trigger
 	 * @return         new Trigger object
 	 */
-	private Trigger(Trigger e) {
-    	super(e.entry);
+	public Trigger(Trigger e) {
+    		super(e.entry);
 	}
 
-	/**
-	 * Coerces Trigger object content map into proper onyx Trigger.
-	 * Returns the onyx representation without altering the existing content map.
-	 * @param  Map<String, Object>       jMap content map to coerce
-	 * @return             onyx representation of content map
-	 */
-	protected IPersistentMap coerce(Map<String, Object> jMap) {
-		return (IPersistentMap) castTypesFn.invoke(coerceKw, jMap);
+	public Trigger(OnyxMap m) {
+		super(m);
 	}
+
 }

@@ -21,8 +21,12 @@ public class Windows extends OnyxVector
 	 * @param  Windows wes           existing windows object to use for content
 	 * @return         new Windows object
 	 */
-    private Windows(Windows wes) {
+    public Windows(Windows wes) {
 	    super(wes.vContents);
+    }
+
+    public Windows(OnyxVector ov) {
+	    super(ov);
     }
 
 	/**

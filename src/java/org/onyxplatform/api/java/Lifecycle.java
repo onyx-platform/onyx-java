@@ -1,8 +1,5 @@
 package org.onyxplatform.api.java;
 
-import clojure.lang.IPersistentMap;
-import java.util.Map;
-
 /**
  * There are several interesting points to execute arbitrary code during a
  * task in Onyx. Onyx lets you plug in and calls functions before a task,
@@ -13,41 +10,35 @@ import java.util.Map;
  * and lifecycles never coordinate across peers. Usage of lifecycles
  * are entirely optional. Lifecycle data is submitted as a data structure
  * at job submission time.
- * Lifecycle derives from OnyxEntity.
+ * Lifecycle derives from OnyxMap.
  */
-public class Lifecycle extends OnyxEntity
+public class Lifecycle extends OnyxMap
 {
-	protected static String coerceKw = OnyxLifecycleEntry;
-
 	/**
-	 * Creates a new Lifecycle object using OnyxEntity superconstructor.
+	 * Creates a new Lifecycle object using OnyxMap superconstructor.
 	 * @return new Lifecycle object.
 	 */
 	public Lifecycle() {
+		super();
 	}
 
 	/**
 	 * Creates a new Lifecycle object using an existing content map.
-	 * Uses OnyxEntity superconstructor.
+	 * Uses OnyxMap superconstructor.
 	 * @param  Lifecycle c             existing map to use for new Lifecycle
 	 * @return           new Lifecycle object
 	 */
-	private Lifecycle(Lifecycle c) {
-    	super(c.entry);
-	}
-
-	public Lifecycle(OnyxEntity e) {
-		super(e);
+	public Lifecycle(Lifecycle c) {
+    		super(c.entry);
 	}
 
 	/**
-	 * Coerces Lifecycle object content map into proper onyx Lifecycle.
-	 * Returns the onyx representation without altering the existing content map.
-	 * @param  Map<String, Object>       jMap Content map to coerce
-	 * @return             onyx representation of content map
+	 * Creates a new Lifecycle object using an existing content map.
+	 * Uses OnyxMap superconstructor.
+	 * @param  Lifecycle c             existing map to use for new Lifecycle
+	 * @return           new Lifecycle object
 	 */
-	protected IPersistentMap coerce(Map<String, Object> jMap) {
-		return (IPersistentMap) castTypesFn.invoke(coerceKw, jMap);
+	public Lifecycle(OnyxMap e) {
+		super(e);
 	}
-
 }

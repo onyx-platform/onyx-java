@@ -7,7 +7,7 @@ import clojure.lang.PersistentVector;
 import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.OnyxNames;
-import org.onyxplatform.api.java.OnyxEntity;
+import org.onyxplatform.api.java.OnyxMap;
 import org.onyxplatform.api.java.Lifecycles;
 import org.onyxplatform.api.java.Lifecycle;
 
@@ -32,7 +32,7 @@ public class AsyncLifecycles implements OnyxNames {
 
 		for (Object e : in) {
 			IPersistentMap ie = (IPersistentMap)e;
-			OnyxEntity oe = MapFns.toEntityMap(ie);
+			OnyxMap oe = MapFns.toOnyxMap(ie);
 			Lifecycle l = new Lifecycle(oe);
 			lifecycles.addLifecycle(l);
 		}
@@ -44,7 +44,7 @@ public class AsyncLifecycles implements OnyxNames {
 
 		for (Object e : out) {
 			IPersistentMap ie = (IPersistentMap)e;
-			OnyxEntity oe = MapFns.toEntityMap(ie);
+			OnyxMap oe = MapFns.toOnyxMap(ie);
 			Lifecycle l = new Lifecycle(oe);
 			lifecycles.addLifecycle(l);
 		}

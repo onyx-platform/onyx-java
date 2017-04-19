@@ -8,12 +8,17 @@ import clojure.lang.IFn;
  * peers are allocated to which tasks. There are a few different Task Scheduler
  * implementations, contained in the class as ENUM options.
  */
-public enum TaskScheduler implements OnyxNames
-{
-    BALANCED(BalancedTaskSchedule),
-    PERCENTAGE(PercentTaskSchedule);
+public class TaskScheduler implements OnyxNames {
 
-    private final String strRepr;
+	private static IFn kwFn;
+	private static IFn nameFn;
+
+	static {
+		IFn kwFn = Clojure.var(CORE, Keyword);
+		IFn nameFn = Clojure.var(CORE, Name);
+	}
+
+    private final Object kwType;
 
 	/**
 	 * Creates a new TaskScheduler object
@@ -21,18 +26,16 @@ public enum TaskScheduler implements OnyxNames
 	 * @return        new TaskScheduler object
 	 */
     private TaskScheduler(String s) {
-        strRepr = s;
+	kwType = kwFn.invoke(s);
     }
 
 	/**
-	 * converts the TaskScheduler content string into a proper onyx
+	 * Returns TaskScheduler content string into a proper onyx
 	 * task scheduler. Does not change existing contents.
 	 * @return onyx representation of TaskScheduler content
 	 */
-    public Object toCljString() {
-		IFn requireFn = Clojure.var(CORE, Require);
-		IFn kwFn = Clojure.var(CORE, Keyword);
-		return kwFn.invoke(strRepr);
+    public Object schedule() {
+	    return kwType;
     }
 
 	/**
@@ -42,7 +45,6 @@ public enum TaskScheduler implements OnyxNames
 	 */
 	@Override
 	public String toString() {
-		return strRepr;
+		return (String)nameFn.invoke(kwType);
 	}
-
 }

@@ -18,7 +18,7 @@ public class Catalog extends OnyxVector
 	 * @param  Catalog c             existing Catalog to use for new Catalog
 	 * @return         new Catalog object
 	 */
-    private Catalog(Catalog c) {
+    public Catalog(Catalog c) {
 	    super(c.vContents);
     }
 

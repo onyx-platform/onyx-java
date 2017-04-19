@@ -13,14 +13,11 @@ public interface OnyxNames {
 	 */
 	public static final String CORE 				= "clojure.core";
 
-	//The following INTEROP has been replaced because of missing type coercion
-	//in the core clj file.
-	//public static final String INTEROP 				= "onyx.interop";
-	public static final String INTEROP				= "onyx-java.utils.interop";
-	public static final String API 					= "onyx.api";
-
 	public static final String Require 				= "require";
 	public static final String Keyword 				= "keyword";
+	public static final String Name 				= "name";
+
+	public static final String API 					= "onyx.api";
 
 	/**
 	 * Environment and Peer Configuration
@@ -101,6 +98,6 @@ public interface OnyxNames {
 	public static final String AsyncLifecycleOut 	= "out-lifecycles";
 
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
-	public static final String ToEntityMap 		= "to-entity-map";
+	public static final String ToOnyxMap 		= "to-onyx-map";
 
 }

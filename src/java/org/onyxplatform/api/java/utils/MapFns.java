@@ -5,7 +5,7 @@ import clojure.lang.IFn;
 import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.OnyxNames;
-import org.onyxplatform.api.java.OnyxEntity;
+import org.onyxplatform.api.java.OnyxMap;
 
 public class MapFns implements OnyxNames {
 
@@ -17,11 +17,11 @@ public class MapFns implements OnyxNames {
 	static {
     		IFn requireFn = Clojure.var(CORE, Require);
 		requireFn.invoke(Clojure.read(MAP_FNS));
-		eMapFn = Clojure.var(MAP_FNS, ToEntityMap);
+		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
 	}
 
-	public static OnyxEntity toEntityMap(IPersistentMap m) {
-		return (OnyxEntity) eMapFn.invoke(m);
+	public static OnyxMap toOnyxMap(IPersistentMap m) {
+		return (OnyxMap) eMapFn.invoke(m);
 	}
 
 	
@@ -31,8 +31,10 @@ public class MapFns implements OnyxNames {
 	
 	// update
 
+	// get-in
 
 	// assoc-in
+
 	
 	// dissoc-in
 	
