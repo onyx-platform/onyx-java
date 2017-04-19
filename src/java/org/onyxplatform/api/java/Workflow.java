@@ -64,7 +64,6 @@ public final class Workflow implements OnyxNames
 	 * This method does not alter the existing PersistentVector edge container.
 	 */
 	public PersistentVector graph() {
-		// TODO: Deep copy here?
 		return edges;
 	}
 }

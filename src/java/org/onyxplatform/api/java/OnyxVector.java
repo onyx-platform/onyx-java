@@ -35,16 +35,6 @@ public class OnyxVector
 	}
 
 	/**
-	 * Creates a new PersistentVector by cloning the existing content
-	 * vector (does not alter the existing content vector).
-	 */
-   	public PersistentVector toVector() {
-		//return PersistentVector.create(vContents);
-		// TODO: do a deep copy or just send it back as ref?
-		return null;
-    	}
-
-	/**
 	 * Adds an existing object to the content vector of the object, appending
 	 * it to the end of the content vector. 
 	 */

@@ -99,5 +99,4 @@ public interface OnyxNames {
 
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
 	public static final String ToOnyxMap 		= "to-onyx-map";
-
 }

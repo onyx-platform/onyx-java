@@ -1,5 +1,8 @@
 package org.onyxplatform.api.java;
 
+import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
+
 /**
  * A catalog holds a set of tasks which can be passed to and run in a job.
  * A catalog derives from an OnyxVector.
@@ -28,6 +31,18 @@ public class Catalog extends OnyxVector
 	 */
     public void addTask(Task task) {
 	    addElement(task);
+    }
+
+
+    public PersistentVector tasks() {
+	PersistentVector out = PersistentVector.EMPTY;
+	for (Object o : super.vContents) {
+		Task t = (Task)o;
+		IPersistentMap m = t.toMap();
+		out.cons(m);
+	}
+
+	return out;
     }
 }
 

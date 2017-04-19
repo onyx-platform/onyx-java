@@ -1,5 +1,8 @@
 package org.onyxplatform.api.java;
 
+import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
+
 /**
  * Windows objects are a set of Window objects that can be used for a
  * given job.
@@ -35,5 +38,15 @@ public class Windows extends OnyxVector
 	 */
     public void addWindow(Window w) {
 	    addElement(w);
+    }
+
+    public PersistentVector windows() {
+	PersistentVector out = PersistentVector.EMPTY;
+	for (Object o : super.vContents) {
+		Window w = (Window)o;
+		IPersistentMap m = w.toMap();
+		out.cons(m);
+	}
+	return out;
     }
 }

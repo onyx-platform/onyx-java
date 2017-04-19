@@ -1,5 +1,7 @@
 package org.onyxplatform.api.java;
 
+import clojure.lang.PersistentVector;
+
 /**
  * Lifecycles objects are a set of Lifecycle objects that can be applied to
  * Tasks running as part of a job.
@@ -36,5 +38,10 @@ public class Lifecycles extends OnyxVector
      */
     public void addLifecycle(Lifecycle cs) {
 	    addElement(cs);
+    }
+
+    public PersistentVector cycles() {
+	PersistentVector out = PersistentVector.EMPTY;
+	return out;
     }
 }

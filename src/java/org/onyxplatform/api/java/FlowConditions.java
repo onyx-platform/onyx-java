@@ -1,5 +1,8 @@
 package org.onyxplatform.api.java;
 
+import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
+
 /**
  * FlowConditions objects are a set of FlowCondition objects that can be applied
  * to Tasks running as part of a job.
@@ -38,5 +41,15 @@ public class FlowConditions extends OnyxVector
 	 */
     public void addCondition(FlowCondition ent) {
 	    addElement(ent);
+    }
+
+    public PersistentVector conditions() {
+	PersistentVector out = PersistentVector.EMPTY;
+	for (Object o : super.vContents) {
+		FlowCondition fc = (FlowCondition)o;
+		IPersistentMap m = fc.toMap();
+		out.cons(m);
+	}
+	return out;
     }
 }

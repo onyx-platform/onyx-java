@@ -226,19 +226,19 @@ public class Job implements OnyxNames
     	PersistentVector wf = workflow.graph();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxWorkflow), wf);
 
-    	PersistentVector c = catalog.toVector();
+    	PersistentVector c = catalog.tasks();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxCatalog), c);
 
-    	PersistentVector l = lifecycles.toVector();
+    	PersistentVector l = lifecycles.cycles();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxLifecycles), l);
 
-    	PersistentVector fc = flowConditions.toVector();
+    	PersistentVector fc = flowConditions.conditions();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxFlowConditions), fc);
 
-    	PersistentVector w = windows.toVector();
+    	PersistentVector w = windows.windows();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxWindows), w);
 
-    	PersistentVector t = triggers.toVector();
+    	PersistentVector t = triggers.triggers();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxTriggers), t);
 
     	return job;

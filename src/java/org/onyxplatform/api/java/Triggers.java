@@ -1,5 +1,8 @@
 package org.onyxplatform.api.java;
 
+import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
+
 /**
  * Triggers are a set of Trigger objects that can be collectively applied
  * to a window or windows associated with an onyx job.
@@ -35,5 +38,15 @@ public class Triggers extends OnyxVector
 	 */
     public void addTrigger(Trigger te) {
 	    addElement(te);
+    }
+
+    public PersistentVector triggers() {
+	PersistentVector out = PersistentVector.EMPTY;
+	for (Object o : super.vContents) {
+		Trigger t = (Trigger)o;
+		IPersistentMap m = t.toMap();
+		out.cons(m);
+	}
+	return out;
     }
 }
