@@ -1,5 +1,6 @@
 (ns onyx-java.utils.map-fns
   (:gen-class) 
+  (:require [clojure.java.io :refer [resource]])
   (:import clojure.lang.IPersistentMap
            org.onyxplatform.api.java.OnyxMap))
 
