@@ -19,7 +19,7 @@ public class VectorFns implements OnyxNames {
 		kwdzFn = Clojure.var(VECTOR_FNS, KeywordizeStrArray);
 	}
 
-	public static PersistentVector keywordize(String[] a) {
+	public static PersistentVector keywordize(String[] array) {
 		return (PersistentVector) kwdzFn.invoke(array);
 	}
 }
