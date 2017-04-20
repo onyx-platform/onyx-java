@@ -11,13 +11,14 @@ import org.onyxplatform.api.java.OnyxVector;
 import org.onyxplatform.api.java.Lifecycles;
 import org.onyxplatform.api.java.Lifecycle;
 
+import org.onyxplatform.api.java.utils.VectorFns;
+
 public class AsyncLifecycles implements OnyxNames {
 
 	protected final static IFn inFn;
 	protected final static IFn bindFn;
 	protected final static IFn outFn;
 	protected final static IFn collectFn;
-	protected final static IFn kwdzFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -29,10 +30,6 @@ public class AsyncLifecycles implements OnyxNames {
 		bindFn = Clojure.var(ASYNC_LIFECYCLES, BindLifecycleInputs);
 		outFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleOut);
 		collectFn = Clojure.var(ASYNC_LIFECYCLES, CollectOutputs);
-
-		requireFn.invoke(Clojure.read(VECTOR_FNS));
-		kwdzFn = Clojure.var(VECTOR_FNS, KeywordizeStrArray);
-
 	}
 
 	public static void addInput(Lifecycles lifecycles, String name) {
@@ -69,7 +66,7 @@ public class AsyncLifecycles implements OnyxNames {
 
 	public static PersistentVector collectOutputs(Lifecycles l, String... outputNames) {
 		PersistentVector cycles = l.cycles();
-		PersistentVector outputs = (PersistentVector) kwdzFn.invoke(outputNames);
+		PersistentVector outputs = VectorFns.keywordize(outputNames);
 		return (PersistentVector) collectFn.invoke(cycles, outputs);
 	}
 }
