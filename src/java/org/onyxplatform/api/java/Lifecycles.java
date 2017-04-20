@@ -29,10 +29,6 @@ public class Lifecycles extends OnyxVector
     }
 
 
-    public Lifecycles(OnyxVector ov) {
-	    super(ov);
-    }
-
     /**
      * Adds an existing Lifecycle to the Lifecycles content vector.
      * @param Lifecycle cs Lifecycle to add to the Lifecycles contents

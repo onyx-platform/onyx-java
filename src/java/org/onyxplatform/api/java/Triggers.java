@@ -28,9 +28,6 @@ public class Triggers extends OnyxVector
 	    super(ts.vContents);
     }
 
-    public Triggers(OnyxVector ov) {
-	    super(ov);
-    }
 
 	/**
 	 * Adds an existing Trigger to the Triggers content vector.

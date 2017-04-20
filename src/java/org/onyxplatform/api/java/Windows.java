@@ -28,9 +28,6 @@ public class Windows extends OnyxVector
 	    super(wes.vContents);
     }
 
-    public Windows(OnyxVector ov) {
-	    super(ov);
-    }
 
 	/**
 	 * Adds an existing Window object to the Windows content vector.

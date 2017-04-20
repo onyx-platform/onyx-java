@@ -29,9 +29,6 @@ public class FlowConditions extends OnyxVector
 	    super(fc.vContents);
     }
 
-    public FlowConditions(OnyxVector ov) {
-	    super(ov);
-    }
 
 	/**
 	 * Adds an existing FlowCondition object to the FlowConditions
