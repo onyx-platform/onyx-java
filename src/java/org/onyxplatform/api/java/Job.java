@@ -71,8 +71,9 @@ public class Job implements OnyxNames
      * Sets the Job Workflow to the passed Workflow object.
      * @param Workflow wf Workflow object to be added
      */
-    public void setWorkflow(Workflow wf) {
+    public Job setWorkflow(Workflow wf) {
 	    workflow = wf;
+	    return this;
     }
 
     /**
@@ -88,16 +89,18 @@ public class Job implements OnyxNames
      * @param String srcTask independent Task
      * @param String dstTask dependent Task
      */
-    public void addWorkflowEdge(String srcTask, String dstTask) {
+    public Job addWorkflowEdge(String srcTask, String dstTask) {
 	    workflow.addEdge(srcTask, dstTask);
+	    return this;
     }
 
     /**
      * Sets the Job Catalog to the passed Catalog object.
      * @param Catalog cat Catalog object to be added
      */
-    public void setCatalog(Catalog cat) {
+    public Job setCatalog(Catalog cat) {
 	    catalog = cat;
+	    return this;
     }
 
     /**
@@ -112,16 +115,18 @@ public class Job implements OnyxNames
      * Adds a new Task object to the Job Catalog.
      * @param Task t Task to be added to the Catalog
      */
-    public void addCatalogTask(Task t) {
+    public Job addCatalogTask(Task t) {
 	    catalog.addTask(t);
+	    return this;
     }
 
     /**
      * Sets the Job Lifecycles to the passed Lifecycles object.
      * @param Lifecycles lfcs Lifecycles object to be added
      */
-    public void setLifecycles(Lifecycles lfcs) {
+    public Job setLifecycles(Lifecycles lfcs) {
 	    lifecycles = lfcs;
+	    return this;
     }
 
     /**
@@ -136,16 +141,18 @@ public class Job implements OnyxNames
      * Adds a Lifecycle Call (Lifecycle object) to the existing Job Lifecycles.
      * @param Lifecycle lf Lifecycle to be added to Job Lifecycles
      */
-    public void addLifecycle(Lifecycle lf) {
+    public Job addLifecycle(Lifecycle lf) {
 	    lifecycles.addLifecycle(lf);
+	    return this;
     }
 
     /**
      * Sets the Job FlowConditions to the passed FlowConditions object.
      * @param FlowConditions fcs FlowConditions to be added
      */
-    public void setFlowConditions(FlowConditions fcs) {
+    public Job setFlowConditions(FlowConditions fcs) {
 	    flowConditions = fcs;
+	    return this;
     }
 
     /**
@@ -160,16 +167,18 @@ public class Job implements OnyxNames
      * Adds a FlowCondition object to the existing Job FlowConditions.
      * @param FlowCondition fc FlowCondition to be added
      */
-    public void addFlowCondition(FlowCondition fc) {
+    public Job addFlowCondition(FlowCondition fc) {
 	    flowConditions.addCondition(fc);
+	    return this;
     }
 
     /**
      * Sets the Job Windows to the passed Windows object.
      * @param Windows ws Windows to be added
      */
-    public void setWindows(Windows ws) {
+    public Job setWindows(Windows ws) {
 	    windows = ws;
+	    return this;
     }
 
     /**
@@ -184,16 +193,18 @@ public class Job implements OnyxNames
      * Adds a Window object to the existing Job Windows object.
      * @param Window w Window object to be added
      */
-    public void addWindow(Window w) {
+    public Job addWindow(Window w) {
 	    windows.addWindow(w);
+	    return this;
     }
 
     /**
      * Sets the Job Triggers to the passed Triggers object.
      * @param Triggers trs Triggers to be added
      */
-    public void setTriggers(Triggers trs) {
+    public Job setTriggers(Triggers trs) {
 	    triggers = trs;
+	    return this;
     }
 
     /**
@@ -208,8 +219,9 @@ public class Job implements OnyxNames
      * Adds a Trigger object to the existing Job Triggers object.
      * @param Trigger t Trigger to be added
      */
-    public void addTrigger(Trigger t) {
+    public Job addTrigger(Trigger t) {
 	    triggers.addTrigger(t);
+	    return this;
     }
 
     /**

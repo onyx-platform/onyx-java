@@ -31,21 +31,29 @@ public class MapFns implements OnyxNames {
 	}
 
 
-	
-	// assoc 
-	
-	// dissoc
-	
-	// update
+	public static IPersistentMap assoc(IPersistentMap m, String key, Object value) {
+		return null;
+	}
 
-	// get-in
+	public static IPersistentMap dissoc(IPersistentMap m, String... keys) {
+		return null;
+	}
 
-	// assoc-in
+	public static IPersistentMap update(IPersistentMap m, String key, IFn f, Object... fargs) {
+		return null;
+	}
 
+	public static IPersistentMap getIn(IPersistentMap m, String... keys) {
+		return null;
+	}
+
+	public static IPersistentMap assocIn(IPersistentMap m, Object value, String... keys) {
+		return null;
+	}
+
+	public static IPersistentMap updateIn(IPersistentMap m, Object value, String... keys) {
+		return null;
+	}
 	
-	// dissoc-in
-	
-	// update-in
-	//
 }
 
