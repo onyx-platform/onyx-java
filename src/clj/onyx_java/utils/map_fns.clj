@@ -4,10 +4,6 @@
            org.onyxplatform.api.java.OnyxMap))
 
 (defn to-onyx-map [^IPersistentMap m]
-  ;; TODO: Re-write to take more care with
-  ;;       map padding to be sensitive to 
-  ;;       keywords vs objs
-  ;;
   (let [ent (OnyxMap.)
         ks (keys m) ]
     (reduce 
@@ -27,3 +23,6 @@
       ks)
     ent))
 
+
+(defn edn-from-resources [rsrc-path]
+  (to-onyx-map (-> rsrc-path resource slurp read-string)))

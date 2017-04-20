@@ -45,7 +45,7 @@ public class Windows extends OnyxVector
 	for (Object o : super.vContents) {
 		Window w = (Window)o;
 		IPersistentMap m = w.toMap();
-		out.cons(m);
+		out = out.cons(m);
 	}
 	return out;
     }

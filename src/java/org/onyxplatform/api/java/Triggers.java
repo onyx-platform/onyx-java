@@ -45,7 +45,7 @@ public class Triggers extends OnyxVector
 	for (Object o : super.vContents) {
 		Trigger t = (Trigger)o;
 		IPersistentMap m = t.toMap();
-		out.cons(m);
+		out = out.cons(m);
 	}
 	return out;
     }

@@ -39,9 +39,8 @@ public class Catalog extends OnyxVector
 	for (Object o : super.vContents) {
 		Task t = (Task)o;
 		IPersistentMap m = t.toMap();
-		out.cons(m);
+		out = out.cons(m);
 	}
-
 	return out;
     }
 }

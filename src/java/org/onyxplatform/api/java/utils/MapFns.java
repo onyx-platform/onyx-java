@@ -10,6 +10,7 @@ import org.onyxplatform.api.java.OnyxMap;
 public class MapFns implements OnyxNames {
 
 	protected final static IFn eMapFn;
+	protected final static IFn ednFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -18,11 +19,17 @@ public class MapFns implements OnyxNames {
     		IFn requireFn = Clojure.var(CORE, Require);
 		requireFn.invoke(Clojure.read(MAP_FNS));
 		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
+		ednFn = Clojure.var(MAP_FNS, EdnFromRsrc);
 	}
 
 	public static OnyxMap toOnyxMap(IPersistentMap m) {
 		return (OnyxMap) eMapFn.invoke(m);
 	}
+
+	public static OnyxMap fromResources(String rsrcPath) {
+		return (OnyxMap) ednFn.invoke(rsrcPath);
+	}
+
 
 	
 	// assoc 

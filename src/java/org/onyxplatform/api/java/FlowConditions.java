@@ -48,7 +48,7 @@ public class FlowConditions extends OnyxVector
 	for (Object o : super.vContents) {
 		FlowCondition fc = (FlowCondition)o;
 		IPersistentMap m = fc.toMap();
-		out.cons(m);
+		out = out.cons(m);
 	}
 	return out;
     }

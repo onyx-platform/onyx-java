@@ -1,6 +1,7 @@
 package org.onyxplatform.api.java;
 
 import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
 
 /**
  * Lifecycles objects are a set of Lifecycle objects that can be applied to
@@ -42,6 +43,11 @@ public class Lifecycles extends OnyxVector
 
     public PersistentVector cycles() {
 	PersistentVector out = PersistentVector.EMPTY;
+	for (Object o : super.vContents) {
+		Lifecycle l = (Lifecycle)o;
+		IPersistentMap m = l.toMap();
+		out = out.cons(m);
+	}
 	return out;
     }
 }
