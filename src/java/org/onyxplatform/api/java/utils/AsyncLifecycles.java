@@ -1,4 +1,3 @@
-
 package org.onyxplatform.api.java.utils;
 
 import clojure.java.api.Clojure;
@@ -22,8 +21,8 @@ public class AsyncLifecycles implements OnyxNames {
 	static {
     		IFn requireFn = Clojure.var(CORE, Require);
 		requireFn.invoke(Clojure.read(ASYNC_LIFECYCLES));
-		inFn = Clojure.var(ASYNC_CATALOG, AsyncLifecycleIn);
-		outFn = Clojure.var(ASYNC_CATALOG, AsyncLifecycleOut);
+		inFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleIn);
+		outFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleOut);
 	}
 
 	public static void addInput(Lifecycles lifecycles, String name) {

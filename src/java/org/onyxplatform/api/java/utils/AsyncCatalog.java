@@ -29,11 +29,8 @@ public class AsyncCatalog implements OnyxNames {
 	public static void addInput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
 		IPersistentMap inCat = (IPersistentMap) inFn.invoke(name, batchSize, batchTimeout);
-		System.out.println("AsyncCatalog::addInput> inCat=" + inCat);
 		OnyxMap e = MapFns.toOnyxMap(inCat);
-		System.out.println("AsyncCatalog::addInput> e=" + e);
 		Task inTask = new Task(e);
-		System.out.println("AsyncCatalog::addInput> inTask=" + inTask);
 		catalog.addTask(inTask);
 	}
 

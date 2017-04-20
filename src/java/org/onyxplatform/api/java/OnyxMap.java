@@ -60,7 +60,7 @@ public class OnyxMap implements OnyxNames
 	 * @param String param key to add to the existing content PersistentHashMap
 	 * @param Object arg   value to associate with the added key
 	 */
-	public void addParameter(String keyname, String keywordValue) {
+	public void addKeywordParameter(String keyname, String keywordValue) {
 		Object k = kwFn.invoke(keyname); 
 	 	Object v = kwFn.invoke(keywordValue);
 		entry = (IPersistentMap) entry.assoc(k, v);
@@ -73,7 +73,7 @@ public class OnyxMap implements OnyxNames
 	 * @param String param key to add to the existing content PersistentHashMap
 	 * @param Object arg   value to associate with the added key
 	 */
-	public void addParameter(String keyname, Object arg) {
+	public void addObjectParameter(String keyname, Object arg) {
 		Object k = kwFn.invoke(keyname); 
 		entry = (IPersistentMap) entry.assoc(k, arg);
 	}

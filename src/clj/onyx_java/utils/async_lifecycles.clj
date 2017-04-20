@@ -46,10 +46,10 @@
   {:lifecycle/before-task-start inject-in-ch})
 
 (defn in-lifecycles [task-name]
-  [{:lifecycle/task task-name 
+  [{:lifecycle/task (keyword task-name) 
     :core.async/id (java.util.UUID/randomUUID)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/in-calls}
-   {:lifecycle/task task-name 
+   {:lifecycle/task (keyword task-name) 
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}])
 
 
@@ -74,11 +74,11 @@
   {:lifecycle/before-task-start inject-out-ch})
 
 (defn out-lifecycles [task-name]
-  [{:lifecycle/task task-name
+  [{:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/out-calls
     :core.async/id (java.util.UUID/randomUUID)
     :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-   {:lifecycle/task task-name
+   {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
 
@@ -100,11 +100,11 @@
   {:lifecycle/before-task-start inject-drop-ch})
 
 (defn drop-lifecycles [task-name]
-  [{:lifecycle/task task-name
+  [{:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/drop-calls
     :core.async/id (java.util.UUID/randomUUID)
     :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-   {:lifecycle/task task-name
+   {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
 

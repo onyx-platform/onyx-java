@@ -11,14 +11,17 @@
       ; Strip keywords, convert everything else to a string.
       (fn [ent k]
         (let [n (if (keyword? k) 
-                  (name k)
+                  (name k) 
                   (str k))
               bv (get m k "MISSING")
+              kw? (keyword? bv)
               v (if (keyword? bv)
-                  (name bv)
+                  (name bv) 
                   bv) ]
           ; Side-effectful
-          (.addParameter ent n v)
+          (if kw?
+            (.addKeywordParameter ent n v)
+            (.addObjectParameter ent n v))
           ent))
       ent
       ks)
