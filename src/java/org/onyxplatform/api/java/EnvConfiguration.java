@@ -7,12 +7,16 @@ package org.onyxplatform.api.java;
  */
 public class EnvConfiguration extends OnyxMap
 {
+	private Object tenancyId;
+
 	/**
 	* Calls empty superconstructor for OnyxMap
 	* @return newly created EnvConfiguration object
 	*/
-    	public EnvConfiguration() {
+    	public EnvConfiguration(Object tenancyId) {
 		super();
+		tenancyId = tenancyId;
+		addObjectParameter("onyx/tenancy-id", tenancyId);
     	}
 
 	/**

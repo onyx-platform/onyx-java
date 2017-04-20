@@ -7,12 +7,16 @@ package org.onyxplatform.api.java;
  */
 public class PeerConfiguration extends OnyxMap
 {
+	private Object tenancyId;
+
 	/**
 	 * Creates a new PeerConfiguration object using OnyxMap superconstructor.
 	 * @return new PeerConfiguration object
 	 */
-	public PeerConfiguration() {
+	public PeerConfiguration(Object tenancyId) {
 		super();
+		tenancyId = tenancyId;
+		addObjectParameter("onyx/tenancy-id", tenancyId);
 	}
 
 	/**
