@@ -8,7 +8,8 @@
   (let [ent (OnyxMap.)
         ks (keys m) ]
     (reduce 
-      ; Strip keywords, convert everything else to a string.
+      ; Strip keywords, pass everything else 
+      ; through untouched.
       (fn [ent k]
         (let [n (if (keyword? k) 
                   (name k) 
