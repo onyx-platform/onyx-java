@@ -1,7 +1,7 @@
 (ns onyx-java.utils.map-fns
   (:gen-class) 
   (:require [clojure.java.io :refer [resource]])
-  (:import clojure.lang.IPersistentMap
+  (:import [clojure.lang IPersistentMap PersistentVector]
            org.onyxplatform.api.java.OnyxMap))
 
 (defn to-onyx-map [^IPersistentMap m]
@@ -26,7 +26,6 @@
       ent
       ks)
     ent))
-
 
 (defn edn-from-resources [rsrc-path]
   (to-onyx-map (-> rsrc-path resource slurp read-string)))

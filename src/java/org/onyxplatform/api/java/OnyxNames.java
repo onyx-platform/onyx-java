@@ -97,8 +97,13 @@ public interface OnyxNames {
 	public static final String AsyncLifecycleIn 	= "in-lifecycles";
 	public static final String BindLifecycleInputs = "bind-inputs!";
 	public static final String AsyncLifecycleOut 	= "out-lifecycles";
+	public static final String CollectOutputs 	= "collect-outputs!";
 
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
 	public static final String ToOnyxMap 		= "to-onyx-map";
 	public static final String EdnFromRsrc 		= "edn-from-resources";
+
+	public static final String VECTOR_FNS     	= "onyx-java.utils.vector-fns";
+	public static final String KeywordizeStrArray 	= "keywordize-str-array";
+
 }

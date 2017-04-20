@@ -16,6 +16,7 @@ public class AsyncLifecycles implements OnyxNames {
 	protected final static IFn inFn;
 	protected final static IFn bindFn;
 	protected final static IFn outFn;
+	protected final static IFn collectFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -26,6 +27,7 @@ public class AsyncLifecycles implements OnyxNames {
 		inFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleIn);
 		bindFn = Clojure.var(ASYNC_LIFECYCLES, BindLifecycleInputs);
 		outFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleOut);
+		collectFn = Clojure.var(ASYNC_LIFECYCLES, CollectOutputs);
 	}
 
 	public static void addInput(Lifecycles lifecycles, String name) {
@@ -59,5 +61,15 @@ public class AsyncLifecycles implements OnyxNames {
 			lifecycles.addLifecycle(l);
 		}
 	}
+
+	public static PersistentVector collectOutputs(Lifecycles l, String... ouputNames) {
+		PersistentVector cycles = l.cycles();
+
+		// Convert the String[] into a PersistentVector of keywords
+		PersistentVector outputs = null;
+//		return (PersistentVector) collectFn.invoke(cycles, outputs);
+		return null;
+	}
+
 }
 
