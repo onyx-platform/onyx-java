@@ -7,12 +7,14 @@ import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.OnyxNames;
 import org.onyxplatform.api.java.OnyxMap;
+import org.onyxplatform.api.java.OnyxVector;
 import org.onyxplatform.api.java.Lifecycles;
 import org.onyxplatform.api.java.Lifecycle;
 
 public class AsyncLifecycles implements OnyxNames {
 
 	protected final static IFn inFn;
+	protected final static IFn bindFn;
 	protected final static IFn outFn;
 
 	/**
@@ -22,6 +24,7 @@ public class AsyncLifecycles implements OnyxNames {
     		IFn requireFn = Clojure.var(CORE, Require);
 		requireFn.invoke(Clojure.read(ASYNC_LIFECYCLES));
 		inFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleIn);
+		bindFn = Clojure.var(ASYNC_LIFECYCLES, BindLifecycleInputs);
 		outFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleOut);
 	}
 
@@ -35,6 +38,14 @@ public class AsyncLifecycles implements OnyxNames {
 			Lifecycle l = new Lifecycle(oe);
 			lifecycles.addLifecycle(l);
 		}
+	}
+
+
+	public static void bindInputs(Lifecycles l, OnyxVector ov) {
+
+		PersistentVector cycles = l.cycles();
+		PersistentVector input = ov.toVector();
+		bindFn.invoke(cycles, input);
 	}
 
 	public static void addOutput(Lifecycles lifecycles, String name) {

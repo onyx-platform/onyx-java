@@ -95,6 +95,7 @@ public interface OnyxNames {
 
 	public static final String ASYNC_LIFECYCLES     = "onyx-java.utils.async-lifecycles";
 	public static final String AsyncLifecycleIn 	= "in-lifecycles";
+	public static final String BindLifecycleInputs = "bind-inputs!";
 	public static final String AsyncLifecycleOut 	= "out-lifecycles";
 
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";

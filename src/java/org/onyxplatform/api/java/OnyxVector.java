@@ -1,6 +1,7 @@
 package org.onyxplatform.api.java;
 
 import clojure.lang.PersistentVector;
+import clojure.lang.IPersistentMap;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class OnyxVector
 	 * @param  PersistentVector pv    existing vector to use as content vector
 	 * @return                  new OnyxVector object
 	 */
-	public OnyxVector(PersistentVector pv) {
+	protected OnyxVector(PersistentVector pv) {
 		vContents = pv;
 	}
 
@@ -38,8 +39,18 @@ public class OnyxVector
 	 * Adds an existing object to the content vector of the object, appending
 	 * it to the end of the content vector. 
 	 */
-	protected void addElement(OnyxMap o) {
+	public void addElement(OnyxMap o) {
 	    vContents = vContents.cons(o);
+	}
+
+	public PersistentVector toVector() {
+		PersistentVector out = PersistentVector.EMPTY;
+		for (Object o : vContents) {
+			OnyxMap om = (OnyxMap)o;
+			IPersistentMap m = om.toMap();
+			out = out.cons(m);
+		}
+		return out;
 	}
 
 	/**
