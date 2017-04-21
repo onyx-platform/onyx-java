@@ -26,20 +26,20 @@ public class AsyncCatalog implements OnyxNames {
 		outFn = Clojure.var(ASYNC_CATALOG, AsyncCatalogOut);
 	}
 
-	public static void addInput(Catalog catalog, String name, int batchSize, int batchTimeout) {
+	public static Catalog addInput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
 		IPersistentMap inCat = (IPersistentMap) inFn.invoke(name, batchSize, batchTimeout);
 		OnyxMap e = MapFns.toOnyxMap(inCat);
 		Task inTask = new Task(e);
-		catalog.addTask(inTask);
+		return catalog.addTask(inTask);
 	}
 
-	public static void addOutput(Catalog catalog, String name, int batchSize, int batchTimeout) {
+	public static Catalog addOutput(Catalog catalog, String name, int batchSize, int batchTimeout) {
 
 		IPersistentMap outCat = (IPersistentMap) outFn.invoke(name, batchSize, batchTimeout);
 		OnyxMap e = MapFns.toOnyxMap(outCat);
 		Task outTask = new Task(e);
-		catalog.addTask(outTask);
+		return catalog.addTask(outTask);
 	}
 }
 

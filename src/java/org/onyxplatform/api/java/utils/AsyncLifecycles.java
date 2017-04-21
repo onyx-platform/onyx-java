@@ -32,7 +32,7 @@ public class AsyncLifecycles implements OnyxNames {
 		collectFn = Clojure.var(ASYNC_LIFECYCLES, CollectOutputs);
 	}
 
-	public static void addInput(Lifecycles lifecycles, String name) {
+	public static Lifecycles addInput(Lifecycles lifecycles, String name) {
 
 		PersistentVector in = (PersistentVector) inFn.invoke(name);
 
@@ -42,6 +42,8 @@ public class AsyncLifecycles implements OnyxNames {
 			Lifecycle l = new Lifecycle(oe);
 			lifecycles.addLifecycle(l);
 		}
+
+		return lifecycles;
 	}
 
 
@@ -52,7 +54,7 @@ public class AsyncLifecycles implements OnyxNames {
 		bindFn.invoke(cycles, input);
 	}
 
-	public static void addOutput(Lifecycles lifecycles, String name) {
+	public static Lifecycles addOutput(Lifecycles lifecycles, String name) {
 
 		PersistentVector out = (PersistentVector) outFn.invoke(name);
 
@@ -62,6 +64,8 @@ public class AsyncLifecycles implements OnyxNames {
 			Lifecycle l = new Lifecycle(oe);
 			lifecycles.addLifecycle(l);
 		}
+
+		return lifecycles;
 	}
 
 	public static PersistentVector collectOutputs(Lifecycles l, String... outputNames) {

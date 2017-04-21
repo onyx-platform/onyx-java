@@ -1,0 +1,6 @@
+{:onyx/name :mixed-case
+ :onyx/fn :onyx-java.test.Functions/blurtHI
+ :onyx/type :function
+ :onyx/batch-timeout 50
+ :onyx/batch-size 5}
+
