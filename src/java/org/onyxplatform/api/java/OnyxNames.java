@@ -16,6 +16,7 @@ public interface OnyxNames {
 	public static final String Require 				= "require";
 	public static final String Keyword 				= "keyword";
 	public static final String Name 				= "name";
+	public static final String Get 					= "get";
 	public static final String Assoc 				= "assoc";
 	public static final String Dissoc				= "dissoc";
 	public static final String Update				= "update";

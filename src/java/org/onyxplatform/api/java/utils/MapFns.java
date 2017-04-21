@@ -17,12 +17,11 @@ public class MapFns implements OnyxNames {
 	protected final static IFn ednFn;
 
 	protected final static IFn kwFn;
+	protected final static IFn rawGetFn;
 	protected final static IFn rawAssocFn;
 	protected final static IFn rawDissocFn;
-	protected final static IFn rawUpdateFn;
 	protected final static IFn rawGetInFn;
 	protected final static IFn rawAssocInFn;
-	protected final static IFn rawUpdateInFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -34,12 +33,11 @@ public class MapFns implements OnyxNames {
 		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
 		ednFn = Clojure.var(MAP_FNS, EdnFromRsrc);
 
+		rawGetFn = Clojure.var(CORE, Get);
 		rawAssocFn = Clojure.var(CORE, Assoc);
 		rawDissocFn = Clojure.var(CORE, Dissoc);
-		rawUpdateFn = Clojure.var(CORE, Update);
 		rawGetInFn = Clojure.var(CORE, GetIn);
 		rawAssocInFn = Clojure.var(CORE, AssocIn);
-		rawUpdateInFn = Clojure.var(CORE, UpdateIn);
 	}
 
 	public static OnyxMap toOnyxMap(IPersistentMap m) {
@@ -50,30 +48,29 @@ public class MapFns implements OnyxNames {
 		return (OnyxMap) ednFn.invoke(rsrcPath);
 	}
 
+	public static Object get(IPersistentMap m, String key) {
+		Object k = kwFn.invoke(key);
+		return rawGetFn.invoke(m, k);
+	}
 
 	public static IPersistentMap assoc(IPersistentMap m, String key, Object value) {
 		Object k = kwFn.invoke(key);
 		return (IPersistentMap)rawAssocFn.invoke(m, k, value);
 	}
 
-	public static IPersistentMap dissoc(IPersistentMap m, String... keys) {
-		return null;
-	}
-
-	public static IPersistentMap update(IPersistentMap m, String key, IFn f, Object... fargs) {
-		return null;
+	public static IPersistentMap dissoc(IPersistentMap m, String key) {
+		Object k = kwFn.invoke(key);
+		return (IPersistentMap)rawDissocFn.invoke(m, k);
 	}
 
 	public static IPersistentMap getIn(IPersistentMap m, String... keys) {
-		return null;
+		PersistentVector ks = VectorFns.keywordize(keys);
+		return (IPersistentMap)rawGetInFn.invoke(m, ks);
 	}
 
 	public static IPersistentMap assocIn(IPersistentMap m, Object value, String... keys) {
-		return null;
-	}
-
-	public static IPersistentMap updateIn(IPersistentMap m, Object value, String... keys) {
-		return null;
+		PersistentVector ks = VectorFns.keywordize(keys);
+		return (IPersistentMap)rawAssocInFn.invoke(m, ks);
 	}
 	
 }
