@@ -10,9 +10,16 @@
     (reduce 
       ; Strip keywords, pass everything else 
       ; through untouched.
+      ;
+      ; Note: take care with qualified keywords
+      ;       as keyword doesn't include the 
+      ;       namespace
+      ;
       (fn [ent k]
         (let [n (if (keyword? k) 
-                  (name k) 
+                  (if-not (nil? (namespace k))
+                    (str (namespace k) "/" (name k))
+                    (name k))
                   (str k))
               bv (get m k "MISSING")
               kw? (keyword? bv)

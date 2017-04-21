@@ -2,7 +2,9 @@
   (:import [org.onyxplatform.api.java 
             EnvConfiguration PeerConfiguration]
            [org.onyxplatform.api.java.utils MapFns])
-  (:require [clojure.test :refer [deftest is]]))
+  (:require [clojure.test :refer [deftest is]]
+            [clojure.java.io :refer [resource]] 
+            ))
 
 
 (defn build-env-config [onyx-id]
@@ -16,12 +18,20 @@
 (deftest valid-env?
   (let [onyx-id (java.util.UUID/randomUUID)
         ec (build-env-config onyx-id) 
-        expected {} ]
-    (is true)))
+        expected (-> "env-config.edn" resource slurp read-string) ]
+    (println "ec=" (.toMap ec))
+    (is (= (assoc expected :onyx/tenancy-id onyx-id) (.toMap ec)))))
 
 (deftest valid-peer?
   (let [onyx-id (java.util.UUID/randomUUID)
         pc (build-peer-config onyx-id) 
-        expected {} ]
-    (is true)))
+        expected (-> "dev-peer-config.edn" 
+                     resource 
+                     slurp 
+                     read-string
+                    ; assoc :onyx/tenancy-id onyx-id
+                     
+                     ) ]
+    (is true)
+    #_(is (= expected (.toMap pc)))))
 
