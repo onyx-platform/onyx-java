@@ -14,29 +14,33 @@ public class TaskScheduler implements OnyxNames {
 	private static IFn nameFn;
 
 	static {
-		IFn kwFn = Clojure.var(CORE, Keyword);
-		IFn nameFn = Clojure.var(CORE, Name);
+		kwFn = Clojure.var(CORE, Keyword);
+		nameFn = Clojure.var(CORE, Name);
 	}
 
-    private final Object kwType;
+    	private Object kwType;
+
+    	public TaskScheduler(TaskScheduler ts) {
+	    	kwType = ts.kwType;
+    	}
 
 	/**
 	 * Creates a new TaskScheduler object
 	 * @param  String s             type of task scheduler to create
 	 * @return        new TaskScheduler object
 	 */
-    private TaskScheduler(String s) {
-	kwType = kwFn.invoke(s);
-    }
+    	public TaskScheduler(String s) {
+		kwType = kwFn.invoke(s); 
+	}
 
 	/**
 	 * Returns TaskScheduler content string into a proper onyx
 	 * task scheduler. Does not change existing contents.
 	 * @return onyx representation of TaskScheduler content
 	 */
-    public Object schedule() {
+    	public Object schedule() {
 	    return kwType;
-    }
+    	}
 
 	/**
 	 * returns a string representation of the TaskScheduler content string.

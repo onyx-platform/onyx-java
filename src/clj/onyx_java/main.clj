@@ -5,7 +5,8 @@
   (:import [org.onyxplatform.api.java.utils 
             AsyncCatalog AsyncLifecycles MapFns VectorFns]
            [org.onyxplatform.api.java 
-            OnyxMap Catalog Lifecycles EnvConfiguration PeerConfiguration]
+            OnyxNames TaskScheduler OnyxMap Catalog 
+            Lifecycles EnvConfiguration PeerConfiguration]
            [clojure.lang PersistentHashMap]))
 
 
