@@ -33,8 +33,9 @@ public class Triggers extends OnyxVector
 	 * Adds an existing Trigger to the Triggers content vector.
 	 * @param Trigger te Trigger to add to the Triggers content
 	 */
-    public void addTrigger(Trigger te) {
+    public Triggers addTrigger(Trigger te) {
 	    addElement(te);
+	    return this;
     }
 
     public PersistentVector triggers() {

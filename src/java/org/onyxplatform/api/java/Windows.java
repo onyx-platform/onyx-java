@@ -33,8 +33,9 @@ public class Windows extends OnyxVector
 	 * Adds an existing Window object to the Windows content vector.
 	 * @param Window w Window to add
 	 */
-    public void addWindow(Window w) {
+    public Windows addWindow(Window w) {
 	    addElement(w);
+	    return this;
     }
 
     public PersistentVector windows() {

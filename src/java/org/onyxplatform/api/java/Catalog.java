@@ -29,8 +29,9 @@ public class Catalog extends OnyxVector
 	 * Adds an existing Task object to the catalog.
 	 * @param Task task task object to be added to the catalog
 	 */
-    public void addTask(Task task) {
+    public Catalog addTask(Task task) {
 	    addElement(task);
+	    return this;
     }
 
 

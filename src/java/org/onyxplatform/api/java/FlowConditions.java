@@ -36,8 +36,9 @@ public class FlowConditions extends OnyxVector
 	 * @param FlowCondition ent FlowCondition to add to the FlowConditions
 	 *                      	contents
 	 */
-    public void addCondition(FlowCondition ent) {
+    public FlowConditions addCondition(FlowCondition ent) {
 	    addElement(ent);
+	    return this;
     }
 
     public PersistentVector conditions() {

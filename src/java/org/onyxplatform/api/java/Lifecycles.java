@@ -33,8 +33,9 @@ public class Lifecycles extends OnyxVector
      * Adds an existing Lifecycle to the Lifecycles content vector.
      * @param Lifecycle cs Lifecycle to add to the Lifecycles contents
      */
-    public void addLifecycle(Lifecycle cs) {
+    public Lifecycles addLifecycle(Lifecycle cs) {
 	    addElement(cs);
+	    return this;
     }
 
     public PersistentVector cycles() {

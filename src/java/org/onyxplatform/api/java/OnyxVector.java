@@ -39,8 +39,9 @@ public class OnyxVector
 	 * Adds an existing object to the content vector of the object, appending
 	 * it to the end of the content vector. 
 	 */
-	public void addElement(OnyxMap o) {
+	public OnyxVector addElement(OnyxMap o) {
 	    vContents = vContents.cons(o);
+	    return this;
 	}
 
 	public PersistentVector toVector() {
