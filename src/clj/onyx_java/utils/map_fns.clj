@@ -4,6 +4,16 @@
   (:import [clojure.lang IPersistentMap PersistentVector]
            org.onyxplatform.api.java.OnyxMap))
 
+(defn full-keyword-str [kw]
+  "Returns the full string representation
+   of a keyword that is fully qualified.
+   Passes through if not a keyword"
+  (if-not (keyword? kw)
+    kw 
+    (if (nil? (namespace kw))
+      (name kw)
+      (str (namespace kw) "/" (name kw)))))
+
 (defn to-onyx-map [^IPersistentMap m]
   (let [ent (OnyxMap.)
         ks (keys m) ]
@@ -16,18 +26,12 @@
       ;       namespace
       ;
       (fn [ent k]
-        (let [n (if (keyword? k) 
-                  (if-not (nil? (namespace k))
-                    (str (namespace k) "/" (name k))
-                    (name k))
-                  (str k))
+        (let [n (full-keyword-str k)
               bv (get m k "MISSING")
-              kw? (keyword? bv)
-              v (if (keyword? bv)
-                  (name bv) 
-                  bv) ]
+              kwv? (keyword? bv)
+              v (full-keyword-str bv) ]
           ; Side-effectful
-          (if kw?
+          (if kwv?
             (.addKeywordParameter ent n v)
             (.addObjectParameter ent n v))
           ent))
