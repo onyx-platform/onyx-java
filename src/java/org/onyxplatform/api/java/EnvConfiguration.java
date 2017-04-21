@@ -30,7 +30,13 @@ public class EnvConfiguration extends OnyxMap
 	    	super(cfg.entry);
     	}
 
-	public EnvConfiguration(OnyxMap e) {
+	public EnvConfiguration(Object tenancyId, OnyxMap e) {
 		super(e);
+		tenancyId = tenancyId;
+		addObjectParameter("onyx/tenancy-id", tenancyId);
+	}
+
+	public Object tenancyId() {
+		return tenancyId;
 	}
 }

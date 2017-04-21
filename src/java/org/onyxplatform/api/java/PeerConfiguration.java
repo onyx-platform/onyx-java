@@ -35,7 +35,13 @@ public class PeerConfiguration extends OnyxMap
 	 * @param  PeerConfiguration cfg           existing PeerConfiguration object
 	 * @return                   new PeerConfiguration object
 	 */
-	public PeerConfiguration(OnyxMap m) {
+	public PeerConfiguration(Object tenancyId, OnyxMap m) {
     		super(m);
+		tenancyId = tenancyId;
+		addObjectParameter("onyx/tenancy-id", tenancyId);
+	}
+
+	public Object tenancyId() {
+		return tenancyId;
 	}
 }
