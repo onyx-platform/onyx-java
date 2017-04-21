@@ -76,8 +76,7 @@
 (defn out-lifecycles [task-name]
   [{:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/out-calls
-    :core.async/id (java.util.UUID/randomUUID)
-    :lifecycle/doc "Lifecycle for writing to a core.async chan"}
+    :core.async/id (java.util.UUID/randomUUID) }
    {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
@@ -102,8 +101,7 @@
 (defn drop-lifecycles [task-name]
   [{:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/drop-calls
-    :core.async/id (java.util.UUID/randomUUID)
-    :lifecycle/doc "Lifecycle for writing to a core.async chan"}
+    :core.async/id (java.util.UUID/randomUUID)}
    {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
 
