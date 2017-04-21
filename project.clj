@@ -7,7 +7,7 @@
                  [org.onyxplatform/onyx "0.9.15"]
                  [com.stuartsierra/component "0.2.3"]]
   :main  ^:skip-aot onyx-java.main
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "test"]
   :java-source-paths ["src/java" "test/java"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
   :resource-paths ["resources"]

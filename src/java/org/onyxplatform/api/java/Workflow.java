@@ -51,12 +51,13 @@ public final class Workflow implements OnyxNames
 	 * @param String srcTask name of independent task
 	 * @param String dstTask name of dependent task
 	 */
-	public void addEdge(String srcTask, String dstTask) {
+	public Workflow addEdge(String srcTask, String dstTask) {
 
 		Object sKw = kwFn.invoke(srcTask);
 		Object dKw = kwFn.invoke(dstTask);
     		PersistentVector pair = PersistentVector.create(sKw, dKw);
 		edges = edges.cons(pair);
+		return this;
 	}
 
 	/**
