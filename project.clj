@@ -8,9 +8,9 @@
                  [com.stuartsierra/component "0.2.3"]]
   :main  ^:skip-aot onyx-java.main
   :source-paths ["src/clj"]
-  :java-source-paths ["src/java"]
+  :java-source-paths ["src/java" "test/java"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:-options"]
-  :resource-paths ["test/resources"]
+  :resource-paths ["resources"]
 ;  :plugins  [[lein-virgil "0.1.6"]]
   :repl-options {:init-ns onyx-java.main
                  :caught clj-stacktrace.repl/pst+ }
