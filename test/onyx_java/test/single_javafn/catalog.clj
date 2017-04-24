@@ -25,8 +25,7 @@
                 :onyx/type :input, 
                 :onyx/max-peers 1, 
                 :onyx/batch-size 5   
-                :onyx/batch-timeout 50, 
-                :onyx/doc "Reads segments from a core.async channel"}
+                :onyx/batch-timeout 50 }
                
                {:onyx/name :out, 
                 :onyx/plugin :onyx.plugin.core-async/output, 
@@ -34,8 +33,7 @@
                 :onyx/type :output, 
                 :onyx/max-peers 1, 
                 :onyx/batch-size 5  
-                :onyx/batch-timeout 50, 
-                :onyx/doc "Writes segments to a core.async channel"}])
+                :onyx/batch-timeout 50 }])
 
 (deftest valid-catalog?
   (let [cat (build-catalog)]

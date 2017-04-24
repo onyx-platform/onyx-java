@@ -9,8 +9,7 @@
    :onyx/medium :core.async
    :onyx/max-peers 1
    :onyx/batch-timeout batch-timeout
-   :onyx/batch-size batch-size
-   :onyx/doc "Reads segments from a core.async channel"})
+   :onyx/batch-size batch-size })
 
 (defn out-catalog [task-name batch-size batch-timeout]
   "Generates a core.async output plugin catalog entry"
@@ -20,6 +19,5 @@
    :onyx/medium :core.async
    :onyx/max-peers 1
    :onyx/batch-timeout batch-timeout
-   :onyx/batch-size batch-size
-   :onyx/doc "Writes segments to a core.async channel"})
+   :onyx/batch-size batch-size })
 

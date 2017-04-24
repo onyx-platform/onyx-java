@@ -127,8 +127,8 @@ public class API implements OnyxNames {
      */
     public static IPersistentMap submitJob(PeerConfiguration peerConfig, Job job) {
         IFn submitJob = Clojure.var(API, SubmitJob);
-	Object j = job.toArray();
         Object c = peerConfig.toMap();
+	Object j = job.toArray();
         return (IPersistentMap) submitJob.invoke(c, j);
     }
 
