@@ -2,6 +2,7 @@ package org.onyxplatform.api.java;
 
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
+import clojure.lang.IPersistentMap;
 
 /**
  * Simple public facing user API mirroring all functionality of underlaying
@@ -124,11 +125,11 @@ public class API implements OnyxNames {
      * @param  Job               job           job object specifying job
      * @return                   Map containing started job
      */
-    public static boolean submitJob(PeerConfiguration peerConfig, Job job) {
+    public static IPersistentMap submitJob(PeerConfiguration peerConfig, Job job) {
         IFn submitJob = Clojure.var(API, SubmitJob);
 	Object j = job.toArray();
         Object c = peerConfig.toMap();
-        return (boolean) submitJob.invoke(c, j);
+        return (IPersistentMap) submitJob.invoke(c, j);
     }
 
     /**
