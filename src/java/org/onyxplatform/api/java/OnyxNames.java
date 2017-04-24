@@ -23,6 +23,7 @@ public interface OnyxNames {
 	public static final String GetIn				= "get-in";
 	public static final String AssocIn				= "assoc-in";
 	public static final String UpdateIn				= "update-in";
+	public static final String Merge				= "merge";
 
 	public static final String API 					= "onyx.api";
 

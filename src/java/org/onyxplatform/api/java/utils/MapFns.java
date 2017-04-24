@@ -22,6 +22,7 @@ public class MapFns implements OnyxNames {
 	protected final static IFn rawDissocFn;
 	protected final static IFn rawGetInFn;
 	protected final static IFn rawAssocInFn;
+	protected final static IFn rawMergeFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -38,6 +39,7 @@ public class MapFns implements OnyxNames {
 		rawDissocFn = Clojure.var(CORE, Dissoc);
 		rawGetInFn = Clojure.var(CORE, GetIn);
 		rawAssocInFn = Clojure.var(CORE, AssocIn);
+		rawMergeFn = Clojure.var(CORE, Merge);
 	}
 
 	public static OnyxMap toOnyxMap(IPersistentMap m) {
@@ -71,6 +73,10 @@ public class MapFns implements OnyxNames {
 	public static IPersistentMap assocIn(IPersistentMap m, Object value, String... keys) {
 		PersistentVector ks = VectorFns.keywordize(keys);
 		return (IPersistentMap)rawAssocInFn.invoke(m, ks);
+	}
+
+	public static IPersistentMap merge(IPersistentMap m, IPersistentMap m2) {
+		return (IPersistentMap)rawMergeFn.invoke(m, m2);
 	}
 	
 }

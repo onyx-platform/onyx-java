@@ -2,7 +2,9 @@
   (:import [org.onyxplatform.api.java 
             API OnyxNames TaskScheduler
             EnvConfiguration PeerConfiguration 
-            Job Catalog Lifecycles Workflow FlowConditions])
+            Job Catalog Lifecycles Workflow FlowConditions]
+           [onyx_java.test.Functions]
+           )
   (:require [clojure.test :refer [deftest is]]
             [onyx-java.test.single-javafn.catalog :as cat]
             [onyx-java.test.single-javafn.config :as conf]
