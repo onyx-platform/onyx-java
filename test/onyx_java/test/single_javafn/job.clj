@@ -3,9 +3,9 @@
             API OnyxNames TaskScheduler
             EnvConfiguration PeerConfiguration 
             Job Catalog Lifecycles Workflow FlowConditions]
-           [onyx_java.test.Functions]
-           )
+           [org.onyxplatform.api.java.utils AsyncLifecycles])
   (:require [clojure.test :refer [deftest is]]
+            [clojure.pprint :refer [pprint]]
             [onyx-java.test.single-javafn.catalog :as cat]
             [onyx-java.test.single-javafn.config :as conf]
             [onyx-java.test.single-javafn.lifecycles :as lc]
@@ -19,11 +19,17 @@
   (let [onyx-id (java.util.UUID/randomUUID)
 
         env-conf (conf/build-env-config onyx-id)
-        onyx-env () ; (API/startEnv env-conf)
+        _ (println "Starting Onyx Env")
+        onyx-env (API/startEnv env-conf)
+        _ (println "Started")
 
         peer-conf (conf/build-peer-config onyx-id)
-        peer-group () ; (API/startPeerGroup peer-config)
-        peers () ; (API/startPeers 1 peer-group)
+        _ (println "Starting Peer Group")
+        peer-group (API/startPeerGroup peer-conf)
+        _ (println "Started")
+        _ (println "Starting Peers (1)")
+        peers  (API/startPeers 1 peer-group)
+        _ (println "Started")
 
         scheduler (TaskScheduler. OnyxNames/BalancedTaskSchedule)
         wf (wf/build-workflow)
@@ -39,19 +45,29 @@
 
         ; Our pipeline simply adds a key to 
         ; the segment via a static Java function.
-        inputs [{}] ]
+        inputs [{:pass-test "TEST"}] ]
+    ;(println "JOB: ===============")
+    ;(pprint (.toArray job))
     (try
-      ; Test that the Env, peer group, and peer(s) have successfully fired up
       ; Bind inputs
+      (AsyncLifecycles/bindInputs lc inputs)
+
       ; Start Job
       ; Collect Output
       (is true)
-    (catch Exception e (do )) 
+    (catch Exception e (do 
+                         (.printStackTrace e))) 
     (finally (do
-               #_(doseq [v-peer peers]
+               (println "Stopping Peers")
+               (doseq [v-peer peers]
                  (API/shutdownPeer v-peer)) 
-               #_(API/shutdownPeerGroup peer-group)
-               #_ (API/shutdownEnv onyx-env)
+               (println "Stopped")
+               (println "Stopping Peer Group")
+               (API/shutdownPeerGroup peer-group)
+               (println "Stopped")
+               (println "Stopping Onyx Env")
+               (API/shutdownEnv onyx-env)
+               (println "Shutdown Complete")
                )))))
 
 

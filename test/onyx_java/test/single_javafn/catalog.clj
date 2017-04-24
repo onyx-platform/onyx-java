@@ -13,8 +13,8 @@
         (AsyncCatalog/addInput  "in" 5 50)
         (AsyncCatalog/addOutput "out" 5 50))))
 
-(def expected [{:onyx/name :jfn, 
-                :onyx/fn :onyx_java.test.Functions/blurtHI, 
+(def expected [{:onyx/name :pass, 
+                :onyx/fn :org.onyxplatform.api.java.instance.PassMethod,
                 :onyx/type :function, 
                 :onyx/batch-size 5   
                 :onyx/batch-timeout 50}

@@ -46,12 +46,16 @@ public class AsyncLifecycles implements OnyxNames {
 		return lifecycles;
 	}
 
-
-	public static void bindInputs(Lifecycles l, OnyxVector ov) {
+	public static void bindInputs(Lifecycles l, PersistentVector inputs) {
 
 		PersistentVector cycles = l.cycles();
-		PersistentVector input = ov.toVector();
-		bindFn.invoke(cycles, input);
+
+		// bind-inputs! expects a map with the vector of input segments
+		// with the key 'in'
+		//
+		OnyxMap om = new OnyxMap();
+		om.addObjectParameter("in", inputs);
+		bindFn.invoke(cycles, om.toMap());
 	}
 
 	public static Lifecycles addOutput(Lifecycles lifecycles, String name) {

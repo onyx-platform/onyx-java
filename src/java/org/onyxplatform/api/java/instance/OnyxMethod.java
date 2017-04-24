@@ -4,6 +4,7 @@ import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.AFn;
 import clojure.lang.IPersistentMap;
+import clojure.lang.PersistentHashMap;
 
 import org.onyxplatform.api.java.OnyxNames;
 import org.onyxplatform.api.java.OnyxMap;
@@ -15,6 +16,10 @@ public abstract class OnyxMethod extends AFn implements OnyxNames {
 
 	public OnyxMethod(IPersistentMap m) {
 		cntrArgs = m;
+	}
+
+	public OnyxMethod() {
+		cntrArgs = PersistentHashMap.EMPTY;
 	}
 
 	public OnyxMap cntrArgs() {

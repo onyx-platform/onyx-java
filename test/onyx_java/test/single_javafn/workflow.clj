@@ -2,14 +2,14 @@
   (:require [clojure.test :refer [deftest is]]) 
   (:import [org.onyxplatform.api.java Workflow]))
 
-(def expected [[:in :jfn]
-               [:jfn :out]])
+(def expected [[:in :pass]
+               [:pass :out]])
 
 (defn build-workflow []
   (let [wf (Workflow.)]
     (-> wf
-        (.addEdge "in" "jfn")
-        (.addEdge "jfn" "out"))))
+        (.addEdge "in" "pass")
+        (.addEdge "pass" "out"))))
 
 
 (deftest valid-workflow?

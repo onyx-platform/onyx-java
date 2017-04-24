@@ -1,5 +1,5 @@
-{:onyx/name :jfn
- :onyx/fn :onyx_java.test.Functions/blurtHI
+{:onyx/name :pass
+ :onyx/fn :org.onyxplatform.api.java.instance.PassMethod
  :onyx/type :function
  :onyx/batch-timeout 50
  :onyx/batch-size 5}
