@@ -1,4 +1,4 @@
-(ns onyx-java.test.single-javafn.workflow
+(ns onyx-java.test.workflow
   (:require [clojure.test :refer [deftest is]]) 
   (:import [org.onyxplatform.api.java Workflow]))
 

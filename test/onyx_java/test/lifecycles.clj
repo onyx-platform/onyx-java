@@ -1,4 +1,4 @@
-(ns onyx-java.test.single-javafn.lifecycles
+(ns onyx-java.test.lifecycles
   (:require [clojure.test :refer [deftest is]]
             [onyx-java.test.single-javafn.catalog :as c]) 
   (:import [org.onyxplatform.api.java Catalog Lifecycles]

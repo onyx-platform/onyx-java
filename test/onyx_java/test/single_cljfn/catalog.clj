@@ -1,4 +1,4 @@
-(ns onyx-java.test.single-javafn.catalog
+(ns onyx-java.test.single-cljfn.catalog
   (import [org.onyxplatform.api.java Catalog Task]
           [org.onyxplatform.api.java.utils AsyncCatalog MapFns])
   (:require [clojure.test :refer [deftest is]]))
@@ -6,7 +6,7 @@
 
 (defn build-catalog []
   (let [cat (Catalog.)
-        om (MapFns/fromResources "catalog-single-java.edn")
+        om (MapFns/fromResources "catalog-single-clj.edn")
         t (Task. om) ]
     (-> cat
         (.addTask t)
@@ -14,7 +14,7 @@
         (AsyncCatalog/addOutput "out" 5 50))))
 
 (def expected [{:onyx/name :pass, 
-                :onyx/fn :org.onyxplatform.api.java.instance.PassMethod,
+                :onyx/fn :onyx-java.test.single-cljfn.functions/pass-through,
                 :onyx/type :function, 
                 :onyx/batch-size 5   
                 :onyx/batch-timeout 50}

@@ -1,4 +1,4 @@
-(ns onyx-java.test.single-javafn.config
+(ns onyx-java.test.config
   (:import [org.onyxplatform.api.java 
             EnvConfiguration PeerConfiguration]
            [org.onyxplatform.api.java.utils MapFns])

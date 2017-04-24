@@ -1,0 +1,6 @@
+{:onyx/name :pass
+ :onyx/fn :onyx-java.test.single-cljfn.functions/pass-through
+ :onyx/type :function
+ :onyx/batch-timeout 50
+ :onyx/batch-size 5}
+

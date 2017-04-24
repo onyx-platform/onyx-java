@@ -26,7 +26,7 @@ public abstract class OnyxMethod extends AFn implements OnyxNames {
 		return MapFns.toOnyxMap(cntrArgs);
 	}
 
-	public abstract IPersistentMap procSegment(IPersistentMap m);
+	public abstract Object procSegment(IPersistentMap m);
 
 	public Object invoke(Object arg1) {
 		IPersistentMap segment = (IPersistentMap)arg1;
