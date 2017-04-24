@@ -11,47 +11,69 @@
             [onyx-java.test.lifecycles :as lc]
             [onyx-java.test.workflow :as wf]))
 
-
-
 ; Tests a simple job that calls one fn using core async plugins
 ;
 (defn run-clj-job [catalog inputs] 
   (let [onyx-id (java.util.UUID/randomUUID)
 
-        env-conf (conf/env-expected onyx-id)
         _ (println "Starting Onyx Env")
-        onyx-env (onyx/start-env env-conf)
+        ;env-conf (conf/env-expected onyx-id)
+        env-conf (conf/build-env-config onyx-id)
+        onyx-env (API/startEnv env-conf)
+        ;onyx-env (onyx/start-env env-conf)
         _ (println "Started")
 
-        peer-conf (conf/peer-expected onyx-id)
         _ (println "Starting Peer Group")
+        peer-conf (conf/peer-expected onyx-id)
+        ;peer-conf (conf/build-peer-config onyx-id)
         peer-group (onyx/start-peer-group peer-conf)
+        ;peer-group (API/startPeerGroup peer-conf)
         _ (println "Started")
-        _ (println "Starting Peers (1)")
+
+        _ (println "Starting Peers (3)")
+        ;peers  (API/startPeers 3 peer-group)
         peers  (onyx/start-peers 3 peer-group)
         _ (println "Started")
 
-        scheduler :onyx.task-scheduler/balanced
-        wf wf/expected 
-        lc lc/expected  
-        fc []  
+        ;scheduler :onyx.task-scheduler/balanced
+        ;wf wf/expected 
+        ;lc lc/expected  
+        ;fc []  
 
-        job {:task-scheduler scheduler
-             :workflow wf
-             :catalog catalog
-             :lifecycles lc
-             :flow-conditions fc } ]
+        ;job {:task-scheduler scheduler
+        ;     :workflow wf
+        ;     :catalog catalog
+        ;     :lifecycles lc
+        ;     :flow-conditions fc } 
+        
+        scheduler (TaskScheduler. OnyxNames/BalancedTaskSchedule)
+        wf (wf/build-workflow)
+        lc (lc/build-lifecycles) 
+        fc (FlowConditions.) ; No flow conditions
+
+        jjob (-> (Job. scheduler)  
+               (.setWorkflow wf)
+               (.setCatalog catalog)
+               (.setLifecycles lc)
+               (.setFlowConditions fc))
+
+        job (.toArray jjob)
+        ]
     (println "JOB: ===============")
     (pprint job)
     (try
       ; Bind inputs
-      (clj-lc/bind-inputs! lc inputs)
+      ;(clj-lc/bind-inputs! lc inputs)
+      ;(clj-lc/bind-inputs! (.cycles lc) inputs)
+      (AsyncLifecycles/bindInputs lc inputs)
       
       ; Start Job
       (onyx/submit-job peer-conf job)
 
       ; Collect Output and return it
-      (clj-lc/collect-outputs! lc [:out])
+      ;(clj-lc/collect-outputs! lc [:out])
+      ;(clj-lc/collect-outputs! (.cycles lc) [:out])
+      (AsyncLifecycles/collectOutputs lc "out") 
 
     (catch Exception e (do 
                          (.printStackTrace e))) 
@@ -123,8 +145,7 @@
                (println "Stopped")
                (println "Stopping Onyx Env")
                (API/shutdownEnv onyx-env)
-               (println "Shutdown Complete")
-               )))))
+               (println "Shutdown Complete"))))))
 
 
 

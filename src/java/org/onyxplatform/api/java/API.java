@@ -43,7 +43,8 @@ public class API implements OnyxNames {
      */
     public static Object startPeerGroup(PeerConfiguration peerConfig) {
         IFn startPeerGroup = Clojure.var(API, StartPeerGroup);
-        Object config = peerConfig.toMap();
+        IPersistentMap config = peerConfig.toMap();
+	System.out.println("API::startPeerGroup> peer-config=" + peerConfig.toMap());
         return startPeerGroup.invoke(config);
     }
 

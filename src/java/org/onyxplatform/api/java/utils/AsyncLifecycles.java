@@ -72,8 +72,15 @@ public class AsyncLifecycles implements OnyxNames {
 		return lifecycles;
 	}
 
+	// java.lang.ClassCastException: java.lang.String cannot be cast to [Ljava.lang.String;
+	//
+	// This looks like it hates there only being 1 string passed although
+	// I've declared it as a variable argument list. TODO: Debug this in Java
+	// first, may need to have 2 fn declarations? 1 single, 1 variable?
+	//
 	public static PersistentVector collectOutputs(Lifecycles l, String... outputNames) {
 		PersistentVector cycles = l.cycles();
+		System.out.println("collectOutputs> outputNames=" + outputNames);
 		PersistentVector outputs = VectorFns.keywordize(outputNames);
 		return (PersistentVector) collectFn.invoke(cycles, outputs);
 	}
