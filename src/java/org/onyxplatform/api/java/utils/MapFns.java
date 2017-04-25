@@ -78,6 +78,5 @@ public class MapFns implements OnyxNames {
 	public static IPersistentMap merge(IPersistentMap m, IPersistentMap m2) {
 		return (IPersistentMap)rawMergeFn.invoke(m, m2);
 	}
-	
 }
 

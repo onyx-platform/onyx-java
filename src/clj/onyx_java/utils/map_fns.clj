@@ -32,8 +32,12 @@
               v (full-keyword-str bv) ]
           ; Side-effectful
           (if kwv?
-            (.addKeywordParameter ent n v)
-            (.addObjectParameter ent n v))
+            (do
+;              (println "adding keyword pair> name=" n " val=" v) 
+              (.addKeywordParameter ent n v))
+            (do
+;              (println "adding object pair> name=" n " obj=" v " type=" (type v)) 
+              (.addObjectParameter ent n v)))
           ent))
       ent
       ks)

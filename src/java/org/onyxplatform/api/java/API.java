@@ -3,6 +3,7 @@ package org.onyxplatform.api.java;
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.IPersistentMap;
+import clojure.lang.PersistentArrayMap;
 
 /**
  * Simple public facing user API mirroring all functionality of underlaying
@@ -42,11 +43,11 @@ public class API implements OnyxNames {
      *                                   machine specific resource config
      */
     public static Object startPeerGroup(PeerConfiguration peerConfig) {
-        IFn startPeerGroup = Clojure.var(API, StartPeerGroup);
-        IPersistentMap config = peerConfig.toMap();
-	System.out.println("API::startPeerGroup> peer-config=" + peerConfig.toMap());
-        return startPeerGroup.invoke(config);
+        IPersistentMap c = peerConfig.toMap();
+        IFn sPeerGroup = Clojure.var(API, StartPeerGroup);
+        return sPeerGroup.invoke(c);
     }
+
 
     /**
      * Launches n virtual peers.
@@ -132,6 +133,7 @@ public class API implements OnyxNames {
 	Object j = job.toArray();
         return (IPersistentMap) submitJob.invoke(c, j);
     }
+
 
     /**
      * Kills a currently executing job, given its job ID. All peers executing

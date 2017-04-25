@@ -5,14 +5,7 @@
 
 (deftest clj-pass-through
   (let [catalog (cat/build-catalog) ;cat/expected
-        ;inputs {:in [{:pass-through "PASSTHROUGH"}]} 
         inputs  [{:pass-through "PASSTHROUGH"}] 
-        outputs (j/run-clj-job catalog inputs) ]
-    (is (= (first inputs) (first (:out outputs))))))
-
-#_(deftest java-pass-through 
-  (let [catalog (cat/build-catalog)
-        inputs [{:pass-through "PASSTHROUGH"}] 
         outputs (j/run-job catalog inputs) ]
     (is (= (first inputs) (first (:out outputs))))))
 
