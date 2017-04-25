@@ -1,7 +1,6 @@
 (ns onyx-java.main
   (:gen-class) 
-  (:require [clojure.java.io :as io]
-            [onyx-java.test.single-javafn.job :as j])
+  (:require [clojure.java.io :as io])
   (:import [org.onyxplatform.api.java.utils 
             AsyncCatalog AsyncLifecycles MapFns VectorFns]
            [org.onyxplatform.api.java.instance PassMethod]

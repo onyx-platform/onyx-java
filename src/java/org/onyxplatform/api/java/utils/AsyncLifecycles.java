@@ -15,6 +15,7 @@ import org.onyxplatform.api.java.utils.VectorFns;
 
 public class AsyncLifecycles implements OnyxNames {
 
+	protected final static IFn kwFn;
 	protected final static IFn inFn;
 	protected final static IFn bindFn;
 	protected final static IFn outFn;
@@ -25,6 +26,7 @@ public class AsyncLifecycles implements OnyxNames {
  	*/
 	static {
     		IFn requireFn = Clojure.var(CORE, Require);
+		kwFn = Clojure.var(CORE, Keyword);
 		requireFn.invoke(Clojure.read(ASYNC_LIFECYCLES));
 		inFn = Clojure.var(ASYNC_LIFECYCLES, AsyncLifecycleIn);
 		bindFn = Clojure.var(ASYNC_LIFECYCLES, BindLifecycleInputs);
@@ -72,17 +74,33 @@ public class AsyncLifecycles implements OnyxNames {
 		return lifecycles;
 	}
 
-	// java.lang.ClassCastException: java.lang.String cannot be cast to [Ljava.lang.String;
-	//
-	// This looks like it hates there only being 1 string passed although
-	// I've declared it as a variable argument list. TODO: Debug this in Java
-	// first, may need to have 2 fn declarations? 1 single, 1 variable?
-	//
-	public static PersistentVector collectOutputs(Lifecycles l, String... outputNames) {
+
+	/**
+	 * This binds the output specified in the Lifecycle to a core.async reader
+	 * plugin and collects outputs. NOTE: this and the below static function are
+	 * broken into 2 pieces because Clojure doesn't handle variable arity functions
+	 * across the langauge boundry.
+	 */
+	public static IPersistentMap collectOutputs(Lifecycles l, String outputName) {
 		PersistentVector cycles = l.cycles();
-		System.out.println("collectOutputs> outputNames=" + outputNames);
-		PersistentVector outputs = VectorFns.keywordize(outputNames);
-		return (PersistentVector) collectFn.invoke(cycles, outputs);
+		PersistentVector outputs = PersistentVector.EMPTY;
+		Object k = kwFn.invoke(outputName);
+		outputs = outputs.cons(k);
+		return (IPersistentMap) collectFn.invoke(cycles, outputs);
+	}
+
+	/**
+	 * This binds the output specified in the Lifecycle to a core.async reader
+	 * plugin and collects outputs. NOTE: this and the above static function are
+	 * broken into 2 pieces because Clojure doesn't handle variable arity functions
+	 * across the langauge boundry.
+	 */
+	public static IPersistentMap collectOutputs(Lifecycles l, String outputName1, String... restOfTheNames) {
+		PersistentVector cycles = l.cycles();
+		PersistentVector outputs = VectorFns.keywordize(restOfTheNames);
+		Object k = kwFn.invoke(outputName1);
+		outputs = outputs.cons(k);
+		return (IPersistentMap) collectFn.invoke(cycles, outputs);
 	}
 }
 
