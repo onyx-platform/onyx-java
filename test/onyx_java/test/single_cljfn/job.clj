@@ -1,3 +1,4 @@
+
 (ns onyx-java.test.single-cljfn.job
   (:require [clojure.test :refer [deftest is]]
             [onyx-java.test.job :as j]
