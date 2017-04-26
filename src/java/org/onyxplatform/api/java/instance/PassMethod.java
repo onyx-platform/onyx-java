@@ -11,11 +11,11 @@ import org.onyxplatform.api.java.utils.MapFns;
 
 public class PassMethod extends OnyxMethod {
 
-	public PassMethod() {
-		super();
+	public PassMethod(IPersistentMap m) {
+		super(m);
 	}
 
-	public IPersistentMap procSegment(IPersistentMap m) {
+	public Object consumeSegment(IPersistentMap m) {
 		return m;
 	}
 }

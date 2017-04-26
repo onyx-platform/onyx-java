@@ -14,23 +14,30 @@ public abstract class OnyxMethod extends AFn implements OnyxNames {
 
 	protected IPersistentMap cntrArgs;
 
+	/**
+	 * This MUST be overridden by the concrete subclass. 
+	 * It is called during the first method invocation.
+	 */
 	public OnyxMethod(IPersistentMap m) {
 		cntrArgs = m;
-	}
-
-	public OnyxMethod() {
-		cntrArgs = PersistentHashMap.EMPTY;
 	}
 
 	public OnyxMap cntrArgs() {
 		return MapFns.toOnyxMap(cntrArgs);
 	}
 
-	public abstract Object procSegment(IPersistentMap m);
+	/**
+	 * Allowed return types:
+	 *
+	 *  1. IPersistentMap
+	 *  2. PersistentVector containing IPersistentMap's
+	 */
+	public abstract Object consumeSegment(IPersistentMap m);
 
 	public Object invoke(Object arg1) {
 		IPersistentMap segment = (IPersistentMap)arg1;
-		return procSegment(segment);
+		// TODO: check return type. 
+		return consumeSegment(segment);
 	}
 }
 

@@ -1,83 +1,37 @@
 (ns onyx-java.instance.bind
-  (:gen-class) ; NS needs to be gen'ed for Onyx to find
-  #_(:require [onyx-java.instance.onyx-instance :as i])
-  )
+  (:gen-class)
+  #_(:import java.lang.reflect.Constructor))
 
-; Functionality:
-;
-;  - Memory management of instances
-;
-;  - Dynamically loads instances at runtime
-;    for use of arbitrary methods on instances
-;
-;  - Performs the keyword to vanilla string 
-;    conversion into a java HashMap
-;
-; Answered questions
-;
-;  - We need an abstract class to constrain the constructor 
-;  - Gen-class for object construction
-;
-; Open questions
-;
-;  - proxy for method dispatch?
-;
+(defn exists?  [c]
+  (let [loader (.getContextClassLoader (Thread/currentThread))]
+    (try
+      (Class/forName c false loader)
+      true
+      (catch ClassNotFoundException cnfe false))))
 
-; Do we want to store more than just the 
-; instance?
-;
-; like class ns?
-;
-; Don't think so as the the lifecycle
-; additions to the segment pass all 
-; this along. 
-; 
+
+(defn new-instance [fq-class-name ctr-args]
+  (if-not (exists? fq-class-name)
+    nil ; Throw ClassNotFoundException?
+    (let [fn-clazz  (Class/forName fq-class-name) 
+          ; Create IPersistentMap ctr
+          ipm-ctr-array (into-array  [clojure.lang.IPersistentMap])
+          inst-ctr (.getConstructor fn-clazz ipm-ctr-array) 
+          inst-args () ; into array so its [Ljava.lang.Object
+          ]
+      (.newInstance inst-ctr inst-args))))
+
 (def instances (atom {}))
 
-; Can we define the base class via gen-class?
-; (looks like only if its concrete. However, it
-; really doesn't need to *do* anything?)
-;
-; Hmmmmmmmmmmmmm
-;
-; Would be nice to have easy affordances for
-; segment io.  Don't wanna force clients
-; into having to over-ride methods. 
-;
-; Might make more sense to have 
-; the abstract base class access
-; translator's defined here instead?
-;
-; Really its mainly going to be java 
-; classes that will be using our
-; convertion libs
-;
-(defn new-instance [id crtr-args]
-  ; gen-class goes here
-  ;
-  ; Should add helper fns that are technically
-  ; offered by the ns or squirrel them away 
-  ; in the object instance?
-  ;
-  ; Can you make methods be class-static this way?
-  ;
-  (let [i ()]
-    
-    ))
+(defn instance [id fq-class-name ctr-args]
+  (let [k (keyword (str id))]
+    (if (contains? @instances k)
+      (get @instances k)
+      (let [i (new-instance fq-class-name ctr-args)]
+        (swap! instances assoc k i)
+        i))))
 
-(defn- instance [{:keys [instance-id instance-ctr-args] :as segment}]
-  
-  )
-
-
-(defn method [segment]
-  ; Class is pulled via instance-id
-  ; 
-  (let [i ()]
-    
-    )
-  )
-
-
-
+(defn method [id fq-class-name ctr-args segment]
+  (let [inst-ifn (instance id fq-class-name ctr-args)]
+    (inst-ifn segment)))
 
