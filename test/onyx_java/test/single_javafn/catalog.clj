@@ -1,24 +1,27 @@
 (ns onyx-java.test.single-javafn.catalog
-  (import [org.onyxplatform.api.java Catalog Task]
-          [org.onyxplatform.api.java.utils AsyncCatalog MapFns])
-  (:require [clojure.test :refer [deftest is]]
-            [onyx-java.instance.catalog :as inscat]))
+  (:import [org.onyxplatform.api.java Catalog Task]
+          [org.onyxplatform.api.java.utils AsyncCatalog MapFns]
+          [org.onyxplatform.api.java.instance CatalogUtils])
+  (:require [clojure.test :refer [deftest is]]))
 
 
 (defn build-catalog []
-  (let [cat (Catalog.)
-        om (MapFns/fromResources "catalog-single-java.edn")
-        t (Task. om) ]
+  (let [cat (Catalog.) 
+        fqns "onyxplatform.test.PassMethod" 
+        ctr-args {}]
     (-> cat
-        (.addTask t)
+        (CatalogUtils/addMethod "pass" 5 50 fqns ctr-args)
         (AsyncCatalog/addInput  "in" 5 50)
         (AsyncCatalog/addOutput "out" 5 50))))
 
 (def expected [{:onyx/name :pass, 
-                :onyx/fn :org.onyxplatform.api.java.instance.PassMethod,
+                :onyx/fn :onyx-java.instance.bind/method, 
                 :onyx/type :function, 
-                :onyx/batch-size 5   
-                :onyx/batch-timeout 50}
+                :onyx/batch-size 5 
+                :onyx/batch-timeout 50, 
+                :java-instance/class "onyxplatform.test.PassMethod", 
+                :java-instance/ctr-args  {}, 
+                :onyx/params  [:java-instance/id :java-instance/class :java-instance/ctr-args] }
 
                {:onyx/name :in, 
                 :onyx/plugin :onyx.plugin.core-async/input, 
@@ -37,6 +40,10 @@
                 :onyx/batch-timeout 50 }])
 
 (deftest valid-catalog?
-  (let [cat (build-catalog)]
-    (is (= expected (.tasks cat)))))
+  (let [cat (build-catalog)
+        ; Strip generated IDs before comparing
+        tasks (map 
+                #(dissoc % :java-instance/id)
+                (.tasks cat)) ]
+    (is (= expected tasks))))
 
