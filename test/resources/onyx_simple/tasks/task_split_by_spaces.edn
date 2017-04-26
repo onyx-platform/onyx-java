@@ -1,0 +1,7 @@
+{
+    :onyx/name :split-by-spaces
+    :onyx/fn :onyx-java.test.onyx-simple.functions/split-by-spaces
+    :onyx/type :function
+    :onyx/batch-timeout 50
+    :onyx/batch-size 10
+}
