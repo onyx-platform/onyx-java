@@ -1,0 +1,7 @@
+{
+    :onyx/name :question
+    :onyx/fn :onyx-java.test.onyx-simple.functions/question
+    :onyx/type :function
+    :onyx/batch-timeout 50
+    :onyx/batch-size 10
+}
