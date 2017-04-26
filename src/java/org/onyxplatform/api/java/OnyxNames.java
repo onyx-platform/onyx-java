@@ -114,4 +114,6 @@ public interface OnyxNames {
 	public static final String VECTOR_FNS     	= "onyx-java.utils.vector-fns";
 	public static final String KeywordizeStrArray 	= "keywordize-str-array";
 
+	public static final String INSTANCE_CATALOG     = "onyx-java.instance.catalog";
+	public static final String CreateMethod 	= "create-method";
 }

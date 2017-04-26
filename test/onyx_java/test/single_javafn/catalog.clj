@@ -1,7 +1,8 @@
 (ns onyx-java.test.single-javafn.catalog
   (import [org.onyxplatform.api.java Catalog Task]
           [org.onyxplatform.api.java.utils AsyncCatalog MapFns])
-  (:require [clojure.test :refer [deftest is]]))
+  (:require [clojure.test :refer [deftest is]]
+            [onyx-java.instance.catalog :as inscat]))
 
 
 (defn build-catalog []
