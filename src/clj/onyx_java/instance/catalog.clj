@@ -1,9 +1,7 @@
 (ns onyx-java.instance.catalog 
   (:gen-class))
 
-(defn create-method [{:keys [task-name 
-                             batch-size batch-timeout   
-                             fqclassname ctr-args]}]
+(defn create-method [task-name batch-size batch-timeout fqclassname ctr-args]
   {:onyx/name (keyword task-name)
    :onyx/fn :onyx-java.instance.bind/method
    :onyx/type :function

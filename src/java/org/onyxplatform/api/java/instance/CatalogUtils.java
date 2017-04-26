@@ -13,7 +13,7 @@ import org.onyxplatform.api.java.utils.MapFns;
 
 public class CatalogUtils implements OnyxNames {
 
-	protected final static IFn instcatFn;
+	private final static IFn instcatFn;
 
 	/**
  	* Loads the clojure namespaces.

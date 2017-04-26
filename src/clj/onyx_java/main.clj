@@ -5,7 +5,7 @@
             )
   (:import [org.onyxplatform.api.java.utils 
             AsyncCatalog AsyncLifecycles MapFns VectorFns]
-           [org.onyxplatform.api.java.instance Loader]
+           [org.onyxplatform.api.java.instance Loader CatalogUtils]
            [org.onyxplatform.api.java 
             OnyxNames TaskScheduler OnyxMap Catalog 
             Lifecycles EnvConfiguration PeerConfiguration]
