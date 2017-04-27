@@ -47,6 +47,7 @@ the behavior in SingleFnTest never changes, no matter what language the tasks ar
 The SingleJavaTest package contains logic specifically dealing with Tasks written in Java - particularly,
 the CatalogUtils call in createCatalog is specific to Java tasks.
 
+<br>
 This java test can be used with any user method without altering any code - in the project resources
 folder, the java-test-setup.edn can be altered, replacing the map values with whatever properties
 the user wishes to test.
