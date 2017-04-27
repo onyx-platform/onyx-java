@@ -26,12 +26,36 @@ Support for use of pure Java objects in a workflow is provided via an abstract b
 <br>
 *OnyxMethod* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
 <br>
-
 ## Usage
 
+This section is non-exhaustive but lays out the general approach giving a feel for its use in practice. Full examples are provided in test.<br>
+<br>
 ### Basic 
 
+
+
+
 ### Java Objects 
+
+Inclusion of Java objects requires that you provide a concrete subclass of OnyxMethod:<br>
+<br>
+```
+import clojure.lang.IPersistentMap;
+
+import org.onyxplatform.api.java.instance.OnyxMethod;
+
+public class PassMethod extends OnyxMethod {
+
+        public PassMethod(IPersistentMap m) {
+                super(m);
+        }
+
+        public Object consumeSegment(IPersistentMap m) {
+                return m;
+        }
+}
+```
+
 
 
 ## License
