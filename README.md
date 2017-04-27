@@ -12,8 +12,8 @@ These classes provide methods to add declarations to your Job description ensuri
 
 #### Maps
 
-A utility class offers Java-esk versions of Clojure map munipulation functions making it easier to directly manipulate Clojure map's 
-
+A utility class MapFns offers Java-esk versions of Clojure map munipulation functions, like get-in, making it easier to directly manipulate Clojure map's. It also provides support for loading from resources edn files that contain simple maps making it easier to manage asset descriptions like environment and peer configuration. <br>
+<br>
 
 #### Core Async
 
