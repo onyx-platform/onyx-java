@@ -28,7 +28,7 @@ Support for use of pure Java objects in a workflow is provided via an abstract b
 <br>
 ## Usage
 
-This section is non-exhaustive but lays out the general approach giving a feel for its use in practice. Full examples are provided in test.<br>
+This section is non-exhaustive but lays out the general approach giving a feel for use of the API in practice. Full examples are provided in test.<br>
 <br>
 ### Basic 
 
@@ -40,6 +40,8 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 Inclusion of Java objects requires that you provide a concrete subclass of OnyxMethod:<br>
 <br>
 ```
+package onyxplatform.test;
+
 import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.instance.OnyxMethod;
@@ -55,7 +57,17 @@ public class PassMethod extends OnyxMethod {
         }
 }
 ```
+<br>
+Using the fully qualified name of your class, and any constructor parameters, you then use *CatalogUtils* to generate a matching catalog entry:<br>
+<br>
+```
+Catalog catalog = new Catalog();
 
+String fullyQualifiedName = "onyxplatform.test.PassMethod";
+IPersitentMap m = MapFns.emptyMap();
+
+
+```
 
 
 ## License

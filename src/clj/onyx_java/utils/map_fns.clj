@@ -43,6 +43,9 @@
       ks)
     ent))
 
+(defn empty-map []
+  {})
+
 (defn edn-from-resources [rsrc-path]
   (to-onyx-map (-> rsrc-path resource slurp read-string)))
 

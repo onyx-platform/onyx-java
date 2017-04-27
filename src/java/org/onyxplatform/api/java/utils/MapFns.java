@@ -13,6 +13,7 @@ import org.onyxplatform.api.java.utils.VectorFns;
 
 public class MapFns implements OnyxNames {
 
+	protected final static IFn emptyFn;
 	protected final static IFn eMapFn;
 	protected final static IFn ednFn;
 
@@ -30,7 +31,9 @@ public class MapFns implements OnyxNames {
 	static {
     		IFn requireFn = Clojure.var(CORE, Require);
 		kwFn = Clojure.var(CORE, Keyword);
+
 		requireFn.invoke(Clojure.read(MAP_FNS));
+		emptyFn = Clojure.var(MAP_FNS, EmptyMap);
 		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
 		ednFn = Clojure.var(MAP_FNS, EdnFromRsrc);
 
@@ -40,6 +43,10 @@ public class MapFns implements OnyxNames {
 		rawGetInFn = Clojure.var(CORE, GetIn);
 		rawAssocInFn = Clojure.var(CORE, AssocIn);
 		rawMergeFn = Clojure.var(CORE, Merge);
+	}
+
+	public static IPersistentMap emptyMap() {
+		return (IPersistentMap) emptyFn.invoke();
 	}
 
 	public static OnyxMap toOnyxMap(IPersistentMap m) {
