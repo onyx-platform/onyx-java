@@ -11,13 +11,23 @@ import clojure.lang.PersistentArrayMap;
  */
 public class API implements OnyxNames {
 
-    protected final static IFn bind;
+    // Explicitly load and bind to a var at runtime 
+    // those clojure functions that are referenced 
+    // in generated workflows.  
+    // (currently onyx-java.instance.bind)
+    // This solves class-not-found exceptions when they 
+    // are obliquely referenced in a Job.
+    //
+    private final static IFn bind;
+
     /**
-     * Loads the onyx-api namespace for use by Java
+     * Loads the required namespaces for use in Java
      */
     static {
         IFn require = Clojure.var(CORE, Require);
         require.invoke(Clojure.read(API));
+
+	// instance binding
         require.invoke(Clojure.read(INSTANCE_BIND));
         bind = Clojure.var(INSTANCE_BIND, Method);
     }
