@@ -231,4 +231,31 @@ public abstract class SingleFnTest {
 		}
 		return false;
 	}
+
+	public String await(PersistentVector inputs) throws Exception{
+		try {
+			System.out.println("Starting job.");
+			setup();
+			IPersistentMap job = submitJob(inputs);
+			String jobId = (MapFns.get(job, "job-id")).toString();
+			System.out.println("Killing job...");
+			boolean killStatus = API.killJob(peerConfig, jobId);
+			System.out.println("Kill status: ");
+			System.out.println(killStatus);
+			if (API.awaitJobCompletion(peerConfig, jobId)){
+				return "Failure!";
+			} else {
+				return "Success!";
+			}
+		}
+		catch (Exception e) {
+			System.out.println("Job kill test. Exception follows:");
+			System.out.println(e);
+		}
+		finally {
+			shutdownEnv();
+		}
+		return "Failure!";
+	}
+
 }

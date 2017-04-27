@@ -23,3 +23,10 @@
           expected true
           outputs (.kill testObject [{:pass-through "PASSTHROUGH"}])]
         (is (= expected outputs))))
+
+(deftest await-test
+    (let [testObject (SingleJavaTest. "single-java-test.edn")
+          inputs [{:pass-through "PASSTHROUGH"}]
+          expected "Success!"
+          outputs (.await testObject [{:pass-through "PASSTHROUGH"}])]
+        (is (= expected outputs))))
