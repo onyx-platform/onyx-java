@@ -16,3 +16,10 @@
           expected {:out [{:pass-through "PASSTHROUGH"} :done]}
           outputs (.run testObject [{:pass-through "PASSTHROUGH"}])]
         (is (= (first inputs) (first (:out outputs))))))
+
+(deftest kill-test
+    (let [testObject (SingleJavaTest. "single-java-test.edn")
+          inputs [{:pass-through "PASSTHROUGH"}]
+          expected true
+          outputs (.kill testObject [{:pass-through "PASSTHROUGH"}])]
+        (is (= expected outputs))))

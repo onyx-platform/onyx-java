@@ -161,7 +161,7 @@ public abstract class SingleFnTest {
 		System.out.println(job.toString());
 	}
 
-	private IPersistentMap executeJob(PersistentVector inputs){
+	private IPersistentMap submitJob(PersistentVector inputs){
 		System.out.println("Inputs: ");
 		System.out.println(inputs);
 		onyxEnv = API.startEnv(envConfig);
@@ -174,6 +174,10 @@ public abstract class SingleFnTest {
 		System.out.println("Inputs bound.");
 		runningJob = API.submitJob(peerConfig, job);
 		System.out.println("Job submitted.");
+		return runningJob;
+	}
+
+	private IPersistentMap getOutput(){
 		return AsyncLifecycles.collectOutputs(lifecycles, "out");
 	}
 
@@ -191,7 +195,10 @@ public abstract class SingleFnTest {
 		try {
 			System.out.println("Starting job.");
 			setup();
-			return executeJob(inputs);
+			IPersistentMap job = submitJob(inputs);
+			IPersistentMap results = getOutput();
+			//API.awaitJobCompletion(peerConfig, jobId);
+			return results;
 		}
 		catch (Exception e) {
 			System.out.println("Job evaluation failed. Exception follows:");
@@ -201,5 +208,27 @@ public abstract class SingleFnTest {
 			shutdownEnv();
 		}
 		return null;
+	}
+
+	public boolean kill(PersistentVector inputs) throws Exception{
+		try {
+			System.out.println("Starting job.");
+			setup();
+			IPersistentMap job = submitJob(inputs);
+			String jobId = (MapFns.get(job, "job-id")).toString();
+			System.out.println("Killing job...");
+			boolean killStatus = API.killJob(peerConfig, jobId);
+			System.out.println("Kill status: ");
+			System.out.println(killStatus);
+			return killStatus;
+		}
+		catch (Exception e) {
+			System.out.println("Job kill test. Exception follows:");
+			System.out.println(e);
+		}
+		finally {
+			shutdownEnv();
+		}
+		return false;
 	}
 }
