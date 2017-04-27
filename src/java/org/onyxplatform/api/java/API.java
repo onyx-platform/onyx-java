@@ -11,12 +11,15 @@ import clojure.lang.PersistentArrayMap;
  */
 public class API implements OnyxNames {
 
+    protected final static IFn bind;
     /**
      * Loads the onyx-api namespace for use by Java
      */
     static {
         IFn require = Clojure.var(CORE, Require);
         require.invoke(Clojure.read(API));
+        require.invoke(Clojure.read(INSTANCE_BIND));
+        bind = Clojure.var(INSTANCE_BIND, Method);
     }
 
     /**

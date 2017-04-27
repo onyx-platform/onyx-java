@@ -116,4 +116,8 @@ public interface OnyxNames {
 
 	public static final String INSTANCE_CATALOG     = "onyx-java.instance.catalog";
 	public static final String CreateMethod 	= "create-method";
+
+	public static final String INSTANCE_BIND     = "onyx-java.instance.bind";
+	public static final String Method 	= "method";
+
 }
