@@ -6,7 +6,7 @@ Onyx-Java provides a simple Java interface for the Onyx Platform's core API, uti
 ## Overview 
 Onyx-Java follows the Onyx Platform's core API providing Java peer's for each aspect of a workflow. I.e. Catalogs, Lifecycles, Jobs, etc. <br>
 <br>
-These classes provide methods to add entries to your Job description ensuring that they are converted into Clojure-native types when needed. Note that this approach doesn't validate semantic correctness of your entries, which are enforced at runtime.<br>
+These classes provide methods to add entries to your workflow description ensuring that they are converted into Clojure-native types when needed. Note that this approach doesn't validate semantic correctness of your entries, which are enforced at runtime.<br>
 <br>
 ### Utilities
 
@@ -22,11 +22,10 @@ Support for the use of core.async plugins are provided via a pair of Java classe
 
 #### Java Objects
 
-
-
-
-
-
+Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxMethod, along with a catalog generation tool CatalogUtils. <br>
+<br>
+*OnyxMethod* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
+<br>
 
 ## Usage
 
