@@ -37,7 +37,7 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 
 ### Java Objects 
 
-Inclusion of Java objects requires that you provide a concrete subclass of OnyxMethod:<br>
+Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of OnyxMethod:<br>
 <br>
 ```
 package onyxplatform.test;
@@ -58,7 +58,7 @@ public class PassMethod extends OnyxMethod {
 }
 ```
 <br>
-Using the fully qualified name of your class, and any constructor parameters, you then use CatalogUtils to generate a matching catalog entry:<br>
+Then, using the fully qualified name of your class and any constructor parameters, you use CatalogUtils to generate a matching catalog entry:<br>
 <br>
 
 ```
@@ -75,7 +75,7 @@ Using the fully qualified name of your class, and any constructor parameters, yo
 ```
 
 <br>
-This will add the appropriate entry to bind task processing to a specific instance that is loaded and called at job runtime.<br>
+This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.<br>
 
 
 ## License
