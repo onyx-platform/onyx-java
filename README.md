@@ -58,8 +58,9 @@ public class PassMethod extends OnyxMethod {
 }
 ```
 <br>
-Using the fully qualified name of your class, and any constructor parameters, you then use CatalogUtils to generate a matching catalog entry:<br>
+Using the fully qualified name of your class, and any constructor parameters, you then use *CatalogUtils* to generate a matching catalog entry:<br>
 <br>
+
 ```
 	Catalog catalog = new Catalog();
 	
