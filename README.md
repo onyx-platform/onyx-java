@@ -12,14 +12,16 @@ These classes provide methods to add declarations to your Job description ensuri
 
 #### Maps
 
+Maps!
+
+
 #### Core Async
+
+Core Async!
 
 #### Java Objects
 
- are provided to make clojure map manipulation easier as well as affordances for loading edn files.<br>
-<br>
-Core Async classes are provided that simplify the usage of onyx core.async plugins.
-
+OMG Java!
 
 
 ## Basic Usage
