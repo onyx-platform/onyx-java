@@ -30,3 +30,10 @@
           expected "Success!"
           outputs (.await testObject [{:pass-through "PASSTHROUGH"}])]
         (is (= expected outputs))))
+
+(deftest gc-test
+    (let [testObject (SingleJavaTest. "single-java-test.edn")
+          inputs [{:pass-through "PASSTHROUGH"}]
+          expected "Success!"
+          outputs (.gc testObject [{:pass-through "PASSTHROUGH"}])]
+        (is (= expected outputs))))
