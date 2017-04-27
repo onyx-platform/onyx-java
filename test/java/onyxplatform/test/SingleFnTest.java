@@ -5,35 +5,53 @@ import java.util.UUID;
 import clojure.lang.IPersistentMap;
 import clojure.lang.PersistentHashMap;
 import clojure.lang.PersistentVector;
-import java.util.HashMap;
 
-import org.onyxplatform.api.java.*;
-import org.onyxplatform.api.java.instance.*;
-import org.onyxplatform.api.java.utils.*;
+import org.onyxplatform.api.java.API;
+import org.onyxplatform.api.java.Job;
+import org.onyxplatform.api.java.TaskScheduler;
+import org.onyxplatform.api.java.Task;
+import org.onyxplatform.api.java.Catalog;
+import org.onyxplatform.api.java.Workflow;
+import org.onyxplatform.api.java.EnvConfiguration;
+import org.onyxplatform.api.java.PeerConfiguration;
+import org.onyxplatform.api.java.Lifecycles;
+import org.onyxplatform.api.java.FlowConditions;
+import org.onyxplatform.api.java.OnyxMap;
+
+import org.onyxplatform.api.java.utils.AsyncCatalog;
+import org.onyxplatform.api.java.utils.AsyncLifecycles;
+import org.onyxplatform.api.java.utils.MapFns;
 
 public abstract class SingleFnTest {
 
-	public Job job;
-	public TaskScheduler taskScheduler;
-	public Task task;
-	public Catalog catalog;
-	public Workflow workflow;
-	public EnvConfiguration envConfig;
-	public PeerConfiguration peerConfig;
-	public Lifecycles lifecycles;
-	public FlowConditions flowConditions;
+	private Job job;
+	private TaskScheduler taskScheduler;
+	private Task task;
+	protected Catalog catalog;
+	private Workflow workflow;
+	private EnvConfiguration envConfig;
+	private PeerConfiguration peerConfig;
+	private Lifecycles lifecycles;
+	private FlowConditions flowConditions;
 
-	public Object tenancyId;
-	public int batchSize;
-	public int batchTimeout;
-	public int virtualPeerCount;
+	private Object tenancyId;
+	protected int batchSize;
+	protected int batchTimeout;
+	protected int virtualPeerCount;
 
-	public Object onyxEnv;
-	public Object peerGroup;
-	public Object virtualPeers;
-	public IPersistentMap runningJob;
+	private Object onyxEnv;
+	private Object peerGroup;
+	private Object virtualPeers;
+	private IPersistentMap runningJob;
 
-	public void defaultSetup(IPersistentMap setupMap){
+	/**
+	 * Abstract methods
+	 */
+	protected abstract void createCatalog();
+	protected abstract void setup();
+
+
+	protected void defaultSetup(IPersistentMap setupMap){
 		setBatchSize(((Long) MapFns.get(setupMap, "batchSize")).intValue());
         setBatchTimeout(((Long) MapFns.get(setupMap, "batchTimeout")).intValue());
 		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
@@ -49,69 +67,64 @@ public abstract class SingleFnTest {
 		createJob();
 	}
 
-	public void setTenancyId(){
+	private void setTenancyId(){
 		tenancyId = UUID.randomUUID();
 		System.out.println("Tenancy ID set to: ");
 		System.out.println(tenancyId);
 	}
 
-	public void setBatchSize(int bs){
+	private void setBatchSize(int bs){
 		batchSize = bs;
 		System.out.println("Batch Size set to: ");
 		System.out.println(batchSize);
 	}
 
-	public void setBatchTimeout(int bt){
+	private void setBatchTimeout(int bt){
 		batchTimeout = bt;
 		System.out.println("Batch Timeout set to: ");
 		System.out.println(batchTimeout);
 	}
 
-	public void setVirtualPeerCount(int vp){
+	private void setVirtualPeerCount(int vp){
 		virtualPeerCount = vp;
 		System.out.println("Virtual Peer Count set to: ");
 		System.out.println(virtualPeerCount);
 	}
 
-	public void createTaskScheduler(String tsString){
+	private void createTaskScheduler(String tsString){
 		taskScheduler = new TaskScheduler(tsString);
 		System.out.println("Task Scheduler Created: ");
 		System.out.println(taskScheduler.toString());
 	}
 
-
-	public abstract void createCatalog();
-
-	public abstract void setup();
-
-	public void updateCatalog(){
+	private void updateCatalog(){
 		catalog = AsyncCatalog.addInput(catalog, "in", batchSize, batchTimeout);
 		catalog = AsyncCatalog.addOutput(catalog, "out", batchSize, batchTimeout);
 		System.out.println("Catalog Updated: ");
 		System.out.println(catalog.toString());
 	}
 
-	public void createFlowConditions(){
+	private void createFlowConditions(){
 		flowConditions = new FlowConditions();
 		System.out.println("FlowConditions Created: ");
 		System.out.println(flowConditions.toString());
 	}
 
-	public void createEnvConfig(String envEdn){
+	private void createEnvConfig(String envEdn){
 		OnyxMap envMap = MapFns.fromResources(envEdn);
 		envConfig = new EnvConfiguration(tenancyId, envMap);
 		System.out.println("EnvConfig Created: ");
 		System.out.println(envConfig.toString());
 	}
 
-	public void createPeerConfig(String peerEdn){
+	private void createPeerConfig(String peerEdn){
 		OnyxMap peerMap = MapFns.fromResources(peerEdn);
 		peerConfig = new PeerConfiguration(tenancyId, peerMap);
 		System.out.println("PeerConfig Created: ");
 		System.out.println(peerConfig.toString());
 	}
 
-	public void createLifecycles(){
+	private void createLifecycles(){
 		lifecycles = new Lifecycles();
 		lifecycles = AsyncLifecycles.addInput(lifecycles, "in");
 		lifecycles = AsyncLifecycles.addOutput(lifecycles, "out");
@@ -119,7 +132,7 @@ public abstract class SingleFnTest {
 		System.out.println(lifecycles.toString());
 	}
 
-	public void createWorkflow(){
+	private void createWorkflow(){
 		workflow = new Workflow();
 		workflow.addEdge("in", "pass");
 		workflow.addEdge("pass", "out");
@@ -127,7 +140,7 @@ public abstract class SingleFnTest {
 		System.out.println(workflow.toString());
 	}
 
-	public void createJob(){
+	private void createJob(){
 		job = new Job(taskScheduler);
 		job.setCatalog(catalog);
 		job.setWorkflow(workflow);
@@ -137,8 +150,7 @@ public abstract class SingleFnTest {
 		System.out.println(job.toString());
 	}
 
-
-	public IPersistentMap runJob(PersistentVector inputs){
+	private IPersistentMap executeJob(PersistentVector inputs){
 		System.out.println("Inputs: ");
 		System.out.println(inputs);
 		onyxEnv = API.startEnv(envConfig);
@@ -154,7 +166,7 @@ public abstract class SingleFnTest {
 		return AsyncLifecycles.collectOutputs(lifecycles, "out");
 	}
 
-	public void shutdownEnv(){
+	private void shutdownEnv(){
 		System.out.println("Beginning shutdown...");
 		API.shutdownPeers(virtualPeers);
 		System.out.println("Shutdown virtual peers.");
@@ -164,20 +176,19 @@ public abstract class SingleFnTest {
 		System.out.println("Shutdown onyx env. Shutdown complete.");
 	}
 
-	public IPersistentMap runTest(PersistentVector inputs) throws Exception{
+	public IPersistentMap runJob(PersistentVector inputs) throws Exception{
 		try {
 			System.out.println("Starting job.");
 			setup();
-			return runJob(inputs);
+			return executeJob(inputs);
 		}
 		catch (Exception e) {
-			System.out.println("Exception.");
+			System.out.println("Job evaluation failed. Exception follows:");
+			System.out.println(e);
 		}
 		finally {
 			shutdownEnv();
 		}
 		return null;
 	}
-
-
 }
