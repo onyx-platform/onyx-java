@@ -21,6 +21,7 @@
                 :onyx/batch-timeout 50, 
                 :java-instance/class "onyxplatform.test.PassMethod", 
                 :java-instance/ctr-args  {}, 
+                ; NOTE: java-instance/id is stripped before comparison as its generated
                 :onyx/params  [:java-instance/id :java-instance/class :java-instance/ctr-args] }
 
                {:onyx/name :in, 
