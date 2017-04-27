@@ -34,32 +34,26 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 
 ### Basic
 
-Basic usage of this package is demonstrated in the two classes related to Java testing, SingleFnTest.java
-and SingleJavaTest.java. The defaultSetup method in SingleFnTest lays out individual steps line by line.
-The executeJob method in SingleFnTest lays out starting an environment, running a job, and returning
-results, line by line. The ShutdownEnv step describes line by line how to cleanly exit the environment.
-The runJob method lays out the highest level of job execution, dictating how to handle exceptions.
+Basic usage of this package is demonstrated in three classes related to pure Java testing. The base class, SingleFnTest.java,
+contains clear, simple methods demonstrating the high level
+view on what is required for a successful job run. It contains nested setup functions that show in an obvious way what steps and in which order things must be built. It also contains functions related to setting up an environment and running a job as well as stopping a job and tearing down the environment. The public 'run' method is the entry point to a test.
 
 <br>
 
-Note that in the example SingleFnTest and SingleJavaTest are split into separate classes so that
-other types of functions (such as pure clojure functions) can be run using the same base class -
-the behavior in SingleFnTest never changes, no matter what language the tasks are written in.
-The SingleJavaTest package contains logic specifically dealing with Tasks written in Java - particularly,
-the CatalogUtils call in createCatalog is specific to Java tasks.
+The extending classes, SingleJavaTest and SingleCljTest,
+demonstrate how catalogs must be built separately depending
+on the language that a given function task is written in.
+<br>
+
+This separation demonstrates how OnyxJava easily provides the ability to use Java objects and methods as tasks without removing the ability to use tasks written in pure clojure (and potentially other languages).
 
 <br>
 
-This java test can be used with any user method without altering any code - in the project resources
-folder, the java-test-setup.edn can be altered, replacing the map values with whatever properties
-the user wishes to test.
+It is important to note that only a very small variation in setup behavior exists between task functions written in different languages, and that all of the logic contained in the base SingleFnTest class will remain the same.
 
 <br>
 
-This represents an important delineation of the capabilities provided by OnyxJava - it wraps Onyx,
-allowing for it to be used from Java, provides  for running tasks based on Java objects (described in the next section), without preventing the ability to create tasks written in other languages.
 
-<br>
 
 ### Java Objects
 

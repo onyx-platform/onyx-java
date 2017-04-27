@@ -1,11 +1,18 @@
 (ns onyx-java.test.pure-java
   (:gen-class)
-  (:import onyxplatform.test.SingleJavaTest)
+  (:import [onyxplatform.test SingleJavaTest SingleCljTest])
   (:require [clojure.test :refer [deftest is]]))
 
 (deftest single-java-test
-    (let [j (SingleJavaTest. "java-test-setup.edn")
+    (let [testObject (SingleJavaTest. "single-java-test.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected {:out [{:pass-through "PASSTHROUGH"} :done]}
-          outputs (.runJob j [{:pass-through "PASSTHROUGH"}])]
+          outputs (.run testObject [{:pass-through "PASSTHROUGH"}])]
+        (is (= (first inputs) (first (:out outputs))))))
+
+(deftest single-clj-test
+    (let [testObject (SingleCljTest. "single-clj-test.edn")
+          inputs [{:pass-through "PASSTHROUGH"}]
+          expected {:out [{:pass-through "PASSTHROUGH"} :done]}
+          outputs (.run testObject [{:pass-through "PASSTHROUGH"}])]
         (is (= (first inputs) (first (:out outputs))))))

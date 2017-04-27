@@ -52,18 +52,31 @@ public abstract class SingleFnTest {
 
 
 	protected void defaultSetup(IPersistentMap setupMap){
+		//basic setup - in this test, these are pulled from a map. these parameters
+		//are constants used for running a job, as well as task construction.
 		setBatchSize(((Long) MapFns.get(setupMap, "batchSize")).intValue());
         setBatchTimeout(((Long) MapFns.get(setupMap, "batchTimeout")).intValue());
 		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
-		createTaskScheduler((String) MapFns.get(setupMap, "taskScheduler"));
+		//note - some methods require using the same tenancy id. This
+		//most commonly is a Java UUID object. It is required by envConfig
+		//as well as PeerConfig. The user must generate/supply this.
 		setTenancyId();
+		//Each line in the following section describes a necessary setup step
+		//for job creation. The corresponding function contains a typical
+		//use for each of these necessary parts for an onyx job.
+		//Note 1: that EnvConfig and PeerConfig are setup using an EDN map.
+		//This is a valid, easy way to set these up. They also contain
+		//their own methods for individually adding necessary parts.
+		//Note 2: createCatalog is an abstract method, and in this test
+		//it depends on the specific language that the test task is written in.
+		//Its contents can be found in the extending language specific class.
 		createEnvConfig((String) MapFns.get(setupMap, "envEdn"));
 		createPeerConfig((String) MapFns.get(setupMap, "peerEdn"));
 		createCatalog();
-		updateCatalog();
 		createFlowConditions();
 		createLifecycles();
 		createWorkflow();
+		createTaskScheduler((String) MapFns.get(setupMap, "taskScheduler"));
 		createJob();
 	}
 
@@ -97,11 +110,9 @@ public abstract class SingleFnTest {
 		System.out.println(taskScheduler.toString());
 	}
 
-	private void updateCatalog(){
+	protected void updateCatalog(){
 		catalog = AsyncCatalog.addInput(catalog, "in", batchSize, batchTimeout);
 		catalog = AsyncCatalog.addOutput(catalog, "out", batchSize, batchTimeout);
-		System.out.println("Catalog Updated: ");
-		System.out.println(catalog.toString());
 	}
 
 	private void createFlowConditions(){
@@ -176,7 +187,7 @@ public abstract class SingleFnTest {
 		System.out.println("Shutdown onyx env. Shutdown complete.");
 	}
 
-	public IPersistentMap runJob(PersistentVector inputs) throws Exception{
+	public IPersistentMap run(PersistentVector inputs) throws Exception{
 		try {
 			System.out.println("Starting job.");
 			setup();

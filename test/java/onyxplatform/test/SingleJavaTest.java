@@ -19,6 +19,7 @@ public class SingleJavaTest extends SingleFnTest {
         catalog = new Catalog();
 		catalog = CatalogUtils.addMethod(catalog, "pass", batchSize,
 								batchTimeout, methodName, MapFns.emptyMap());
+        updateCatalog();
 		System.out.println("Java Catalog Created: ");
 		System.out.println(catalog.toString());
     }
