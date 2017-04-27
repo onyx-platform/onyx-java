@@ -6,29 +6,33 @@ Onyx-Java provides a simple Java interface for the Onyx Platform's core API, uti
 ## Overview 
 Onyx-Java follows the Onyx Platform's core API providing Java peer's for each aspect of a workflow. I.e. Catalogs, Lifecycles, Jobs, etc. <br>
 <br>
-These classes provide methods to add descriptions to your Job description ensuring that they are converted into Clojure-native types when needed. Note that this approach doesn't validate semantic correctness of your assets, which are enforced at runtime.<br>
+These classes provide methods to add entries to your Job description ensuring that they are converted into Clojure-native types when needed. Note that this approach doesn't validate semantic correctness of your entries, which are enforced at runtime.<br>
 <br>
 ### Utilities
 
 #### Maps
 
-A utility class, MapFns, offers Java-esk versions of (some) Clojure map munipulation functions, like get-in, making it easier to directly manipulate Clojure map's. It also provides support for loading from resources edn files that contain simple maps making it easier to manage asset descriptions like environment and peer configuration. <br>
+A utility class, MapFns, offers Java-esk versions of (some) Clojure map munipulation functions, like get-in, making it easier to directly manipulate Clojure map's. It also provides support for loading edn files of simple maps from resources making it easier to manage entries like environment and peer configuration. <br>
 <br>
 
 #### Core Async
 
-Support for the use of core.async plugin's is provided via a pair of Java classes. AsyncCatalog and AsyncLifecycles encapsulate generating the correct catalog and lifecycle entries, as well as providing support methods to for use during job runtime to pass and collect data.<br>
+Support for the use of core.async plugins are provided via a pair of Java classes. AsyncCatalog and AsyncLifecycles encapsulate generating the correct catalog and lifecycle entries, as well as providing support methods for use during job runtime to pass and collect data.<br>
 <br>
-
 
 #### Java Objects
 
 
 
-## Basic Usage
 
 
-## Java Objects 
+
+
+## Usage
+
+### Basic 
+
+### Java Objects 
 
 
 ## License
