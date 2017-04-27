@@ -76,6 +76,8 @@ Then, using the fully qualified name of your class and any constructor parameter
 
 <br>
 This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.<br>
+<br>
+#### NOTE: There are parallel clojure namespaces and functions that provide affordances for clojure-based workflows. The single_javafn directory in test demonstrates its use from clojure.
 
 
 ## License
