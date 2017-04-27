@@ -58,9 +58,9 @@ public class PassMethod extends OnyxMethod {
 }
 ```
 <br>
-Using the fully qualified name of your class, and any constructor parameters, you then use *CatalogUtils* to generate a matching catalog entry:<br>
+Using the fully qualified name of your class, and any constructor parameters, you then use CatalogUtils to generate a matching catalog entry:<br>
 <br>
-
+```
 	Catalog catalog = new Catalog();
 	
 	String taskName = "pass";
@@ -71,6 +71,7 @@ Using the fully qualified name of your class, and any constructor parameters, yo
 	int batchTimeout = 50;
 	
 	CatalogUtils.addMethod(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
+```
 
 <br>
 This will add the appropriate entry to bind task processing to a specific instance that is loaded at job runtime.<br>
