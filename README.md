@@ -41,6 +41,7 @@ results, line by line. The ShutdownEnv step describes line by line how to cleanl
 The runJob method lays out the highest level of job execution, dictating how to handle exceptions.
 
 <br>
+
 Note that in the example SingleFnTest and SingleJavaTest are split into separate classes so that
 other types of functions (such as pure clojure functions) can be run using the same base class -
 the behavior in SingleFnTest never changes, no matter what language the tasks are written in.
@@ -48,11 +49,13 @@ The SingleJavaTest package contains logic specifically dealing with Tasks writte
 the CatalogUtils call in createCatalog is specific to Java tasks.
 
 <br>
+
 This java test can be used with any user method without altering any code - in the project resources
 folder, the java-test-setup.edn can be altered, replacing the map values with whatever properties
 the user wishes to test.
 
 <br>
+
 This represents an important delineation of the capabilities provided by OnyxJava - it wraps Onyx,
 allowing for it to be used from Java, provides  for running tasks based on Java objects (described in the next section), without preventing the ability to create tasks written in other languages.
 
