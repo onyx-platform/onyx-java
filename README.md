@@ -26,19 +26,22 @@ Support for use of pure Java objects in a workflow is provided via an abstract b
 <br>
 *OnyxMethod* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
 <br>
+
 ## Usage
 
 This section is non-exhaustive but lays out the general approach giving a feel for use of the API in practice. Full examples are provided in test.<br>
 <br>
+
 ### Basic 
 
-
+In progress...
 
 
 ### Java Objects 
 
 Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of OnyxMethod:<br>
 <br>
+
 ```
 package onyxplatform.test;
 
@@ -57,6 +60,7 @@ public class PassMethod extends OnyxMethod {
         }
 }
 ```
+
 <br>
 Then, using the fully qualified name of your class and any constructor parameters, you use CatalogUtils to generate a matching catalog entry:<br>
 <br>
