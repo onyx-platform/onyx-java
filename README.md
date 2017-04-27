@@ -75,7 +75,7 @@ Using the fully qualified name of your class, and any constructor parameters, yo
 ```
 
 <br>
-This will add the appropriate entry to bind task processing to a specific instance that is loaded at job runtime.<br>
+This will add the appropriate entry to bind task processing to a specific instance that is loaded and called at job runtime.<br>
 
 
 ## License
