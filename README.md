@@ -63,11 +63,17 @@ Using the fully qualified name of your class, and any constructor parameters, yo
 ```
 Catalog catalog = new Catalog();
 
+String taskName = "pass";
 String fullyQualifiedName = "onyxplatform.test.PassMethod";
-IPersitentMap m = MapFns.emptyMap();
+IPersitentMap ctrArgs = MapFns.emptyMap();
 
+int batchSize = 5;
+int batchTimeout = 50;
 
+CatalogUtils.addMethod(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 ```
+<br>
+This will add the appropriate entry to bind task processing to a specific instance that is loaded at job runtime.<br>
 
 
 ## License
