@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 
 public class Loader {
 
-	public static IFn loadOnyxMethod(String fqClassName, IPersistentMap args) 
+	public static IFn loadOnyxFn(String fqClassName, IPersistentMap args) 
 		throws ClassNotFoundException, 
 		NoSuchMethodException, 
 		InstantiationException,

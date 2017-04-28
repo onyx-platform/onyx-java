@@ -22,9 +22,9 @@ Support for the use of core.async plugins are provided via a pair of Java classe
 
 #### Java Objects
 
-Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxMethod, along with a catalog generation tool CatalogUtils. <br>
+Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxFn, along with a catalog generation tool CatalogUtils. <br>
 <br>
-*OnyxMethod* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
+*OnyxFn* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
 <br>
 
 ## Usage
@@ -57,7 +57,7 @@ It is important to note that only a very small variation in setup behavior exist
 
 ### Java Objects
 
-Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of OnyxMethod:<br>
+Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of OnyxFn:<br>
 <br>
 
 ```
@@ -65,9 +65,9 @@ package onyxplatform.test;
 
 import clojure.lang.IPersistentMap;
 
-import org.onyxplatform.api.java.instance.OnyxMethod;
+import org.onyxplatform.api.java.instance.OnyxFn;
 
-public class PassMethod extends OnyxMethod {
+public class PassMethod extends OnyxFn {
 
         public PassMethod(IPersistentMap m) {
                 super(m);

@@ -2,11 +2,11 @@ package onyxplatform.test;
 
 import clojure.lang.IPersistentMap;
 
-import org.onyxplatform.api.java.instance.OnyxMethod;
+import org.onyxplatform.api.java.instance.OnyxFn;
 
-public class PassMethod extends OnyxMethod {
+public class PassFn extends OnyxFn {
 
-	public PassMethod(IPersistentMap m) {
+	public PassFn(IPersistentMap m) {
 		super(m);
 	}
 

@@ -10,7 +10,7 @@ import org.onyxplatform.api.java.OnyxNames;
 import org.onyxplatform.api.java.OnyxMap;
 import org.onyxplatform.api.java.utils.MapFns;
 
-public abstract class OnyxMethod extends AFn implements OnyxNames {
+public abstract class OnyxFn extends AFn implements OnyxNames {
 
 	protected IPersistentMap cntrArgs;
 
@@ -18,7 +18,7 @@ public abstract class OnyxMethod extends AFn implements OnyxNames {
 	 * This MUST be overridden by the concrete subclass. 
 	 * It is called during the first method invocation.
 	 */
-	public OnyxMethod(IPersistentMap m) {
+	public OnyxFn(IPersistentMap m) {
 		cntrArgs = m;
 	}
 

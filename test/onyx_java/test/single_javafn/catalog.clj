@@ -7,10 +7,10 @@
 
 (defn build-catalog []
   (let [cat (Catalog.) 
-        fqns "onyxplatform.test.PassMethod" 
+        fqns "onyxplatform.test.PassFn" 
         ctr-args {}]
     (-> cat
-        (CatalogUtils/addMethod "pass" 5 50 fqns ctr-args)
+        (CatalogUtils/addFn "pass" 5 50 fqns ctr-args)
         (AsyncCatalog/addInput  "in" 5 50)
         (AsyncCatalog/addOutput "out" 5 50))))
 
@@ -19,7 +19,7 @@
                 :onyx/type :function, 
                 :onyx/batch-size 5 
                 :onyx/batch-timeout 50, 
-                :java-instance/class "onyxplatform.test.PassMethod", 
+                :java-instance/class "onyxplatform.test.PassFn", 
                 :java-instance/ctr-args  {}, 
                 ; NOTE: java-instance/id is stripped before comparison as its generated
                 :onyx/params  [:java-instance/id :java-instance/class :java-instance/ctr-args] }

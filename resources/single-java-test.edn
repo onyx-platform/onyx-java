@@ -1,7 +1,7 @@
 {
     :peerEdn "dev-peer-config.edn"
     :envEdn "env-config.edn"
-    :methodName "onyxplatform.test.PassMethod"
+    :methodName "onyxplatform.test.PassFn"
     :virtualPeerCount 3
     :batchSize 5
     :batchTimeout 50
