@@ -67,9 +67,9 @@ import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.instance.OnyxFn;
 
-public class PassMethod extends OnyxFn {
+public class PassFn extends OnyxFn {
 
-        public PassMethod(IPersistentMap m) {
+        public PassFn(IPersistentMap m) {
                 super(m);
         }
 
@@ -87,7 +87,7 @@ Then, using the fully qualified name of your class and any constructor parameter
 	Catalog catalog = new Catalog();
 
 	String taskName = "pass";
-	String fullyQualifiedName = "onyxplatform.test.PassMethod";
+	String fullyQualifiedName = "onyxplatform.test.PassFn";
 	IPersitentMap ctrArgs = MapFns.emptyMap();
 
 	int batchSize = 5;
