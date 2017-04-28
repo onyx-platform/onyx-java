@@ -24,9 +24,9 @@ public class CatalogUtils implements OnyxNames {
 		instcatFn = Clojure.var(INSTANCE_CATALOG, CreateMethod);
 	}
 
-	public static Catalog addMethod(Catalog catalog, String taskName, 
-					int batchSize, int batchTimeout,
-					String fqClassName, IPersistentMap ctrArgs) 
+	public static Catalog addFn(Catalog catalog, String taskName, 
+				    int batchSize, int batchTimeout,
+				    String fqClassName, IPersistentMap ctrArgs) 
 	{
 		IPersistentMap methodCat = (IPersistentMap) instcatFn.invoke(taskName, 
 								             batchSize, batchTimeout, 

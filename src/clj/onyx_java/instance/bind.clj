@@ -15,7 +15,7 @@
   (let [k (keyword (str id))]
     (if (contains? @instances k)
       (get @instances k) 
-      (let [i (Loader/loadOnyxMethod fq-class-name ctr-args)]
+      (let [i (Loader/loadOnyxFn fq-class-name ctr-args)]
         (swap! instances assoc k i)
         i))))
 
