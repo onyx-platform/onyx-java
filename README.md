@@ -93,7 +93,7 @@ Then, using the fully qualified name of your class and any constructor parameter
 	int batchSize = 5;
 	int batchTimeout = 50;
 
-	CatalogUtils.addMethod(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
+	CatalogUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 ```
 
 <br>
