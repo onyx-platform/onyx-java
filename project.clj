@@ -12,8 +12,7 @@
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:unchecked"]
   :resource-paths ["resources" "test/resources"]
 ;  :plugins  [[lein-virgil "0.1.6"]]
-  :repl-options {;:init-ns onyx-java.main
-                :init-ns onyx-java.test.pure-java
+  :repl-options {:init-ns onyx-java.main
                  :caught clj-stacktrace.repl/pst+ }
   :profiles {:uberjar {:aot :all}
              :dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]]
