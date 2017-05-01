@@ -170,7 +170,7 @@ public class API implements OnyxNames {
      * @param  PeerConfiguration peerConfig    peerConfig object
      * @return                   true/false status of garbage collection effort
      */
-    public static boolean collectGarbage(PeerConfiguration peerConfig) {
+    public static boolean gc(PeerConfiguration peerConfig) {
         IFn collectGarbage = Clojure.var(API, CollectGarbage);
         Object coercedConfig = peerConfig.toMap();
         return (boolean) collectGarbage.invoke(coercedConfig);
