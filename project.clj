@@ -11,7 +11,6 @@
   :java-source-paths ["src/java" "test/java"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:unchecked"]
   :resource-paths ["resources" "test/resources"]
-;  :plugins  [[lein-virgil "0.1.6"]]
   :repl-options {:init-ns onyx-java.main
                  :caught clj-stacktrace.repl/pst+ }
   :profiles {:uberjar {:aot :all}

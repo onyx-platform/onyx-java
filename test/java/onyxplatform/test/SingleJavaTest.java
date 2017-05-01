@@ -1,38 +1,21 @@
 package onyxplatform.test;
 
+import clojure.java.api.Clojure;
+import clojure.lang.IFn;
 import clojure.lang.IPersistentMap;
 
+import org.onyxplatform.api.java.OnyxNames;
 import org.onyxplatform.api.java.Catalog;
-import org.onyxplatform.api.java.instance.CatalogUtils;
+import org.onyxplatform.api.java.Task;
 import org.onyxplatform.api.java.utils.MapFns;
 
-public class SingleJavaTest extends SingleFnTest {
+public class SingleJavaTest extends JobBuilder {
 
-    private String methodName;
-    private IPersistentMap setupMap;
+    	public SingleJavaTest(String onyxEnvConfig) {
+		super(onyxEnvConfig);
+    	}
 
-    public SingleJavaTest(String setupEdn){
-        setupMap = MapFns.fromResources(setupEdn).toMap();
-    }
-
-    protected void createCatalog(){
-        catalog = new Catalog();
-		catalog = CatalogUtils.addFn(catalog, "pass", batchSize,
-								batchTimeout, methodName, MapFns.emptyMap());
-        updateCatalog();
-		System.out.println("Java Catalog Created: ");
-		System.out.println(catalog.toString());
-    }
-
-    protected void setup(){
-        setMethodName((String) MapFns.get(setupMap, "methodName"));
-        defaultSetup(setupMap);
-    }
-
-    private void setMethodName(String methodNameString){
-        methodName = methodNameString;
-        System.out.println("Set method name: ");
-        System.out.println(methodName);
-    }
-
+	public void configureCatalog() {
+	
+	}
 }

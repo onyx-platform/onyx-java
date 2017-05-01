@@ -1,6 +1,0 @@
-{:onyx/name :pass
- :onyx/fn :onyxplatform.test.PassFn
- :onyx/type :function
- :onyx/batch-timeout 50
- :onyx/batch-size 5}
-

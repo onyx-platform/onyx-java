@@ -18,6 +18,8 @@ import org.onyxplatform.api.java.utils.MapFns;
 
 public class OnyxEnv {
 
+	protected IPersistentMap onyxEnvConfig;
+
 	protected TaskScheduler taskScheduler;
 	protected EnvConfiguration envConfig;
 	protected PeerConfiguration peerConfig;
@@ -29,6 +31,31 @@ public class OnyxEnv {
 	protected Object peerGroup;
 	protected Object virtualPeers;
 
+
+	public OnyxEnv(String onyxEnvConfig) {
+		OnyxMap config = MapFns.fromResources(onyxEnvConfig);
+		applySetupMap(config.toMap());
+	}
+
+	public OnyxEnv(String onyxEnvConfig, boolean start) {
+		this(onyxEnvConfig);
+		if (start) {
+			startEnv();
+		}
+	}
+
+	public OnyxEnv applySetupMap(IPersistentMap setupMap){
+
+		if( (boolean) MapFns.get(setupMap, "generateTenancyId") ) {
+			generateTenancyId();
+		}
+
+		setTaskScheduler(new TaskScheduler((String) MapFns.get(setupMap, "taskScheduler")));
+		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
+		loadEnvConfig((String) MapFns.get(setupMap, "envEdn"));
+		loadPeerConfig((String) MapFns.get(setupMap, "peerEdn"));
+		return this;
+	}
 
 	public OnyxEnv generateTenancyId(){
 		tenancyId = UUID.randomUUID();
@@ -55,8 +82,8 @@ public class OnyxEnv {
 		return virtualPeerCount;
 	}
 
-	public OnyxEnv setTaskScheduler(String tsString){
-		taskScheduler = new TaskScheduler(tsString);
+	public OnyxEnv setTaskScheduler(TaskScheduler ts) {
+		taskScheduler = ts;
 		System.out.println("Task Scheduler Created: " + taskScheduler);
 		return this;
 	}
@@ -95,19 +122,6 @@ public class OnyxEnv {
 
 	public PeerConfiguration peerConfig() {
 		return peerConfig;
-	}
-
-	public OnyxEnv applySetupMap(IPersistentMap setupMap){
-
-		if( (boolean) MapFns.get(setupMap, "generateTenancyId") ) {
-			generateTenancyId();
-		}
-
-		setTaskScheduler((String) MapFns.get(setupMap, "taskScheduler"));
-		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
-		loadEnvConfig((String) MapFns.get(setupMap, "envEdn"));
-		loadPeerConfig((String) MapFns.get(setupMap, "peerEdn"));
-		return this;
 	}
 
 	public OnyxEnv startEnv() {
@@ -195,4 +209,6 @@ public class OnyxEnv {
 			return false;
 		}
 	}
+
+	// TODO: toString?
 }
