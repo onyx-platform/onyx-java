@@ -1,4 +1,4 @@
-(defproject onyx-java "1.0.0-SNAPSHOT"
+(defproject onyx-java "0.1.0-SNAPSHOT"
   :license {:name "Eclipse Public License"
             :url "https://github.com/onyx-platform/onyx-java"}
   :dependencies [[org.clojure/clojure "1.8.0"]

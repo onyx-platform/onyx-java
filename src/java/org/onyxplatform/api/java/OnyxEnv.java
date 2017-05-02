@@ -6,13 +6,6 @@ import clojure.lang.IPersistentMap;
 import clojure.lang.PersistentHashMap;
 import clojure.lang.PersistentVector;
 
-import org.onyxplatform.api.java.API;
-import org.onyxplatform.api.java.TaskScheduler;
-import org.onyxplatform.api.java.EnvConfiguration;
-import org.onyxplatform.api.java.PeerConfiguration;
-import org.onyxplatform.api.java.OnyxMap;
-import org.onyxplatform.api.java.OnyxVector;
-
 import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
 import org.onyxplatform.api.java.utils.MapFns;
@@ -174,7 +167,7 @@ public class OnyxEnv {
 			System.out.println(inputs);
 			AsyncLifecycles.bindInputs(job.getLifecycles(), inputs);
 			System.out.println("Inputs bound.");
-			return API.submitJob(peerConfig, job);
+			return submitJob(job);
 		}
 		catch (Exception e) {
 			System.out.println("Killing job failed. Exception follows:");
