@@ -128,7 +128,7 @@ Catalog catalog = new Catalog();
 
 String taskName = "pass";
 String fullyQualifiedName = "onyxplatform.test.PassFn";
-IPersitentMap ctrArgs = MapFns.emptyMap();
+IPersistentMap ctrArgs = MapFns.emptyMap();
 
 int batchSize = 5;
 int batchTimeout = 50;
