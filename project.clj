@@ -1,4 +1,4 @@
-(defproject onyx-java "0.9.15-SNAPSHOT"
+(defproject onyx-java "1.0.0-SNAPSHOT"
   :license {:name "Eclipse Public License"
             :url "https://github.com/onyx-platform/onyx-java"}
   :dependencies [[org.clojure/clojure "1.8.0"]
@@ -6,7 +6,6 @@
                  [clj-stacktrace "0.2.8"]
                  [org.onyxplatform/onyx "0.9.15"]
                  [com.stuartsierra/component "0.2.3"]]
-  :main  ^:skip-aot onyx-java.main
   :source-paths ["src/clj" "test"]
   :java-source-paths ["src/java" "test/java"]
   :javac-options ["-target" "1.8" "-source" "1.8" "-Xlint:unchecked"]

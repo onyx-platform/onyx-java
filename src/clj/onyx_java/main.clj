@@ -1,14 +1,35 @@
 (ns onyx-java.main
   (:gen-class) 
-  (:require [clojure.java.io :as io]
-            [onyx-java.instance.bind :as b]
-            )
-  (:import [org.onyxplatform.api.java.utils 
-            AsyncCatalog AsyncLifecycles MapFns VectorFns]
-           [org.onyxplatform.api.java.instance Loader CatalogUtils]
-           [org.onyxplatform.api.java 
-            OnyxNames TaskScheduler OnyxMap Catalog 
-            Lifecycles EnvConfiguration PeerConfiguration]
-           [clojure.lang PersistentHashMap]))
-
+  (:require [onyx-java.instance.bind])
+  (:import [org.onyxplatform.api.java 
+            API 
+            Catalog 
+            EnvConfiguration 
+            FlowCondition
+            FlowConditions
+            Job
+            Lifecycle
+            Lifecycles
+            OnyxEnv
+            OnyxMap 
+            OnyxNames 
+            OnyxVector 
+            TaskScheduler 
+            PeerConfiguration   
+            Task
+            TaskScheduler
+            Trigger
+            Triggers
+            Window
+            Windows
+            Workflow]
+           [org.onyxplatform.api.java.instance 
+            Loader 
+            BindUtils 
+            OnyxFn]
+           [org.onyxplatform.api.java.utils 
+            AsyncCatalog 
+            AsyncLifecycles 
+            MapFns 
+            VectorFns]))
 
