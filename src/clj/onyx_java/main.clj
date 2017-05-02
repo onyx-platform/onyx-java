@@ -1,6 +1,7 @@
 (ns onyx-java.main
   (:gen-class) 
-  (:require [onyx-java.instance.bind])
+  (:require [onyx-java.instance.bind :as ib]
+            [onyx-java.instance.catalog :as ic])
   (:import [org.onyxplatform.api.java 
             API 
             Catalog 

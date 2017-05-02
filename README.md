@@ -96,6 +96,9 @@ OnyxVector inputs = new OnyxVector().addElement(m);
 
 IPersistentMap job-meta = onyxEnv.submitAsyncJob(job, inputs);
 PersistentVector output = AsyncLifecycles.collectOutputs(job, "out");
+
+// Release the cached instance
+BindUtils.releaseInstances(job);
 ```
 
 

@@ -16,3 +16,8 @@
                  :java-instance/class
                  :java-instance/ctr-args] })
 
+(defn instance? [task-entry]
+  (contains? task-entry :java-instance/id))
+
+(defn id [task-entry]
+  (:java-instance/id task-entry))
