@@ -38,11 +38,37 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 
 ### Basic
 
-The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does. There are some minor differences due to the use of onyx-java specific utilities and the natural flexibility of the Onyx Platform in general in how to construct and submit jobs.<br>
+The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does. The Onyx Platform's flexibility, and minor differences due to onyx-java's approach, this section covers a very simple approach to construction and use of the Java APIs.<br>
 <br>
+The following example highlights basic usage. For more detail of API usage see *link-to-in-test-readme*. <br>
 
-This simple example highlights basic usage. For a more structured approach see *link to in-test readme*. <br>
+```
+// Configure and start the Onyx Platform runtime.
+//
+OnyxEnv onyxEnv = new OnyxEnv("onyx-env.edn", true);
 
+// Constuct a simple single-function job that uses
+// a pure Java object for segment processing backed
+// by core.async.
+//
+Job job = new Job(onyxEnv.taskScheduler());
+
+job.addWorkflowEdge("in", "pass");
+job.addWorkflowEdge("pass", "out");
+
+Catalog c = job.getCatalog();
+AsyncCatalog.addInput(c, "in", batchSize, batchTimeout);
+AsyncCatalog.addOutput(c, "out", batchSize, batchTimeout);
+CatalogUtils.addFn(c, "pass", batchSize(), batchTimeout(),
+                   "onyxplatform.test.PassFn", MapFns.emptyMap());
+
+Lifecycles lc = job.getLifecycles();
+AsyncLifecycles.addInput(lc, "in");
+AsyncLifecycles.addOutput(lc, "out");
+
+IPersistentMap job-meta = onyxEnv.submitAsyncJob(job, inputs);
+PersistentVector output = AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
+```
 
 
 ### Java Objects
