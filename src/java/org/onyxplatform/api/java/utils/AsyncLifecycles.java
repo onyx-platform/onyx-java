@@ -8,6 +8,7 @@ import clojure.lang.IPersistentMap;
 import org.onyxplatform.api.java.OnyxNames;
 import org.onyxplatform.api.java.OnyxMap;
 import org.onyxplatform.api.java.OnyxVector;
+import org.onyxplatform.api.java.Job;
 import org.onyxplatform.api.java.Lifecycles;
 import org.onyxplatform.api.java.Lifecycle;
 
@@ -100,6 +101,12 @@ public class AsyncLifecycles implements OnyxNames {
 		PersistentVector outputs = VectorFns.keywordize(restOfTheNames);
 		Object k = kwFn.invoke(outputName1);
 		outputs = outputs.cons(k);
+		return (IPersistentMap) collectFn.invoke(cycles, outputs);
+	}
+
+	public static IPersistentMap collectOutputs(Job j, String... names) {
+		PersistentVector cycles = j.getLifecycles().cycles();
+		PersistentVector outputs = VectorFns.keywordize(names);
 		return (IPersistentMap) collectFn.invoke(cycles, outputs);
 	}
 }

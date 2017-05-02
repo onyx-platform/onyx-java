@@ -89,7 +89,7 @@ OnyxMap m = new OnyxMap().addKeywordParameter("test-input", "TEST");
 OnyxVector inputs = new OnyxVector().addElement(m);
 
 IPersistentMap job-meta = onyxEnv.submitAsyncJob(job, inputs);
-PersistentVector output = AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
+PersistentVector output = AsyncLifecycles.collectOutputs(job, "out");
 ```
 
 
