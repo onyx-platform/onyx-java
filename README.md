@@ -67,20 +67,26 @@ OnyxEnv onyxEnv = new OnyxEnv("onyx-env.edn", true);
 // a pure Java object for segment processing backed
 // by core.async.
 //
+
 Job job = new Job(onyxEnv.taskScheduler());
 
 job.addWorkflowEdge("in", "pass");
 job.addWorkflowEdge("pass", "out");
 
 Catalog c = job.getCatalog();
+int batchSize = 5;
+int batchTimeout = 50;
+
+// Add core.async plugin catalog entries
 AsyncCatalog.addInput(c, "in", batchSize, batchTimeout);
 AsyncCatalog.addOutput(c, "out", batchSize, batchTimeout);
 
 // Use the fully-qualified onyxplatform.test.PassFn class
 //
-BindUtils.addFn(c, "pass", batchSize(), batchTimeout(),
+BindUtils.addFn(c, "pass", batchSize, batchTimeout,
                    "onyxplatform.test.PassFn", MapFns.emptyMap());
 
+// Add accompanying core.async plugin lifecycles
 Lifecycles lc = job.getLifecycles();
 AsyncLifecycles.addInput(lc, "in");
 AsyncLifecycles.addOutput(lc, "out");
