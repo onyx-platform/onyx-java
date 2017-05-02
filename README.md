@@ -95,7 +95,7 @@ PersistentVector output = AsyncLifecycles.collectOutputs(job.getLifecycles(), "o
 
 ### Java Objects
 
-Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of OnyxFn:<br>
+Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of *OnyxFn*:<br>
 <br>
 
 ```
@@ -118,20 +118,22 @@ public class PassFn extends OnyxFn {
 ```
 
 <br>
-Then, using the fully qualified name of your class and any constructor parameters, you use BindUtils to generate a matching catalog entry:<br>
+Then, using the fully qualified name of your class and any constructor parameters, you use *BindUtils* to generate a matching catalog entry:<br>
 <br>
 
 ```
-	Catalog catalog = new Catalog();
+import org.onyxplatform.api.java.instance.BindUtils;
 
-	String taskName = "pass";
-	String fullyQualifiedName = "onyxplatform.test.PassFn";
-	IPersitentMap ctrArgs = MapFns.emptyMap();
+Catalog catalog = new Catalog();
 
-	int batchSize = 5;
-	int batchTimeout = 50;
+String taskName = "pass";
+String fullyQualifiedName = "onyxplatform.test.PassFn";
+IPersitentMap ctrArgs = MapFns.emptyMap();
 
-	BindUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
+int batchSize = 5;
+int batchTimeout = 50;
+
+BindUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 ```
 
 <br>
