@@ -9,18 +9,22 @@ import org.onyxplatform.api.java.Catalog;
 import org.onyxplatform.api.java.Lifecycles;
 
 import org.onyxplatform.api.java.utils.MapFns;
+import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
 
 public abstract class JobBuilder {
 
     protected OnyxEnv onyxEnv;
-    protected int batchSize;
-    protected int batchTimeout;
+    protected Integer batchSize;
+    protected Integer batchTimeout;
     protected Job job;
 
     public JobBuilder(String onyxEnvConfig, int batchSize, int batchTimeout) {
 
 	    onyxEnv = new OnyxEnv("onyx-env.edn", true);
+
+	    this.batchSize = new Integer(batchSize);
+	    this.batchTimeout = new Integer(batchTimeout);
 	    job = createBaseJob();
     }
 
@@ -33,7 +37,7 @@ public abstract class JobBuilder {
 	//
 	
 
-	job = new Job(taskScheduler());
+	job = new Job(onyxEnv.taskScheduler());
 
 	job.addWorkflowEdge("in", "pass");
 	job.addWorkflowEdge("pass", "out");
@@ -43,25 +47,46 @@ public abstract class JobBuilder {
 	AsyncCatalog.addOutput(c, "out", batchSize, batchTimeout);
 
 	Lifecycles lc = job.getLifecycles();
-	AsyncCatalog.addInput(lc, "in");
-	AsyncCatalog.addOutput(lc, "out");
+	AsyncLifecycles.addInput(lc, "in");
+	AsyncLifecycles.addOutput(lc, "out");
 
 	return job;
+    }
+
+    public OnyxEnv getOnyx() {
+	    return onyxEnv;
     }
 
     public Job getJob() {
 	return job;
     }
 
+    public Integer batchSize() {
+	return batchSize;
+    }
+
+    public Integer batchTimeout() {
+	return batchTimeout;
+    }
+
     public abstract void configureCatalog();
 
     public IPersistentMap runJob(PersistentVector inputs) {
-	    configureCatalog();
-	    return onxyEnv.submitAsyncJob(job, inputs);
+	    try {
+	    	configureCatalog();
+	    	return onyxEnv.submitAsyncJob(job, inputs);
+	    } catch (Exception e) {
+		shutdown();
+		return null;
+	    }
     }
 
     public IPersistentMap runJobCollectOutputs(PersistentVector inputs) {
 	    IPersistentMap jmeta = runJob(inputs);
-	    return AsyncLifecycles.collectOutputs(job.lifecycles(), "out"); 
+	    return AsyncLifecycles.collectOutputs(job.getLifecycles(), "out"); 
+    }
+
+    public void shutdown() {
+	    onyxEnv.stopEnv();
     }
 }

@@ -146,7 +146,7 @@ public class OnyxEnv {
 		return this;
 	}
 
-	public boolean gc(PersistentVector inputs) throws Exception{
+	public boolean gc() {
 		try {
 			return API.gc(peerConfig);
 		}
@@ -156,7 +156,7 @@ public class OnyxEnv {
 		}
 	}
 
-	private IPersistentMap submitJob(Job job){
+	public IPersistentMap submitJob(Job job){
 		try {
 			return API.submitJob(peerConfig, job);
 		}
@@ -167,7 +167,7 @@ public class OnyxEnv {
 		}
 	}
 
-	private IPersistentMap submitAsyncJob(Job job, PersistentVector inputs){
+	public IPersistentMap submitAsyncJob(Job job, PersistentVector inputs){
 		try {
 			System.out.println("Inputs: ");
 			System.out.println(inputs);
