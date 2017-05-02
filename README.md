@@ -148,6 +148,12 @@ BindUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 <br>
 This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.<br>
 <br>
+You are responsible for instance management as your instances are cached in memory. This is accomplished via the release static methods provided by *BindUtils*:<br>
+<br>
+
+```
+BindUtils.releaseInstances(job);
+```
 
 #### **NOTE**
 
