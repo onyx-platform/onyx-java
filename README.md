@@ -26,9 +26,9 @@ Support for the use of core.async plugins are provided via a pair of Java classe
 
 #### Java Objects
 
-Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxFn, along with a catalog generation tool CatalogUtils. <br>
+Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxFn, along with a catalog generation tool BindUtils. <br>
 <br>
-*OnyxFn* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *CatalogUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
+*OnyxFn* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *BindUtils* provides a means to create an instance-aware catalog entry that calls your bootrapped derived instance at runtime.<br>
 <br>
 
 ## Usage
@@ -38,11 +38,27 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 
 ### Basic
 
-The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does. The Onyx Platform's flexibility, and minor differences due to onyx-java's approach, this section covers a very simple approach to construction and use of the Java APIs.<br>
+The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does with minor differences due to onyx-java's approach.
 <br>
 The following example highlights basic usage. For more detail of API usage see *link-to-in-test-readme*. <br>
 
 ```
+import clojure.lang.IPersistentMap;
+import clojure.lang.PersistentVector;
+
+import org.onyxplatform.api.java.OnyxEnv;
+import org.onyxplatform.api.java.OnyxMap;
+import org.onyxplatform.api.java.OnyxVector;
+import org.onyxplatform.api.java.Job;
+import org.onyxplatform.api.java.Catalog;
+import org.onyxplatform.api.java.Lifecycles;
+
+import org.onyxplatform.api.java.utils.AsyncCatalog;
+import org.onyxplatform.api.java.utils.AsyncLifecycles;
+
+import org.onyxplatform.api.java.instance.BindUtils;
+
+
 // Configure and start the Onyx Platform runtime.
 //
 OnyxEnv onyxEnv = new OnyxEnv("onyx-env.edn", true);
@@ -59,7 +75,10 @@ job.addWorkflowEdge("pass", "out");
 Catalog c = job.getCatalog();
 AsyncCatalog.addInput(c, "in", batchSize, batchTimeout);
 AsyncCatalog.addOutput(c, "out", batchSize, batchTimeout);
-CatalogUtils.addFn(c, "pass", batchSize(), batchTimeout(),
+
+// Use the fully-qualified onyxplatform.test.PassFn class
+//
+BindUtils.addFn(c, "pass", batchSize(), batchTimeout(),
                    "onyxplatform.test.PassFn", MapFns.emptyMap());
 
 Lifecycles lc = job.getLifecycles();
@@ -99,7 +118,7 @@ public class PassFn extends OnyxFn {
 ```
 
 <br>
-Then, using the fully qualified name of your class and any constructor parameters, you use CatalogUtils to generate a matching catalog entry:<br>
+Then, using the fully qualified name of your class and any constructor parameters, you use BindUtils to generate a matching catalog entry:<br>
 <br>
 
 ```
@@ -112,7 +131,7 @@ Then, using the fully qualified name of your class and any constructor parameter
 	int batchSize = 5;
 	int batchTimeout = 50;
 
-	CatalogUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
+	BindUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 ```
 
 <br>

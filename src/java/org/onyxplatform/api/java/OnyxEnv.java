@@ -11,6 +11,7 @@ import org.onyxplatform.api.java.TaskScheduler;
 import org.onyxplatform.api.java.EnvConfiguration;
 import org.onyxplatform.api.java.PeerConfiguration;
 import org.onyxplatform.api.java.OnyxMap;
+import org.onyxplatform.api.java.OnyxVector;
 
 import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
@@ -156,7 +157,7 @@ public class OnyxEnv {
 		}
 	}
 
-	public IPersistentMap submitJob(Job job){
+	public IPersistentMap submitJob(Job job) {
 		try {
 			return API.submitJob(peerConfig, job);
 		}
@@ -167,7 +168,7 @@ public class OnyxEnv {
 		}
 	}
 
-	public IPersistentMap submitAsyncJob(Job job, PersistentVector inputs){
+	public IPersistentMap submitAsyncJob(Job job, PersistentVector inputs) {
 		try {
 			System.out.println("Inputs: ");
 			System.out.println(inputs);
@@ -182,7 +183,12 @@ public class OnyxEnv {
 		}
 	}
 
-	public boolean killJob(IPersistentMap jobMetadata) throws Exception{
+	public IPersistentMap submitAsyncJob(Job job, OnyxVector inputs) {
+		PersistentVector v = inputs.toVector();
+		return submitAsyncJob(job, v);
+	}
+
+	public boolean killJob(IPersistentMap jobMetadata) throws Exception {
 		try {
 			String jobId = (MapFns.get(jobMetadata, "job-id")).toString();
 			System.out.println("Killing job...");

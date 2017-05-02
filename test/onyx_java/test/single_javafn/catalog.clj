@@ -1,7 +1,7 @@
 (ns onyx-java.test.single-javafn.catalog
   (:import [org.onyxplatform.api.java Catalog Task]
           [org.onyxplatform.api.java.utils AsyncCatalog MapFns]
-          [org.onyxplatform.api.java.instance CatalogUtils])
+          [org.onyxplatform.api.java.instance BindUtils])
   (:require [clojure.test :refer [deftest is]]))
 
 
@@ -10,7 +10,7 @@
         fqns "onyxplatform.test.PassFn" 
         ctr-args {}]
     (-> cat
-        (CatalogUtils/addFn "pass" 5 50 fqns ctr-args)
+        (BindUtils/addFn "pass" 5 50 fqns ctr-args)
         (AsyncCatalog/addInput  "in" 5 50)
         (AsyncCatalog/addOutput "out" 5 50))))
 

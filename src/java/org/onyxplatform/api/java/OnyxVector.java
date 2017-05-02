@@ -44,6 +44,13 @@ public class OnyxVector
 	    return this;
 	}
 
+	public OnyxVector addElements(OnyxMap... oms) {
+		for (OnyxMap m : oms) {
+			addElement(m);
+		}
+		return this;
+	}
+
 	public PersistentVector toVector() {
 		PersistentVector out = PersistentVector.EMPTY;
 		for (Object o : vContents) {

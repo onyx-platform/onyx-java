@@ -11,7 +11,7 @@ import org.onyxplatform.api.java.Task;
 
 import org.onyxplatform.api.java.utils.MapFns;
 
-public class CatalogUtils implements OnyxNames {
+public class BindUtils implements OnyxNames {
 
 	private final static IFn instcatFn;
 

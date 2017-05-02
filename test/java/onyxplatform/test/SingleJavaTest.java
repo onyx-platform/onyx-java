@@ -8,7 +8,7 @@ import org.onyxplatform.api.java.Catalog;
 import org.onyxplatform.api.java.Task;
 import org.onyxplatform.api.java.utils.MapFns;
 
-import org.onyxplatform.api.java.instance.CatalogUtils;
+import org.onyxplatform.api.java.instance.BindUtils;
 
 public class SingleJavaTest extends JobBuilder {
 
@@ -18,8 +18,8 @@ public class SingleJavaTest extends JobBuilder {
 
 	public void configureCatalog() {
 		Catalog c = job.getCatalog();
-		CatalogUtils.addFn(c, "pass", 
-				   batchSize(), batchTimeout(), 
-				   "onyxplatform.test.PassFn", MapFns.emptyMap());
+		BindUtils.addFn(c, "pass", 
+				batchSize(), batchTimeout(), 
+				"onyxplatform.test.PassFn", MapFns.emptyMap());
 	}
 }
