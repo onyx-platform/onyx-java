@@ -10,6 +10,10 @@ These classes provide methods to add entries to your workflow description ensuri
 <br>
 ### Utilities
 
+#### Onyx Environment 
+
+Bootstrapping and management of the Onyx Platform's involves several pieces which require carefully ordered calls during spin up and shutdown. Additionally, all core API calls require that this metadata be readily available. The management class *OnyxEnv* is provided to simplify management of the environment and proxying methods to encapsulate this complexity.
+
 #### Maps
 
 A utility class, MapFns, offers Java-esk versions of (some) Clojure map munipulation functions, like get-in, making it easier to directly manipulate Clojure map's. It also provides support for loading edn files of simple maps from resources making it easier to manage entries like environment and peer configuration. <br>
