@@ -66,6 +66,9 @@ Lifecycles lc = job.getLifecycles();
 AsyncLifecycles.addInput(lc, "in");
 AsyncLifecycles.addOutput(lc, "out");
 
+OnyxMap m = new OnyxMap().addKeywordParameter("test-input", "TEST");
+OnyxVector inputs = new OnyxVector().addElement(m);
+
 IPersistentMap job-meta = onyxEnv.submitAsyncJob(job, inputs);
 PersistentVector output = AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
 ```
