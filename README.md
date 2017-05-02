@@ -38,7 +38,10 @@ This section is non-exhaustive but lays out the general approach giving a feel f
 
 ### Basic
 
-The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow. 
+The use of onyx-java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does. There are some minor differences due to the use of onyx-java specific utilities and the natural flexibility of the Onyx Platform in general in how to construct and submit jobs.<br>
+<br>
+
+This simple example highlights basic usage. For a more structured approach see *link to in-test readme*. <br>
 
 
 
