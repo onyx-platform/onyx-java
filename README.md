@@ -87,9 +87,10 @@ Then, using the fully qualified name of your class and any constructor parameter
 This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.<br>
 <br>
 
-#### NOTE 
+#### __NOTE__
 
-There are parallel clojure namespaces and functions that provide affordances for clojure-based workflows.
+There are parallel clojure namespaces and functions that provide affordances for clojure-based workflows. <br>
+<br>
 
 
 ## License
@@ -97,9 +98,9 @@ There are parallel clojure namespaces and functions that provide affordances for
 Copyright © 2016 Distributed Masonry
 
 Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+your option) any later version.<br>
+<br>
 
-
-#### NOTE 
+#### __NOTE__
 
 This repo is under active development and not ready for actual usage yet.
