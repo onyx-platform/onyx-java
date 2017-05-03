@@ -7,6 +7,14 @@ import java.lang.reflect.Constructor;
 
 public class Loader {
 
+	// TODO: Create a custom class loader so that 
+	//       the class will be garbage collected 
+	//       when its no longer referenced. 
+	//
+	//       Otherwise the class will remain in 
+	//       memory and any native library 
+	//       loaded into it will not be unloaded.
+	//
 	public static IFn loadOnyxFn(String fqClassName, IPersistentMap args) 
 		throws ClassNotFoundException, 
 		NoSuchMethodException, 

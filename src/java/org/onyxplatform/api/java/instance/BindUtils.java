@@ -15,9 +15,9 @@ import org.onyxplatform.api.java.utils.MapFns;
 
 public class BindUtils implements OnyxNames {
 
-	private final static IFn instcatFn;
-	private final static IFn releaseFn;
-	private final static IFn releaseAllFn;
+	protected static IFn instcatFn;
+	protected static IFn releaseFn;
+	protected static IFn releaseAllFn;
 
 	/**
  	* Loads the clojure namespaces.
@@ -45,11 +45,13 @@ public class BindUtils implements OnyxNames {
 	public static void releaseInstance(Task task) {
 		IPersistentMap e = task.toMap();
 		releaseFn.invoke(e);
+		System.gc();
 	}
 
 	public static void releaseInstances(Job j) {
 		PersistentVector at = j.getCatalog().tasks();
 		releaseAllFn.invoke(at);
+		System.gc();
 	}
 }
 

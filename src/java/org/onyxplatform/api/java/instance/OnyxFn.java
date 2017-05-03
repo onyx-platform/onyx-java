@@ -14,6 +14,19 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 
 	protected IPersistentMap cntrArgs;
 
+	// TODO: Add a ClassLoader member that is added by the Loader
+	//       with affordance for null-ing it out when this object
+	//       is removed. This ensures that when all instances 
+	//       of the class are no longer referenced the class 
+	//       itself will also be garbage collected. 
+	//
+	//       This matters for native code-backed class loading.
+	//       Java has no affordances for unloading libraries
+	//       pulled in by classes because the library is class-level bound
+	//       and the class itself is never gc'ed if loaded by 
+	//       the default class loader which is always reachable.
+	//
+
 	/**
 	 * This MUST be overridden by the concrete subclass. 
 	 * It is called during the first method invocation.
