@@ -1,19 +1,21 @@
 # Onyx-Java
 
 Onyx-Java is designed to allow users who write Java code to use the Onyx Platform.
-The package provides the following features:
+<br>The package provides the following features:
 <ul>
 <li>A simple Java interface for the Onyx Platform core API</li>
 <li>Utilities for manipulating Clojure maps directly in Java</li>
 <li>Tools to simplify use of core.async plugins</li>
-<li>Affordances for inclusion of pure Java classes in a workflow.</li>
+<li>Affordances for inclusion of pure Java classes in a workflow</li>
 </ul><br>
-<br>
 
 ## Overview
-Onyx-Java mirrors the Onyx Platform core API by providing a Java equivalent for each component of an Onyx workflow. This means the parts of Onyx such as Catalogs, Lifecycles, Jobs, Tasks, and the rest, each have a new equivalent Java class.<br>
+Onyx-Java mirrors the Onyx Platform core API by providing a Java equivalent for each component of an Onyx workflow. This means the parts of Onyx such as Catalogs, Lifecycles, Jobs, Tasks, and so on, each have a new equivalent Java class.
 <br>
-These classes provide methods to add entries to your workflow description ensuring that they are converted into Clojure-native types when needed. Note that this approach doesn't validate semantic correctness of your entries, which are enforced at runtime.<br>
+These classes provide methods to add entries to your workflow description ensuring that they are converted into Clojure-native types when needed.
+<br>
+<strong>Please note: This approach doesn't validate semantic correctness of your entries. This means that users of Onyx-Java must refer to the Onyx Platform documentation to ensure they are passing the types, keywords, and names that are expected by the Onyx Platform as this enforcement is left to the Platform itself to take care of at runtime.</strong>
+<br>
 <br>
 ### Utilities
 
