@@ -42,28 +42,35 @@ MapFns also provides support for loading edn files that contain map specificatio
 <br><br>
 
 #### Core Async
+
 The Onyx Platform provides excellent support for asynchronous task execution via a core-async plugin. Core-async jobs in Onyx are common and stereotyped, and setting them up includes lots of reused boilerplate code.
 <br>
-Onyx-Java provides the ability to setup these common core-async jobs up automatically via the utility classes AsyncCatalog and AsyncLifecycles. These two classes encapsulate generating the correct catalog and lifecycle entries for setting up, using, and collecting the resulting output from async channels.
+Onyx-Java provides the ability to set up these common core-async jobs up automatically via the utility classes AsyncCatalog and AsyncLifecycles. These two classes encapsulate generating the correct catalog and lifecycle entries for setting up, using, and collecting the resulting output from async channels.
 <br><br>
 
 #### Java Objects
 
-Support for use of pure Java objects in a workflow is provided via an abstract base class, OnyxFn, along with a catalog generation tool BindUtils. <br>
+Onyx-Java allows pure Java objects to be added to workflows and jobs as tasks by providing a simple abstract base class for user classes to extend and a utility class to add objects created by those user classes to a catalog.
+<br><br>
+The abstract base class *OnyxFn* takes a Clojure map as the single argument and provides an abstract method that consumes the map. This abstract method is overridden by the user class.
 <br>
-*OnyxFn* is an abstract base class with a constructor that takes a Clojure map, and an abstract method that consumes the Clojure map segment. *BindUtils* provides a means to create an instance-aware catalog entry that calls your bootstrapped derived instance at runtime.<br>
-<br>
+Object based on the user class can then be added to the job catalog using the *BindUtils*, which will create a new instance of the class at runtime. BindUtils also provides methods for releasing the instances once they are no longer needed.
+<br><br>
 
-## Usage
+## Package Use
 
-This section is non-exhaustive but lays out the general approach giving a feel for use of the API in practice. Full examples are provided in test.<br>
+Onyx-Java is designed to be used in a way that mirrors as closely as possible the traditional use of Onyx Platform while being implemented in a way that reflects Java convention. This makes it easy for Java users to quickly feel comfortable using the package without obfuscating the power of the Onyx Platform itself.
 <br>
+Just as in Onyx Platform, users have the responsibility to set up jobs and job components, initialize environment and peer configurations, and control job execution;
+however, unlike Onyx Platform, Onyx-Java users can do this using an API written entirely in Java that can be implemented in a conventional Java way.
+<br><br>
 
 ### Basic
 
-The use of Onyx-Java's core API, essentially, follows the same basic steps that construction of a pure Clojure Onyx Platform workflow does with minor differences due to onyx-java's approach.  <br>
+This section outlines out a general approach for using Onyx-Java by providing a working bare-bones implementation.
 <br>
-The following example highlights basic usage. For more detail of API usage see *link-to-in-test-readme*. <br>
+More detailed examples can be found in the test documentation [here](docs/readme/expanded_use_example.md).
+<br><br>
 
 ```
 import clojure.lang.IPersistentMap;
