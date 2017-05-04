@@ -16,11 +16,13 @@ Onyx-Java mirrors the Onyx Platform core API by providing a Java equivalent for 
 <br><br>
 These classes provide methods for adding entries to components, such as adding tasks to catalogs, edges to workflows, catalogs to jobs, etc.
 <br><br>
-<strong>Please note:
+<strong>
+Please note:
 <br>
-Onyx-Java does not validate semantic correctness of entries - parameter and type checking enforcement is left to Onyx Platform itself, which takes place at runtime.</strong>
+Onyx-Java does not validate semantic correctness of entries - parameter and type checking enforcement is left to Onyx Platform itself, which takes place at runtime.
 <br>
 This means that it is up to the user to refer to the Onyx Platform information model documentation to ensure that they are passing the expected parameters of types expected by the Onyx Platform.
+</strong>
 <br><br>
 ### Utilities
 
