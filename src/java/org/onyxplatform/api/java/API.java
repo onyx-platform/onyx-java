@@ -11,11 +11,11 @@ import clojure.lang.PersistentArrayMap;
  */
 public class API implements OnyxNames {
 
-    // Explicitly load and bind to a var at runtime 
-    // those clojure functions that are referenced 
-    // in generated workflows.  
+    // Explicitly load and bind to a var at runtime
+    // those clojure functions that are referenced
+    // in generated workflows.
     // (currently onyx-java.instance.bind)
-    // This solves class-not-found exceptions when they 
+    // This solves class-not-found exceptions when they
     // are obliquely referenced in a Job.
     //
     private final static IFn bind;
@@ -171,7 +171,7 @@ public class API implements OnyxNames {
      * @return                   true/false status of garbage collection effort
      */
     public static boolean gc(PeerConfiguration peerConfig) {
-        IFn collectGarbage = Clojure.var(API, CollectGarbage);
+        IFn collectGarbage = Clojure.var(API, GC);
         Object coercedConfig = peerConfig.toMap();
         return (boolean) collectGarbage.invoke(coercedConfig);
     }

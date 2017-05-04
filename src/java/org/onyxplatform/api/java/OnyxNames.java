@@ -76,7 +76,7 @@ public interface OnyxNames {
 	public static final String SubmitJob 		= "submit-job";
 	public static final String KillJob 		= "kill-job";
 	public static final String AwaitJobCompletion 	= "await-job-completion";
-	public static final String CollectGarbage 	= "gc";
+	public static final String GC 	= "gc";
 
 	/**
 	 * Generic TypeCasting
