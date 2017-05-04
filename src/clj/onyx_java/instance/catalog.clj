@@ -1,4 +1,4 @@
-(ns onyx-java.instance.catalog 
+(ns onyx-java.instance.catalog
   (:gen-class))
 
 (defn create-method [task-name batch-size batch-timeout fqclassname ctr-args]
