@@ -45,7 +45,7 @@ MapFns also provides support for loading edn files that contain map specificatio
 
 The Onyx Platform provides excellent support for asynchronous task execution via a core-async plugin. Core-async jobs in Onyx are common and stereotyped, and setting them up includes lots of reused boilerplate code.
 <br>
-Onyx-Java provides the ability to set up these common core-async jobs up automatically via the utility classes AsyncCatalog and AsyncLifecycles. These two classes encapsulate generating the correct catalog and lifecycle entries for setting up, using, and collecting the resulting output from async channels.
+Onyx-Java provides the ability to set up these common core-async jobs up automatically via the utility classes *AsyncCatalog* and *AsyncLifecycles*. These two classes encapsulate generating the correct catalog and lifecycle entries for setting up, using, and collecting the resulting output from async channels.
 <br><br>
 
 #### Java Objects
