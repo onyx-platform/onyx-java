@@ -138,8 +138,8 @@ BindUtils.releaseInstances(job);
 
 ### Java Objects
 
-Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of *OnyxFn*:<br>
-<br>
+Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of *OnyxFn*:
+<br><br>
 
 ```
 package onyxplatform.test;
@@ -161,8 +161,8 @@ public class PassFn extends OnyxFn {
 ```
 
 <br>
-Then, using the fully qualified name of your class and any constructor parameters, you use *BindUtils* to generate a matching catalog entry:<br>
-<br>
+Then, using the fully qualified name of your class and any constructor parameters, you use *BindUtils* to generate a matching catalog entry:
+<br><br>
 
 ```
 import org.onyxplatform.api.java.instance.BindUtils;
@@ -180,10 +180,10 @@ BindUtils.addFn(catalog, batchSize, batchTimeout, fullyQualifiedName, ctrArgs);
 ```
 
 <br>
-This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.<br>
-<br>
-You are responsible for instance management as your instances are cached in memory. This is accomplished via the release static methods provided by *BindUtils*:<br>
-<br>
+This will add the appropriate entry to bind task processing to a specific instance of your class that is loaded and called at job runtime.
+<br><br>
+You are responsible for instance management as your instances are cached in memory. This is accomplished via the release static methods provided by *BindUtils*:
+<br><br>
 
 ```
 BindUtils.releaseInstances(job);
