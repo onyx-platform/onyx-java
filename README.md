@@ -18,9 +18,9 @@ These classes provide methods for adding entries to components, such as adding t
 <br><br>
 <strong>Please note:
 <br>
-This approach does not validate semantic correctness of entries.
+Onyx-Java does not validate semantic correctness of entries - parameter and type checking enforcement is left to Onyx Platform itself, which takes place at runtime.</strong>
 <br>
-This means that it is up to the user to refer to the Onyx Platform documentation to ensure that  Onyx-Java must refer to the Onyx Platform documentation to ensure they are passing parameters that are expected by the Onyx Platform as this enforcement is left to the Platform itself to take care of at runtime.</strong>
+This means that it is up to the user to refer to the Onyx Platform information model documentation to ensure that they are passing the expected parameters of types expected by the Onyx Platform.
 <br><br>
 ### Utilities
 
