@@ -36,7 +36,7 @@ Onyx-Java provides a utility class called *OnyxEnv* to simplify management of th
 
 The native language of the Onyx Platform is Clojure, and the ubiquitous data structure that it uses for all communication is an implementation of the IPersistentMap. While Java can manipulate these maps directly, it is often easier or preferable to use tools that mirror the natural way Onyx is used to using for argument manipulation.
 <br>
-Onyx-Java provides this ability in the utility class MapFns, which offers pure Java versions of useful Clojure map manipulation functions, such as get, getIn, assoc, dissoc, and others, making it easier to directly manipulate the arguments used by Onyx.
+Onyx-Java provides this ability in the utility class *MapFns*, which offers pure Java versions of useful Clojure map manipulation functions, such as get, getIn, assoc, dissoc, and others, making it easier to directly manipulate the arguments used by Onyx.
 <br>
 MapFns also provides support for loading edn files that contain map specifications, allowing the environment, peer configuration, and task specifications to be configured rather than coded. This promotes highly patterned design, allows high reuse, and guarantees efficiency.
 <br><br>
@@ -187,8 +187,10 @@ BindUtils.releaseInstances(job);
 
 #### **NOTE**
 
-There are parallel clojure namespaces and functions that provide affordances for clojure-based workflows. <br>
+There are parallel clojure namespaces and functions that provide affordances for clojure-based workflows;
 <br>
+i.e., Onyx-Java does not prohibit users from writing the system in Java while running tasks that are written in Clojure.
+<br><br>
 
 
 ## License
