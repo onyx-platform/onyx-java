@@ -31,7 +31,6 @@ public class OnyxMap implements OnyxNames
 
 	/**
 	 * Constructs a new OnyxMap object with an empty contents map.
-	 * @return new OnyxMap object
 	 */
 	public OnyxMap() {
 		entry = PersistentHashMap.EMPTY;
@@ -41,14 +40,16 @@ public class OnyxMap implements OnyxNames
 	/**
 	 * Constructs a new OnyxMap object with an initial contents map set
 	 * to the passed PersistentHashMap.
-	 * @param  PersistentHashMap ent           existing PersistentHashMap
-	 *                           		to use as this object's content map
-	 * @return                   new OnyxMap object with initial content map
+	 * @param  m   existing PersistentHashMap to use as this object's content map
 	 */
 	public OnyxMap(IPersistentMap m) {
 		entry = m;
 	}
 
+	/**
+	 * Constructs a new OnyxMap based on the passed OnyxMap object.
+	 * @param  ent      the OnyxMap to use for construction
+	 */
 	public OnyxMap(OnyxMap ent) {
 		entry = ent.entry;
 	}
@@ -57,11 +58,12 @@ public class OnyxMap implements OnyxNames
 	 * Adds a new key-value entry to the existing content PersistentHashMap.
 	 * This method updates the existing object content vector to be equal
 	 * to the old plus the new entry.
-	 * @param String param key to add to the existing content PersistentHashMap
-	 * @param Object arg   value to associate with the added key
+	 * @param keyname key to add to the existing content PersistentHashMap
+	 * @param keywordValue   Keyword value to associate with the added key
+	 * @return returns the updated object so that methods can be chained
 	 */
 	public OnyxMap addKeywordParameter(String keyname, String keywordValue) {
-		Object k = kwFn.invoke(keyname); 
+		Object k = kwFn.invoke(keyname);
 	 	Object v = kwFn.invoke(keywordValue);
 		entry = (IPersistentMap) entry.assoc(k, v);
 		return this;
@@ -71,11 +73,12 @@ public class OnyxMap implements OnyxNames
 	 * Adds a new key-value entry to the existing content PersistentHashMap.
 	 * This method updates the existing object content vector to be equal
 	 * to the old plus the new entry.
-	 * @param String param key to add to the existing content PersistentHashMap
-	 * @param Object arg   value to associate with the added key
+	 * @param keyname key to add to the existing content PersistentHashMap
+	 * @param arg   Object type value to associate with the added key
+	 * @return returns the updated object so that methods can be chained
 	 */
 	public OnyxMap addObjectParameter(String keyname, Object arg) {
-		Object k = kwFn.invoke(keyname); 
+		Object k = kwFn.invoke(keyname);
 		entry = (IPersistentMap) entry.assoc(k, arg);
 		return this;
 	}
@@ -83,7 +86,7 @@ public class OnyxMap implements OnyxNames
 	/**
 	 * Returns a Java Map representation of the existing
 	 * PersistentHashMap content 'entry'.
-	 * @return Java Map representation of existing PersistentHashMap 'entry'
+	 * @return Java Map representation of existing PersistentHashMap entry
 	 */
 	@SuppressWarnings("unchecked")
 	public IPersistentMap toMap() {

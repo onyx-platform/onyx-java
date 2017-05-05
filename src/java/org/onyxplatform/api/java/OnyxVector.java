@@ -15,7 +15,6 @@ public class OnyxVector
 
 	/**
 	 * Constructs a new OnyxVector object with an empty contents vector.
-	 * @return new OnyxVector object with an empty content vector
 	 */
 	public OnyxVector() {
 		vContents = PersistentVector.EMPTY;
@@ -24,8 +23,7 @@ public class OnyxVector
 	/**
 	 * Constructs a new OnyxVector object with an initial contents vector set
 	 * to an existing passed vector
-	 * @param  PersistentVector pv    existing vector to use as content vector
-	 * @return                  new OnyxVector object
+	 * @param  pv    existing PersistentVector to use as content vector
 	 */
 	protected OnyxVector(PersistentVector pv) {
 		vContents = pv;
@@ -33,8 +31,7 @@ public class OnyxVector
 
 	/**
 	 * Constructs a new OnyxVector from an existing OnyxVector object.
-	 * @param  OnyxVector ov            existing OnyxVector object
-	 * @return            new OnyxVector object mirroring argument OnyxVector
+	 * @param  ov         existing OnyxVector object
 	 */
 	public OnyxVector(OnyxVector ov) {
 		vContents = ov.vContents;
@@ -44,7 +41,8 @@ public class OnyxVector
 	 * Adds an existing object to the content vector of the object, appending
 	 * it to the end of the content vector.
 	 * Returns the OnyxVector object so that methods can be chained.
-	 * @return the updated OnyxVector object.
+	 * @param o an OnyxMap object to be added to the vector
+	 * @return the updated OnyxVector object
 	 */
 	public OnyxVector addElement(OnyxMap o) {
 	    vContents = vContents.cons(o);
@@ -54,8 +52,8 @@ public class OnyxVector
 	/**
 	 * Adds an arbitrary number of OnyxMap object elements to the OnyxVector.
 	 * Returns the updated OnyxVector object so that methods can be chained.
-	 * @param  OnyxMap... oms           OnyxMap objects to be added to the vector.
-	 * @return            [description]
+	 * @param  oms        OnyxMap objects to be added to the vector
+	 * @return            the updated OnyxVector object
 	 */
 	public OnyxVector addElements(OnyxMap... oms) {
 		for (OnyxMap m : oms) {
@@ -64,6 +62,11 @@ public class OnyxVector
 		return this;
 	}
 
+	/**
+	 * Converts the OnyxVector object contents to a PersistentVector and returns it.
+	 * Converts every contained OnyxMap object to an IPersistentMap object.
+	 * @return A PersistentVector containing IPersistentMaps of content Objects
+	 */
 	public PersistentVector toVector() {
 		PersistentVector out = PersistentVector.EMPTY;
 		for (Object o : vContents) {

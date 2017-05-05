@@ -12,28 +12,26 @@ import java.util.Map;
 public class FlowCondition extends OnyxMap
 {
 	/**
-	 * Creates a new FlowCondition object using OnyxMap superconstructor.
-	 * @return new FlowCondition object
+	 * Creates a new FlowCondition object.
+	 * Uses the OnyxMap superconstructor.
 	 */
 	public FlowCondition() {
 		super();
 	}
 
 	/**
-	 * Creates a new FlowCondition object using an existing FlowCondition.
-	 * Uses OnyxMap superconstructor.
-	 * @param  PersistentHashMap ent           existing map to use for new FlowCondition
-	 * @return                  new FlowCondition object
+	 * Constructs a new FlowCondition object based on an existing FlowCondition.
+	 * Uses the OnyxMap superconstructor.
+	 * @param  flowCondition  existing FlowCondition to use for new FlowCondition
 	 */
 	public FlowCondition(FlowCondition flowCondition) {
     		entry = flowCondition.entry;
 	}
 
 	/**
- 	* Creates a new FlowCondition object using an existing FlowCondition.
+ 	* Constructs a new FlowCondition object using an existing FlowCondition.
  	* Uses OnyxMap superconstructor.
- 	* @param  PersistentHashMap ent           existing map to use for new FlowCondition
- 	* @return                  new FlowCondition object
+ 	* @param  m           OnyxMap to use for new FlowCondition
  	*/
 	public FlowCondition(OnyxMap m) {
 		entry = m.entry;

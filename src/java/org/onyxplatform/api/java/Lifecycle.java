@@ -15,28 +15,25 @@ package org.onyxplatform.api.java;
 public class Lifecycle extends OnyxMap
 {
 	/**
-	 * Creates a new Lifecycle object using OnyxMap superconstructor.
-	 * @return new Lifecycle object.
+	 * Constructs a new Lifecycle object using OnyxMap superconstructor.
 	 */
 	public Lifecycle() {
 		super();
 	}
 
 	/**
-	 * Creates a new Lifecycle object using an existing content map.
+	 * Constructs a new Lifecycle object using an existing Lifecycle object.
 	 * Uses OnyxMap superconstructor.
-	 * @param  Lifecycle c             existing map to use for new Lifecycle
-	 * @return           new Lifecycle object
+	 * @param  c             existing Lifecycle object to use for new Lifecycle
 	 */
 	public Lifecycle(Lifecycle c) {
     		super(c.entry);
 	}
 
 	/**
-	 * Creates a new Lifecycle object using an existing content map.
+	 * Constructs a new Lifecycle object using an existing content map.
 	 * Uses OnyxMap superconstructor.
-	 * @param  Lifecycle c             existing map to use for new Lifecycle
-	 * @return           new Lifecycle object
+	 * @param   e             existing OnyxMap to use for new Lifecycle
 	 */
 	public Lifecycle(OnyxMap e) {
 		super(e);

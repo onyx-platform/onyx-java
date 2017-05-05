@@ -12,7 +12,6 @@ public class Windows extends OnyxVector
 {
 	/**
 	 * Constructs a new Windows object using OnyxVector superconstructor.
-	 * @return a new Windows object
 	 */
     public Windows() {
     }
@@ -21,8 +20,7 @@ public class Windows extends OnyxVector
 	 * Constructs a new Windows object using an existing Windows
 	 * object (uses contents from existing Windows).
 	 * Uses OnyxVector superconstructor.
-	 * @param  Windows wes           existing windows object to use for content
-	 * @return         a new Windows object
+	 * @param  wes   existing windows object to use for content
 	 */
     public Windows(Windows wes) {
 	    super(wes.vContents);
@@ -32,7 +30,7 @@ public class Windows extends OnyxVector
 	/**
 	 * Adds an existing Window object to the Windows content vector.
 	 * Returns the windows object so that methods can be chained.
-	 * @param Window w Window to add
+	 * @param w Window to add
 	 * @return the updated Windows object
 	 */
     public Windows addWindow(Window w) {

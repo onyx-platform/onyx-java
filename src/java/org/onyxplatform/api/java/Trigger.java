@@ -13,7 +13,6 @@ public class Trigger extends OnyxMap
 {
 	/**
 	 * Constructs a new Trigger object using OnyxMap superconstructor.
-	 * @return new Trigger object
 	 */
 	public Trigger() {
 		super();
@@ -22,8 +21,7 @@ public class Trigger extends OnyxMap
 	/**
 	 * Constructs a new Trigger object using an existing Trigger objects content.
 	 * Uses OnyxMap superconstructor.
-	 * @param  Trigger e             existing trigger to use for new Trigger
-	 * @return         new Trigger object
+	 * @param  e       existing Trigger object to use for new Trigger
 	 */
 	public Trigger(Trigger e) {
     	super(e.entry);
@@ -32,8 +30,7 @@ public class Trigger extends OnyxMap
 	/**
 	 * Constructs a new Trigger object using a map representing the parameters
 	 * used to create the trigger. Uses the OnyxMap superconstructor.
-	 * @param  OnyxMap m             the map used to define the new trigger object
-	 * @return         new Trigger object
+	 * @param  m       OnyxMap used to define the new trigger object
 	 */
 	public Trigger(OnyxMap m) {
 		super(m);

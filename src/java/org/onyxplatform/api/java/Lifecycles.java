@@ -11,18 +11,16 @@ import clojure.lang.IPersistentMap;
 public class Lifecycles extends OnyxVector
 {
     /**
-     * Creates a new Lifecycles object using OnyxVector superconstructor.
-     * @return new Lifecycles object
+     * Constructs a new Lifecycles object using OnyxVector superconstructor.
      */
     public Lifecycles() {
+        super();
     }
 
     /**
-     * Creates a new Lifecycles object using an existing Lifecycles object.
+     * Constructs a new Lifecycles object using an existing Lifecycles object.
      * Uses OnyxVector superconstructor.
-     * @param  Lifecycles ls            existing Lifecycles object containing
-     *                              contents to use for new Lifecycles object
-     * @return            new Lifecycles object
+     * @param  ls            existing Lifecycles object containing contents to use for new Lifecycles object
      */
     public Lifecycles(Lifecycles ls) {
 	    super(ls.vContents);
@@ -30,14 +28,21 @@ public class Lifecycles extends OnyxVector
 
 
     /**
-     * Adds an existing Lifecycle to the Lifecycles content vector.
-     * @param Lifecycle cs Lifecycle to add to the Lifecycles contents
+     * Adds an existing Lifecycle object to the Lifecycles object contents.
+     * Returns the Lifecycles object so that methods can be chained.
+     * @param cs Lifecycle to add to the Lifecycles contents
+     * @return the updated Lifecycles object.
      */
     public Lifecycles addLifecycle(Lifecycle cs) {
 	    addElement(cs);
 	    return this;
     }
 
+    /**
+     * Creates and returns a PersistentVector of IPersistentMaps based on map representations
+     * of the Lifecycles contained by the Lifecycles vector.
+     * @return PersistentVector of IPersistentMaps
+     */
     public PersistentVector cycles() {
 	PersistentVector out = PersistentVector.EMPTY;
 	for (Object o : super.vContents) {

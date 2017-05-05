@@ -7,17 +7,15 @@ import clojure.lang.PersistentArrayMap;
 
 /**
  * Simple public facing user API mirroring all functionality of underlaying
- * onyx API.
+ * onyx API. This is a static utility class that should not be used as an
+ * Object, but should instead be used on objects.
  */
 public class API implements OnyxNames {
 
-    // Explicitly load and bind to a var at runtime
-    // those clojure functions that are referenced
-    // in generated workflows.
-    // (currently onyx-java.instance.bind)
-    // This solves class-not-found exceptions when they
-    // are obliquely referenced in a Job.
-    //
+    /**
+    which are referenced in generated workflows (currently onyx-java.instance.bind).
+    This solves class-not-found exceptions when they are obliquely referenced in a Job.
+    */
     private final static IFn bind;
 
     /**
@@ -35,8 +33,7 @@ public class API implements OnyxNames {
     /**
      * Starts a development environment using an in-memory
      * implementation of ZooKeeper.
-     * @param  EnvConfiguration envConfig     configuration object used for
-     *                                          starting environment
+     * @param  envConfig     configuration object used for starting environment
      * @return                  object representing the started environment
      */
     public static Object startEnv(EnvConfiguration envConfig) {
@@ -50,10 +47,8 @@ public class API implements OnyxNames {
      * on this machine.
      * Optionally takes a monitoring configuration map.
      * See the User Guide for details.
-     * @param  PeerConfiguration peerConfig    peerConfig object used to specify
-     *                                          peerGroup startup conditions
-     * @return                   peerGroup object representing
-     *                                   machine specific resource config
+     * @param  peerConfig    peerConfig object used to specify peerGroup startup conditions
+     * @return    peerGroup object representing machine specific resource config
      */
     public static Object startPeerGroup(PeerConfiguration peerConfig) {
         IPersistentMap c = peerConfig.toMap();
@@ -61,13 +56,11 @@ public class API implements OnyxNames {
         return sPeerGroup.invoke(c);
     }
 
-
     /**
      * Launches n virtual peers.
      * Each peer may be stopped by passing it to the shutdown-peer function.
-     * @param  int    nPeers        number of virtual peers to start
-     * @param  Object peerGroup     peerGroup configuration object specifying
-     *                              peer runtime conditions
+     * @param  nPeers        number of virtual peers to start
+     * @param  peerGroup     peerGroup configuration object specifying peer runtime conditions
      * @return        peers object holding n virtual peers
      */
     public static Object startPeers(int nPeers, Object peerGroup) {
@@ -77,8 +70,8 @@ public class API implements OnyxNames {
 
     /**
      * Shuts down the given development environment.
-     * @param  Object env           object representing environment to shutdown
-     * @return        returns null
+     * @param  env    object representing environment to shutdown
+     * @return        null
      */
     public static Object shutdownEnv(Object env) {
         IFn shutdownEnv = Clojure.var(API, ShutdownEnv);
@@ -88,8 +81,8 @@ public class API implements OnyxNames {
     /**
      * Shuts down the peer group, releasing any messaging resources
      * it was holding open.
-     * @param  Object peerGroup     Object representing peerGroup to shutdown
-     * @return        Always null
+     * @param  peerGroup     Object representing peerGroup to shutdown
+     * @return        null
      */
     public static Object shutdownPeerGroup(Object peerGroup) {
         IFn shutdownPeerGroup = Clojure.var(API, ShutdownPeerGroup);
@@ -100,8 +93,8 @@ public class API implements OnyxNames {
      * Shuts down the virtual peer, which releases all of its resources
      * and removes it from the execution of any tasks. This peer will
      * no longer volunteer for tasks. Returns null.
-     * @param  Object peer          Object representing peer to be shutdown
-     * @return        Always null
+     * @param  peer   Object representing peer to be shutdown
+     * @return        null
      */
     public static Object shutdownPeer(Object peer) {
         IFn shutdownPeer = Clojure.var(API, ShutdownPeer);
@@ -111,9 +104,8 @@ public class API implements OnyxNames {
     /**
      * Like shutdownPeer, but takes a sequence of peers as an argument,
      * shutting each down in order. Returns null.
-     * @param  Object peers         An object representing the sequence of peers
-     *                              to shutdown
-     * @return        Always null
+     * @param  peers  An object representing the sequence of peers to shutdown
+     * @return        null
      */
     public static Object shutdownPeers(Object peers) {
         IFn shutdownPeers = Clojure.var(API, ShutdownPeers);
@@ -135,10 +127,9 @@ public class API implements OnyxNames {
      * submitting jobs must match the hash value exactly, otherwise the
      * submission will be rejected. This forces all jobs under the same job-id
      * to have exactly the same value.
-     * @param  PeerConfiguration peerConfig    peerConfig object specifying
-     *                                          peer behavior
-     * @param  Job               job           job object specifying job
-     * @return                   Map containing started job
+     * @param  peerConfig    peerConfig object specifying peer behavior
+     * @param  job           job object specifying job
+     * @return                IPersistentMap containing the started job object
      */
     public static IPersistentMap submitJob(PeerConfiguration peerConfig, Job job) {
         IFn submitJob = Clojure.var(API, SubmitJob);
@@ -153,9 +144,9 @@ public class API implements OnyxNames {
      * tasks for this job cleanly stop executing and volunteer to work on other jobs.
      * Task lifecycle APIs for closing tasks are invoked.
      * This job is never again scheduled for execution.
-     * @param  PeerConfiguration peerConfig    peerConfig object
-     * @param  String            jobID         ID of job to kill
-     * @return                   true/false status dependent on job kill effort
+     * @param  peerConfig    peerConfig object
+     * @param  jobID         ID of job to kill
+     * @return               true/false status dependent on job kill effort
      */
     public static boolean killJob(PeerConfiguration peerConfig, String jobID) {
         IFn killJob = Clojure.var(API, KillJob);
@@ -167,8 +158,8 @@ public class API implements OnyxNames {
      * Invokes the garbage collector on Onyx. Compresses all local replicas
      * for peers, decreasing memory usage. Also deletes old log entries from
      * ZooKeeper, freeing up disk space.
-     * @param  PeerConfiguration peerConfig    peerConfig object
-     * @return                   true/false status of garbage collection effort
+     * @param  peerConfig    peerConfig object
+     * @return              true/false status of garbage collection effort
      */
     public static boolean gc(PeerConfiguration peerConfig) {
         IFn collectGarbage = Clojure.var(API, GC);
@@ -179,9 +170,9 @@ public class API implements OnyxNames {
     /**
      * Blocks until job-id has had all of its tasks completed or the job is killed.
      * Returns true if the job completed successfully, false if the job was killed.
-     * @param  PeerConfiguration peerConfig    peerConfig object
-     * @param  String            jobID         ID of currently running job
-     * @return                   true (job complete) or false (job killed)
+     * @param  peerConfig    peerConfig object
+     * @param  jobID         ID of currently running job
+     * @return               true (job complete) or false (job killed)
      */
     public static boolean awaitJobCompletion(PeerConfiguration peerConfig, String jobID) {
         IFn awaitJobCompletion = Clojure.var(API, AwaitJobCompletion);

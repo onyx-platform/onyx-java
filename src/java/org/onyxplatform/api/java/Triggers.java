@@ -13,7 +13,6 @@ public class Triggers extends OnyxVector
 	/**
 	 * Constructs a new, empty Triggers object using
 	 * the OnyxVector superconstructor.
-	 * @return new Triggers object
 	 */
     public Triggers() {
         super();
@@ -23,8 +22,7 @@ public class Triggers extends OnyxVector
 	 * Constructs a new Triggers object using an existing Triggers
 	 * object (uses the existing Trigger collection as content).
 	 * Uses OnyxVector superconstructor.
-	 * @param  Triggers ts         existing Triggers object to use for content
-	 * @return          new Triggers object
+	 * @param  ts  existing Triggers object to use for content
 	 */
     public Triggers(Triggers ts) {
 	    super(ts.vContents);
@@ -34,8 +32,8 @@ public class Triggers extends OnyxVector
 	/**
 	 * Adds an existing Trigger to the Triggers content vector.
 	 * Returns the Triggers object so that methods can be chained.
-	 * @param Trigger te Trigger to add to the Triggers content
-	 * @return Triggers the updated Triggers object
+	 * @param  te Trigger to add to the Triggers content
+	 * @return the updated Triggers object
 	 */
     public Triggers addTrigger(Trigger te) {
 	    addElement(te);

@@ -10,7 +10,6 @@ public class Task extends OnyxMap
 {
 	/**
 	 * Constructs a new Task object using the OnyxMap superconstructor.
-	 * @return new Task object
 	 */
 	public Task() {
 		super();
@@ -19,8 +18,7 @@ public class Task extends OnyxMap
 	/**
 	 * Constructs a new Task object using an existing Task.
 	 * Uses OnyxMap superconstructor.
-	 * @param  Task task           existing task to use for new task
-	 * @return                   new Task object
+	 * @param  task    existing Task object to use for new task
 	 */
 	public Task(Task task) {
     		super(task.entry);
@@ -29,8 +27,7 @@ public class Task extends OnyxMap
 	/**
 	 * Constructs a new Task object using a map representing the task to be created.
 	 * Uses the OnyxMap superconstructor.
-	 * @param  OnyxMap e             existing map to use for new Task
-	 * @return         new Task object
+	 * @param  e       existing OnyxMap to use for Task construction
 	 */
 	public Task(OnyxMap e) {
 		super(e);

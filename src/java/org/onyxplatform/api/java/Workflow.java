@@ -27,7 +27,6 @@ public final class Workflow implements OnyxNames
 
 	/**
 	 * Constructs a new Workflow object with an empty set of edges.
-	 * @return new Workflow object
 	 */
 	public Workflow() {
 		edges = PersistentVector.EMPTY;
@@ -36,8 +35,7 @@ public final class Workflow implements OnyxNames
 	/**
 	 * Constructs a new Workflow object using a set of edges from a previous
 	 * workflow.
-	 * @param  Workflow wf            existing Workflow containing edges to use
-	 * @return          new Workflow object
+	 * @param  wf   existing Workflow containing edges to use
 	 */
 	private Workflow(Workflow wf) {
 		edges = wf.edges;
@@ -45,19 +43,17 @@ public final class Workflow implements OnyxNames
 
 	/**
 	 * Adds an edge to the workflow edges content vector.
-	 * An edge is a pair of strings, where the first string is the
-	 * name of the independent task and the second
-	 * string is the name of the dependent task. Returns the workflow so that
-	 * methods can be chained.
-	 * @param String srcTask name of independent task
-	 * @param String dstTask name of dependent task
-	 * @return Workflow updated workflow object
+	 * An edge is a pair of strings, where the first string is the name of the
+	 * independent task and the second string is the name of the dependent task.
+	 * Returns the workflow so that methods can be chained.
+	 * @param  srcTask       Source Task (Independent Edge)
+	 * @param  dstTask       Destination Task (Dependent Edge)
+	 * @return        the updated Workflow object
 	 */
 	public Workflow addEdge(String srcTask, String dstTask) {
-
 		Object sKw = kwFn.invoke(srcTask);
 		Object dKw = kwFn.invoke(dstTask);
-    		PersistentVector pair = PersistentVector.create(sKw, dKw);
+    	PersistentVector pair = PersistentVector.create(sKw, dKw);
 		edges = edges.cons(pair);
 		return this;
 	}

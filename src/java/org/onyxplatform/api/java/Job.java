@@ -31,13 +31,11 @@ public class Job implements OnyxNames
     public Triggers triggers;
 
     /**
-     * Creates a new Job object. Creating a new Job requires passing an existing
+     * Constructs a new Job object. Creating a new Job requires passing an existing
      * TaskScheduler object. The new Job will be initialized with empty
      * components, including associated Workflow, Catalog, Lifecycles,
      * FlowConditions, Windows, and Triggers objects.
-     * @param  TaskScheduler ts            taskScheduler object specifying
-     *                                      running job conditions
-     * @return               new Job object
+     * @param  ts            taskScheduler object specifying running job conditions
      */
     public Job(TaskScheduler ts) {
         taskScheduler = ts;
@@ -50,12 +48,11 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Creates a new Job object using an existing Job. This new Job will
-     * use the existing Job components, including the existing
+     * Constructs a new Job object based on an existing Job object. This new Job will
+     * use the existing Job object components, including the existing
      * TaskScheduler, Workflow, Catalog, Lifecycles, FlowConditions,
      * Windows, and Triggers.
-     * @param  Job j             existing Job to use as a template for new Job
-     * @return     new Job object
+     * @param  j             existing Job to use as a template for new Job
      */
     public Job(Job j) {
 	    taskScheduler = j.taskScheduler;
@@ -68,8 +65,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job Workflow to the passed Workflow object.
-     * @param Workflow wf Workflow object to be added
+     * Associates the specified Workflow object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param wf workflow object to be associated with the job
+     * @return the updated Job object
      */
     public Job setWorkflow(Workflow wf) {
 	    workflow = wf;
@@ -77,7 +76,7 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job Workflow object.
+     * Returns the Workflow object currently associated with the job object.
      * @return Workflow object
      */
     public Workflow getWorkflow(){
@@ -86,8 +85,10 @@ public class Job implements OnyxNames
 
     /**
      * Adds a new Workflow Edge to the Job Workflow.
-     * @param String srcTask independent Task
-     * @param String dstTask dependent Task
+     * Returns the updated job object so that methods can be chained.
+     * @param srcTask independent Task edge
+     * @param dstTask dependent Task edge
+     * @return the updated Job object
      */
     public Job addWorkflowEdge(String srcTask, String dstTask) {
 	    workflow.addEdge(srcTask, dstTask);
@@ -95,8 +96,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job Catalog to the passed Catalog object.
-     * @param Catalog cat Catalog object to be added
+     * Associates the specified Catalog object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param cat Catalog object to be associated with the job
+     * @return the updated Job object
      */
     public Job setCatalog(Catalog cat) {
 	    catalog = cat;
@@ -104,7 +107,8 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job Catalog object.
+     * Returns the Catalog object currently associated with the Job.
+     * Returns the updated job object so that methods can be chained.
      * @return Catalog object
      */
     public Catalog getCatalog(){
@@ -113,7 +117,9 @@ public class Job implements OnyxNames
 
     /**
      * Adds a new Task object to the Job Catalog.
-     * @param Task t Task to be added to the Catalog
+     * Returns the updated job object so that methods can be chained.
+     * @param t Task to be added to the Job Catalog
+     * @return the updated job object
      */
     public Job addCatalogTask(Task t) {
 	    catalog.addTask(t);
@@ -121,8 +127,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job Lifecycles to the passed Lifecycles object.
-     * @param Lifecycles lfcs Lifecycles object to be added
+     * Associates the specified Lifecycles object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param lfcs Lifecycles object to be associated with the job
+     * @return the updated job object
      */
     public Job setLifecycles(Lifecycles lfcs) {
 	    lifecycles = lfcs;
@@ -130,7 +138,7 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job Lifecycles object.
+     * Returns the Lifecycles object currently associated with the job.
      * @return Lifecycles object
      */
     public Lifecycles getLifecycles(){
@@ -139,7 +147,9 @@ public class Job implements OnyxNames
 
     /**
      * Adds a Lifecycle Call (Lifecycle object) to the existing Job Lifecycles.
-     * @param Lifecycle lf Lifecycle to be added to Job Lifecycles
+     * Returns the updated job object so that methods can be chained.
+     * @param lf Lifecycle to be added to Job Lifecycles
+     * @return the updated job object
      */
     public Job addLifecycle(Lifecycle lf) {
 	    lifecycles.addLifecycle(lf);
@@ -147,8 +157,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job FlowConditions to the passed FlowConditions object.
-     * @param FlowConditions fcs FlowConditions to be added
+     * Associates the specified FlowConditions object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param fcs FlowConditions to be associated with the Job
+     * @return the updated job object
      */
     public Job setFlowConditions(FlowConditions fcs) {
 	    flowConditions = fcs;
@@ -156,7 +168,7 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job FlowConditions object.
+     * Returns the FlowConditions object currently associated with the Job.
      * @return FlowConditions object
      */
     public FlowConditions getFlowConditions(){
@@ -165,7 +177,9 @@ public class Job implements OnyxNames
 
     /**
      * Adds a FlowCondition object to the existing Job FlowConditions.
-     * @param FlowCondition fc FlowCondition to be added
+     * Returns the updated job object so that methods can be chained.
+     * @param fc FlowCondition to be added to the Job FlowConditions object.
+     * @return the updated job object
      */
     public Job addFlowCondition(FlowCondition fc) {
 	    flowConditions.addCondition(fc);
@@ -173,8 +187,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job Windows to the passed Windows object.
-     * @param Windows ws Windows to be added
+     * Associates the specified Windows object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param ws Windows object to be associated with the Job
+     * @return the updated Job object
      */
     public Job setWindows(Windows ws) {
 	    windows = ws;
@@ -182,7 +198,7 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job Windows object.
+     * Returns the Windows object currently associated with the Job.
      * @return Windows object
      */
     public Windows getWindows(){
@@ -191,7 +207,9 @@ public class Job implements OnyxNames
 
     /**
      * Adds a Window object to the existing Job Windows object.
-     * @param Window w Window object to be added
+     * Returns the updated job object so that methods can be chained.
+     * @param w Window object to be added to the Job Windows
+     * @return the updated Job object
      */
     public Job addWindow(Window w) {
 	    windows.addWindow(w);
@@ -199,8 +217,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Sets the Job Triggers to the passed Triggers object.
-     * @param Triggers trs Triggers to be added
+     * Associates the specified Triggers object to the Job.
+     * Returns the updated job object so that methods can be chained.
+     * @param trs Triggers object to be associated with the Job object
+     * @return the updated Job object
      */
     public Job setTriggers(Triggers trs) {
 	    triggers = trs;
@@ -208,8 +228,8 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the current Job Triggers object.
-     * @return Triggers object
+     * Returns the Triggers object currently associated with the Job.
+     * @return Triggers object associated with the Job
      */
     public Triggers getTriggers(){
         return triggers;
@@ -217,7 +237,9 @@ public class Job implements OnyxNames
 
     /**
      * Adds a Trigger object to the existing Job Triggers object.
-     * @param Trigger t Trigger to be added
+     * Returns the updated job object so that methods can be chained.
+     * @param t Trigger object to be added
+     * @return the updated Job object
      */
     public Job addTrigger(Trigger t) {
 	    triggers.addTrigger(t);
@@ -225,8 +247,10 @@ public class Job implements OnyxNames
     }
 
     /**
-     * Returns the fully described Job.
-     * @return onyx Job.
+     * Returns the fully described Job as a PersistentArrayMap of key/value pairs,
+     * where the key is the keyword associated with the Job component (Catalog, Windows, etc.)
+     * and the values are themselves PersistentArrayMaps representing the components themselves.
+     * @return PersistentArrayMap of PersistentArrayMaps representing job
      */
     public PersistentArrayMap toArray() {
 

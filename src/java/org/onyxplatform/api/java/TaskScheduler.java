@@ -24,8 +24,7 @@ public class TaskScheduler implements OnyxNames {
 	/**
 	 * Constructs a new TaskScheduler object from an existing TaskScheduler
 	 * object.
-	 * @param  TaskScheduler ts            existing TaskScheduler object
-	 * @return               new TaskScheduler object
+	 * @param  ts     existing TaskScheduler object
 	 */
 	public TaskScheduler(TaskScheduler ts) {
     	kwType = ts.kwType;
@@ -34,8 +33,7 @@ public class TaskScheduler implements OnyxNames {
 	/**
 	 * Constructs a new TaskScheduler object using a string representing
 	 * a valid TaskScheduler type.
-	 * @param  String s             type of task scheduler to create
-	 * @return        new TaskScheduler object
+	 * @param  s   string representing type of task scheduler to create
 	 */
     	public TaskScheduler(String s) {
 		kwType = kwFn.invoke(s);

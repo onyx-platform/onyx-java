@@ -13,7 +13,6 @@ public class Window extends OnyxMap
 {
 	/**
 	 * Constructs a new Window object using the OnyxMap superconstructor.
-	 * @return new Window object
 	 */
 	public Window() {
 		super();
@@ -22,8 +21,7 @@ public class Window extends OnyxMap
 	/**
 	 * Constructs a new Window object using an existing Window (uses content map).
 	 * Uses the OnyxMap superconstructor.
-	 * @param	Window e	existing window to use for content
-	 * @return        new Window object
+	 * @param	e	existing Window object to use for content
 	 */
 	public Window(Window e) {
     		super(e.entry);
@@ -31,8 +29,7 @@ public class Window extends OnyxMap
 
 	/**
 	 * Constructs a new Window object using an existing map representing a Window.
-	 * @param  OnyxMap e             map representing the window to be created.
-	 * @return         new Window object
+	 * @param  e       OnyxMap representing the window to be created.
 	 */
 	public Window(OnyxMap e) {
 		super(e);

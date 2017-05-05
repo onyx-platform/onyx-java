@@ -11,19 +11,17 @@ import clojure.lang.IPersistentMap;
 public class FlowConditions extends OnyxVector
 {
 	/**
-	 * Creates a new FlowConditions object using OnyxVector superconstructor.
-	 * @return new FlowConditions object
+	 * Constructs a new FlowConditions object.
+	 * Uses the OnyxVector superconstructor.
 	 */
     public FlowConditions() {
     }
 
 	/**
-	 * Creates a new FlowConditions object using an existing FlowConditions
-	 * object. Uses OnyxVector superconstructor.
-	 * @param  FlowConditions fc            existing FlowConditions object
-	 *                        				containing contents to use for
-	 *                        				new FlowConditions object
-	 * @return                new FlowConditions object
+	 * Constructs a new FlowConditions object using an existing FlowConditions
+	 * object.
+	 * Uses OnyxVector superconstructor.
+	 * @param  fc   existing FlowConditions object
 	 */
     public FlowConditions(FlowConditions fc) {
 	    super(fc.vContents);
@@ -31,16 +29,21 @@ public class FlowConditions extends OnyxVector
 
 
 	/**
-	 * Adds an existing FlowCondition object to the FlowConditions
-	 * content vector.
-	 * @param FlowCondition ent FlowCondition to add to the FlowConditions
-	 *                      	contents
+	 * Adds an existing FlowCondition object to the FlowConditions vector.
+	 * Returns the updated FlowConditions so that methods can be chained.
+	 * @param ent FlowCondition object to be added.
+	 * @return updated FlowConditions object
 	 */
     public FlowConditions addCondition(FlowCondition ent) {
 	    addElement(ent);
 	    return this;
     }
 
+    /**
+     * Creates and returns a PersistentVector of IPersistentMaps based on the
+     * FlowCondition objects contained by the FlowConditions vector object.
+     * @return A PersistentVector of IPersistentMaps
+     */
     public PersistentVector conditions() {
 	PersistentVector out = PersistentVector.EMPTY;
 	for (Object o : super.vContents) {

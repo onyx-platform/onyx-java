@@ -10,24 +10,27 @@ import clojure.lang.IPersistentMap;
 public class Catalog extends OnyxVector
 {
 	/**
-	 * Creates a new catalog, which derives from OnyxVector.
-	 * @return new catalog object
+	 * Constructs a new empty Catalog object.
+	 * Uses the OnyxVector superconstructor.
 	 */
     public Catalog() {
+        super();
     }
 
 	/**
-	 * Creates a new Catalog from an existing Catalog.
-	 * @param  Catalog c             existing Catalog to use for new Catalog
-	 * @return         new Catalog object
+	 * Creates a new Catalog object based on an existing Catalog object.
+	 * Uses the OnyxVector superconstructor.
+	 * @param  c    an existing Catalog object to use as a template for the new Catalog
 	 */
     public Catalog(Catalog c) {
 	    super(c.vContents);
     }
 
 	/**
-	 * Adds an existing Task object to the catalog.
-	 * @param Task task task object to be added to the catalog
+	 * Adds an existing Task object to the catalog object.
+	 * Returns the updated Catalog object so that methods can be chained.
+	 * @param task a task object to be added to the catalog
+	 * @return updated Catalog object
 	 */
     public Catalog addTask(Task task) {
 	    addElement(task);
@@ -35,6 +38,11 @@ public class Catalog extends OnyxVector
     }
 
 
+    /**
+     * Returns a PersistentVector containing IPersistentMap representations
+     * of the tasks currently associated with the catalog object.
+     * @return PersistentVector of IPersistentMaps
+     */
     public PersistentVector tasks() {
 	PersistentVector out = PersistentVector.EMPTY;
 	for (Object o : super.vContents) {
@@ -45,4 +53,3 @@ public class Catalog extends OnyxVector
 	return out;
     }
 }
-
