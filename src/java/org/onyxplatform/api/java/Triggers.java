@@ -11,15 +11,17 @@ import clojure.lang.IPersistentMap;
 public class Triggers extends OnyxVector
 {
 	/**
-	 * Creates a new Triggers object using OnyxVector superconstructor.
+	 * Constructs a new, empty Triggers object using
+	 * the OnyxVector superconstructor.
 	 * @return new Triggers object
 	 */
     public Triggers() {
+        super();
     }
 
 	/**
-	 * Creates a new Triggers object using an existing Triggers
-	 * object (uses the existing trigger collection as content).
+	 * Constructs a new Triggers object using an existing Triggers
+	 * object (uses the existing Trigger collection as content).
 	 * Uses OnyxVector superconstructor.
 	 * @param  Triggers ts         existing Triggers object to use for content
 	 * @return          new Triggers object
@@ -31,13 +33,21 @@ public class Triggers extends OnyxVector
 
 	/**
 	 * Adds an existing Trigger to the Triggers content vector.
+	 * Returns the Triggers object so that methods can be chained.
 	 * @param Trigger te Trigger to add to the Triggers content
+	 * @return Triggers the updated Triggers object
 	 */
     public Triggers addTrigger(Trigger te) {
 	    addElement(te);
 	    return this;
     }
 
+    /**
+     * Returns the trigger objects contained by the Triggers container as a
+     * vector of maps, rather than objects.
+     * @return vector of map representations of the triggers contained by
+     * the triggers object.
+     */
     public PersistentVector triggers() {
 	PersistentVector out = PersistentVector.EMPTY;
 	for (Object o : super.vContents) {

@@ -10,7 +10,8 @@ public class PeerConfiguration extends OnyxMap
 	private Object tenancyId;
 
 	/**
-	 * Creates a new PeerConfiguration object using OnyxMap superconstructor.
+	 * Constructs a new empty PeerConfiguration object using a tenancyId.
+	 * @param Object tenancyId		a unique id used to identify the PeerConfiguration
 	 * @return new PeerConfiguration object
 	 */
 	public PeerConfiguration(Object tenancyId) {
@@ -20,8 +21,8 @@ public class PeerConfiguration extends OnyxMap
 	}
 
 	/**
-	 * Creates a new PeerConfiguration object using an exsiting content map
-	 * from an exsiting peer configuration. Uses OnyxMap superconstructor.
+	 * Constructs a new PeerConfiguration object using an exsiting PeerConfiguration.
+	 * Uses OnyxMap superconstructor.
 	 * @param  PeerConfiguration cfg           existing PeerConfiguration object
 	 * @return                   new PeerConfiguration object
 	 */
@@ -30,8 +31,10 @@ public class PeerConfiguration extends OnyxMap
 	}
 
 	/**
-	 * Creates a new PeerConfiguration object using an exsiting content map
-	 * from an exsiting peer configuration. Uses OnyxMap superconstructor.
+	 * Constructs a new PeerConfiguration object using an exsiting content map
+	 * from an exsiting peer configuration and a tenancyId.
+	 * Uses OnyxMap superconstructor.
+	 * @param Object tenancyId		a unique id used to identify the PeerConfiguration
 	 * @param  PeerConfiguration cfg           existing PeerConfiguration object
 	 * @return                   new PeerConfiguration object
 	 */
@@ -41,6 +44,10 @@ public class PeerConfiguration extends OnyxMap
 		addObjectParameter("onyx/tenancy-id", tenancyId);
 	}
 
+	/**
+	 * Returns the tenancyId associated with the PeerConfiguration object
+	 * @return the tenancyId object
+	 */
 	public Object tenancyId() {
 		return tenancyId;
 	}

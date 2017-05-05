@@ -13,7 +13,7 @@ The package provides the following features:
 
 ## Build Status
 
-Project being built via CircleCI: [![CircleCI](https://circleci.com/gh/RBerkheimer/onyx-java.svg?style=svg)](https://circleci.com/gh/RBerkheimer/onyx-java)
+CircleCI Tests:  [![CircleCI](https://circleci.com/gh/RBerkheimer/onyx-java.svg?style=svg)](https://circleci.com/gh/RBerkheimer/onyx-java)
 
 ## Overview
 Onyx-Java mirrors the Onyx Platform core API by providing a Java equivalent for each component of an Onyx workflow. This means the parts of Onyx such as Catalogs, Lifecycles, Jobs, Tasks, and so on, each have a new equivalent Java class.
@@ -28,6 +28,12 @@ Onyx-Java does not validate semantic correctness of entries - parameter and type
 <br>
 This means that it is up to the user to refer to the Onyx Platform information model documentation to ensure that they are passing the expected parameters of types expected by the Onyx Platform.
 <br><br>
+
+## API Documentation
+Please visit [here](docs/javadoc/index.html) for the API documentation.
+<br><br>
+
+
 ### Utilities
 
 Onyx-Java provides the following utilities for high-level package consumption:

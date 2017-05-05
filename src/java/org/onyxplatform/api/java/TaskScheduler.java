@@ -6,7 +6,8 @@ import clojure.lang.IFn;
 /**
  * The purpose of the task scheduler is to control the order in which available
  * peers are allocated to which tasks. There are a few different Task Scheduler
- * implementations, contained in the class as ENUM options.
+ * implementations to choose from. The user should consult with the Onyx
+ * information model for options.
  */
 public class TaskScheduler implements OnyxNames {
 
@@ -20,23 +21,30 @@ public class TaskScheduler implements OnyxNames {
 
     	private Object kwType;
 
-    	public TaskScheduler(TaskScheduler ts) {
-	    	kwType = ts.kwType;
-    	}
+	/**
+	 * Constructs a new TaskScheduler object from an existing TaskScheduler
+	 * object.
+	 * @param  TaskScheduler ts            existing TaskScheduler object
+	 * @return               new TaskScheduler object
+	 */
+	public TaskScheduler(TaskScheduler ts) {
+    	kwType = ts.kwType;
+	}
 
 	/**
-	 * Creates a new TaskScheduler object
+	 * Constructs a new TaskScheduler object using a string representing
+	 * a valid TaskScheduler type.
 	 * @param  String s             type of task scheduler to create
 	 * @return        new TaskScheduler object
 	 */
     	public TaskScheduler(String s) {
-		kwType = kwFn.invoke(s); 
+		kwType = kwFn.invoke(s);
 	}
 
 	/**
-	 * Returns TaskScheduler content string into a proper onyx
-	 * task scheduler. Does not change existing contents.
-	 * @return onyx representation of TaskScheduler content
+	 * Returns TaskScheduler content keyword object.
+	 * Does not change existing contents.
+	 * @return TaskScheduler Keyword
 	 */
     	public Object schedule() {
 	    return kwType;

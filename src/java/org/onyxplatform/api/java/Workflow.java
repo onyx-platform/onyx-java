@@ -26,7 +26,7 @@ public final class Workflow implements OnyxNames
 	protected PersistentVector edges;
 
 	/**
-	 * Creates a new Workflow object with an empty set of edges.
+	 * Constructs a new Workflow object with an empty set of edges.
 	 * @return new Workflow object
 	 */
 	public Workflow() {
@@ -34,7 +34,7 @@ public final class Workflow implements OnyxNames
 	}
 
 	/**
-	 * Creates a new Workflow object using a set of edges from a previous
+	 * Constructs a new Workflow object using a set of edges from a previous
 	 * workflow.
 	 * @param  Workflow wf            existing Workflow containing edges to use
 	 * @return          new Workflow object
@@ -47,9 +47,11 @@ public final class Workflow implements OnyxNames
 	 * Adds an edge to the workflow edges content vector.
 	 * An edge is a pair of strings, where the first string is the
 	 * name of the independent task and the second
-	 * string is the name of the dependent task.
+	 * string is the name of the dependent task. Returns the workflow so that
+	 * methods can be chained.
 	 * @param String srcTask name of independent task
 	 * @param String dstTask name of dependent task
+	 * @return Workflow updated workflow object
 	 */
 	public Workflow addEdge(String srcTask, String dstTask) {
 
@@ -63,6 +65,7 @@ public final class Workflow implements OnyxNames
 	/**
 	 * Returns a Java array representation of the Workflow edges content vector.
 	 * This method does not alter the existing PersistentVector edge container.
+	 * @return edges contained by the workflow
 	 */
 	public PersistentVector graph() {
 		return edges;

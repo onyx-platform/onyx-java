@@ -11,18 +11,18 @@ import clojure.lang.IPersistentMap;
 public class Windows extends OnyxVector
 {
 	/**
-	 * Creates a new Windows object using OnyxVector superconstructor.
-	 * @return new Windows object
+	 * Constructs a new Windows object using OnyxVector superconstructor.
+	 * @return a new Windows object
 	 */
     public Windows() {
     }
 
 	/**
-	 * Creates a new Windows object using an existing Windows
+	 * Constructs a new Windows object using an existing Windows
 	 * object (uses contents from existing Windows).
 	 * Uses OnyxVector superconstructor.
 	 * @param  Windows wes           existing windows object to use for content
-	 * @return         new Windows object
+	 * @return         a new Windows object
 	 */
     public Windows(Windows wes) {
 	    super(wes.vContents);
@@ -31,13 +31,20 @@ public class Windows extends OnyxVector
 
 	/**
 	 * Adds an existing Window object to the Windows content vector.
+	 * Returns the windows object so that methods can be chained.
 	 * @param Window w Window to add
+	 * @return the updated Windows object
 	 */
     public Windows addWindow(Window w) {
 	    addElement(w);
 	    return this;
     }
 
+    /**
+     * Returns the windows objects contained by the Windows object vector.
+     * Returns them as a PersistentVector rather than a Windows object.
+     * @return  windows contained by the Windows object
+     */
     public PersistentVector windows() {
 	PersistentVector out = PersistentVector.EMPTY;
 	for (Object o : super.vContents) {

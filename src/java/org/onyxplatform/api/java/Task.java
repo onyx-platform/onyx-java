@@ -9,7 +9,7 @@ package org.onyxplatform.api.java;
 public class Task extends OnyxMap
 {
 	/**
-	 * Creates a new Task object using OnyxMap superconstructor.
+	 * Constructs a new Task object using the OnyxMap superconstructor.
 	 * @return new Task object
 	 */
 	public Task() {
@@ -17,15 +17,21 @@ public class Task extends OnyxMap
 	}
 
 	/**
-	 * Creates a new Task object using an existing content map.
+	 * Constructs a new Task object using an existing Task.
 	 * Uses OnyxMap superconstructor.
-	 * @param  PersistentHashMap ent           existing map to use for new Task
+	 * @param  Task task           existing task to use for new task
 	 * @return                   new Task object
 	 */
 	public Task(Task task) {
     		super(task.entry);
 	}
 
+	/**
+	 * Constructs a new Task object using a map representing the task to be created.
+	 * Uses the OnyxMap superconstructor.
+	 * @param  OnyxMap e             existing map to use for new Task
+	 * @return         new Task object
+	 */
 	public Task(OnyxMap e) {
 		super(e);
 	}
