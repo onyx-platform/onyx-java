@@ -29,11 +29,6 @@ Onyx-Java does not validate semantic correctness of entries - parameter and type
 This means that it is up to the user to refer to the Onyx Platform information model documentation to ensure that they are passing the expected parameters of types expected by the Onyx Platform.
 <br><br>
 
-## API Documentation
-Please visit [here](docs/javadoc/index.html) for the API documentation.
-<br><br>
-
-
 ### Utilities
 
 Onyx-Java provides the following utilities for high-level package consumption:
