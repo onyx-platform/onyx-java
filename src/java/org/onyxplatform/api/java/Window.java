@@ -22,7 +22,7 @@ public class Window extends OnyxMap
 	/**
 	 * Constructs a new Window object using an existing Window (uses content map).
 	 * Uses the OnyxMap superconstructor.
-	 * @param  Window e             existing window to use for content
+	 * @param	Window e	existing window to use for content
 	 * @return        new Window object
 	 */
 	public Window(Window e) {

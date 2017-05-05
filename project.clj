@@ -23,4 +23,4 @@
                                      "org.onyxplatform.api.java.utils"
                                      "org.onyxplatform.api.java"
                                      "onyxplatform.test"]
-                                    :output-dir "docs/javadoc"}}})
+                                    :output-dir "docs"}}})
