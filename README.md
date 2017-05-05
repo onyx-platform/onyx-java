@@ -15,6 +15,10 @@ The package provides the following features:
 
 CircleCI Tests:  [![CircleCI](https://circleci.com/gh/RBerkheimer/onyx-java.svg?style=svg)](https://circleci.com/gh/RBerkheimer/onyx-java)
 
+## API Docs
+
+Automatically generated documentation for the Java API can be found [here](https://rberkheimer.github.io/onyx-java/).
+
 ## Overview
 Onyx-Java mirrors the Onyx Platform core API by providing a Java equivalent for each component of an Onyx workflow. This means the parts of Onyx such as Catalogs, Lifecycles, Jobs, Tasks, and so on, each have a new equivalent Java class.
 <br><br>
