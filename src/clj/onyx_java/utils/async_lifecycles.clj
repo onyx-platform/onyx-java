@@ -46,10 +46,10 @@
   {:lifecycle/before-task-start inject-in-ch})
 
 (defn in-lifecycles [task-name]
-  [{:lifecycle/task (keyword task-name) 
+  [{:lifecycle/task (keyword task-name)
     :core.async/id (java.util.UUID/randomUUID)
     :lifecycle/calls :onyx-java.utils.async-lifecycles/in-calls}
-   {:lifecycle/task (keyword task-name) 
+   {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/reader-calls}])
 
 
@@ -87,7 +87,7 @@
 (def get-drop-channel
   (memoize
    (fn [id]
-     ; Drops async on the floor. 
+     ; Drops async on the floor.
      ; Used with side-effect-ful
      ; jobs.
      (chan (dropping-buffer 1)))))
@@ -104,5 +104,3 @@
     :core.async/id (java.util.UUID/randomUUID)}
    {:lifecycle/task (keyword task-name)
     :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
-
-
