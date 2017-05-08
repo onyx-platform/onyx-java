@@ -82,6 +82,7 @@ The contents of the EDN file look like this:
     :taskScheduler "onyx.task-scheduler/balanced"
 }
 ```
+
 <br>
 Note that the structure of the set-up is just a map containing keys used by the environment set-up, and the values they should be set to.
 <br>
@@ -89,6 +90,7 @@ This is true in all cases except for the peerEdn and envEdn keywords, which poin
 a set-up method in *OnyxEnv*, contained in the extended base class *JobBuilder*. Note above that the *SingleJavaTest* class calls the *JobBuilder* super constructor.
 This super constructor creates a new *OnyxEnv* object associated with the *JobBuilder*, as well as a new *Job*:
 <br>
+
 ```
 /**
  * Constructs a JobBuilder using an EDN configuration, a batchSize, and
@@ -136,6 +138,7 @@ AsyncLifecycles.addOutput(lc, "out");
 return job;
 }
 ```
+
 <br>
 Our *JobBuilder* class is a convenient aggregator class that is not part of the standard Onyx-Java package - but
 it does make it obvious how a user could implement all of their Onyx-Java code in a centralized way.
@@ -145,6 +148,7 @@ As seen above, the workflow edges are added, inputs are added, and outputs are a
 <br>
 Our *JobBuilder* class provides an abstract method that needs to be overridden:
 <br>
+
 ```
 /**
  * Abstract method must be extended by extending subclass to add other
@@ -152,10 +156,12 @@ Our *JobBuilder* class provides an abstract method that needs to be overridden:
  */
 public abstract void configureCatalog();
 ```
+
 <br>
 This method is overridden by our *SingleJavaTest* class seen above, using the *BindUtils* utility class
 to add a new catalog entry (which is based on our fully qualified pure Java example class, called "PassFn"):
 <br>
+
 ```
 package onyxplatform.test;
 
@@ -192,6 +198,7 @@ public class PassFn extends OnyxFn {
 	}
 }
 ```
+
 <br><br>
 Notice that this test class extends *OnyxFn*, which is required when using pure Java objects with Onyx-Java.
 Also notice the other requirements for user classes used as tasks -
@@ -208,6 +215,7 @@ as long as it conforms to the input/output requirements. I.e., it can call other
 Going back to the single-java-test clojure test function, we see that the inputs (input segments) are passed as a PersistentVector. This is how *JobBuilder*
 consumes input segments in its two job running methods. Both of these are similar - in this example, we are using the method that runs the job and collects outputs:
 <br>
+
 ```
 /**
  * Runs a job and collects the outputs, returning them inside an IPersistentMap.
@@ -219,6 +227,7 @@ public IPersistentMap runJobCollectOutputs(PersistentVector inputs) {
     return AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
 }
 ```
+
 <br>
 Notice that in the 'expected' parameter that we are comparing these outputs, we are getting an IPersistentMap with an 'out' key.
 This is because we are collecting the outputs associated with a channel that is supposed to be collecting outputs for the 'out' task.
@@ -230,6 +239,7 @@ when doing applications programming with Onyx-Java.
 Finally in our single-java-test test method, note that we call a shutdown method on our *JobBuilder* class. This class simply shuts down the *OnyxEnv* object
 associated with the *JobBuilder*, and should always be used when jobs are finished. In *JobBuilder* it looks like:
 <br>
+
 ```
 /**
  * Completely shuts down the environment associated with the JobBuilder
@@ -238,6 +248,7 @@ public void shutdown() {
     onyxEnv.stopEnv();
 }
 ```
+
 <br>
 Notice that in our onyxplatform.test package, we have a similar class to *SingleJavaTest*, called *SingleCljTest*, which also
 extends our *JobBuilder* convenience class. this class demonstrates how to add and use a pure clojure function in an Onyx workflow using Onyx-Java.
