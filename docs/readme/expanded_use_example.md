@@ -2,17 +2,17 @@
 
 This section contains a more complete description of the underlying system, attempting
 to provide the user with an idea on how the system can be used.
-<br>
+<br><br>
 All tests in the package are run using leiningen, in the test/onyx_java/test directory.
-<br>
+<br><br>
 This directory contains a namespace called pure_java.clj - all of the tests in this namespace
 do nothing but wrap behavior contained in the test/java/onyxplatform/test directory (the onyxplatform.test package).
-<br>
+<br><br>
 Opening the clj file shows several unit tests, covering all behaviors in the org.onyxplatform.api.java.API class.
 Each test follows the same essential pattern - set up, run, and tear down.
-<br>
+<br><br>
 One of the tests here is called single-java-test:
-<br>
+<br><br>
 ```
 (deftest single-java-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
@@ -24,7 +24,7 @@ One of the tests here is called single-java-test:
 ```
 <br>
 In this test, we set up the SingleJavaTest object based on the onyxplatform.test.SingleJavaTest class:
-<br>
+<br><br>
 
 ```
 package onyxplatform.test;
@@ -71,7 +71,7 @@ public class SingleJavaTest extends JobBuilder {
 <br>
 This class constructor takes a string path to an EDN file, which is a map that contains environment set-up conditions.
 The contents of the EDN file look like this:
-<br>
+<br><br>
 
 ```
 {
@@ -85,11 +85,11 @@ The contents of the EDN file look like this:
 
 <br>
 Note that the structure of the set-up is just a map containing keys used by the environment set-up, and the values they should be set to.
-<br>
+<br><br>
 This is true in all cases except for the peerEdn and envEdn keywords, which point to their own EDN set-up maps; these maps are in turn unpacked by
 a set-up method in *OnyxEnv*, contained in the extended base class *JobBuilder*. Note above that the *SingleJavaTest* class calls the *JobBuilder* super constructor.
 This super constructor creates a new *OnyxEnv* object associated with the *JobBuilder*, as well as a new *Job*:
-<br>
+<br><br>
 
 ```
 /**
@@ -142,12 +142,12 @@ return job;
 <br>
 Our *JobBuilder* class is a convenient aggregator class that is not part of the standard Onyx-Java package - but
 it does make it obvious how a user could implement all of their Onyx-Java code in a centralized way.
-<br>
+<br><br>
 In our example *JobBuilder*, the *Job* is assembled with automatically added Async inputs and outputs.
 As seen above, the workflow edges are added, inputs are added, and outputs are added very easily using the proper API and helper classes and methods.
 <br>
 Our *JobBuilder* class provides an abstract method that needs to be overridden:
-<br>
+<br><br>
 
 ```
 /**
@@ -160,7 +160,7 @@ public abstract void configureCatalog();
 <br>
 This method is overridden by our *SingleJavaTest* class seen above, using the *BindUtils* utility class
 to add a new catalog entry (which is based on our fully qualified pure Java example class, called "PassFn"):
-<br>
+<br><br>
 
 ```
 package onyxplatform.test;
@@ -211,10 +211,10 @@ Also notice the other requirements for user classes used as tasks -
 <br>
 In this simple case, consumeSegment simply passes through the input - in practice, this method can do literally anything with the input segments,
 as long as it conforms to the input/output requirements. I.e., it can call other classes, create new/unused data, etc.
-<br>
+<br><br>
 Going back to the single-java-test clojure test function, we see that the inputs (input segments) are passed as a PersistentVector. This is how *JobBuilder*
 consumes input segments in its two job running methods. Both of these are similar - in this example, we are using the method that runs the job and collects outputs:
-<br>
+<br><br>
 
 ```
 /**
@@ -235,10 +235,10 @@ The value for this task key contains two entries in a PersistentVector - the inp
 keyword. This keyword is produced by the Onyx Platform itself, and is called a sentinel value. It is simply there to inform that all segments have
 been processed and returned. It will always be present on a properly processed and gathered output, and thus should always be accounted for
 when doing applications programming with Onyx-Java.
-<br>
+<br><br>
 Finally in our single-java-test test method, note that we call a shutdown method on our *JobBuilder* class. This class simply shuts down the *OnyxEnv* object
 associated with the *JobBuilder*, and should always be used when jobs are finished. In *JobBuilder* it looks like:
-<br>
+<br><br>
 
 ```
 /**
