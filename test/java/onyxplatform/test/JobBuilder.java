@@ -12,6 +12,15 @@ import org.onyxplatform.api.java.utils.MapFns;
 import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
 
+/**
+ * JobBuilder is a simple centralized abstract test class useful (and used)
+ * for testing single functions in the context of a job backed by simple inputs
+ * and outputs backed by core-async. JobBuilder takes a string path of an EDN
+ * file describing the Job, turns the spec into a Job, and preps it for running.
+ * The configureCatalog method must be overridden by the extending class, which
+ * should add the test function. JobBuilder provides simple methods for running
+ * the assembled job and gathering outputs.
+ */
 public abstract class JobBuilder {
 
     protected OnyxEnv onyxEnv;
@@ -19,6 +28,13 @@ public abstract class JobBuilder {
     protected Integer batchTimeout;
     protected Job job;
 
+    /**
+     * Constructs a JobBuilder using an EDN configuration, a batchSize, and
+     * a batchTimeout.
+     * @param  onyxEnvConfig path to the EDN file containing the job set up spec
+     * @param  batchSize     integer representing the number of segments tasks should consume at once
+     * @param  batchTimeout  integer representing the maximum time (ms) a task should wait before beginning
+     */
     public JobBuilder(String onyxEnvConfig, int batchSize, int batchTimeout) {
 
 	    onyxEnv = new OnyxEnv("onyx-env.edn", true);
@@ -28,14 +44,19 @@ public abstract class JobBuilder {
 	    job = createBaseJob();
     }
 
+    /**
+     * Adds asynchronous input/output channels and the appropriate test edges
+     * for test functions
+     * @return the created Job
+     */
     public Job createBaseJob() {
 
 	// Tests have a simple 1-fn core async backed
-	// workflow that share all bootstrapping with 
+	// workflow that share all bootstrapping with
 	// other tests. Generates all job entries excepting
 	// the actual fn catalog entity.
 	//
-	
+
 
 	job = new Job(onyxEnv.taskScheduler());
 
@@ -53,24 +74,50 @@ public abstract class JobBuilder {
 	return job;
     }
 
+    /**
+     * Returns the onyxEnv object associated with the JobBuilder
+     * @return OnyxEnv object used by the JobBuilder
+     */
     public OnyxEnv getOnyx() {
 	    return onyxEnv;
     }
 
+    /**
+     * Returns the Job object associated with the JobBuilder
+     * @return Job object used by JobBuilder
+     */
     public Job getJob() {
 	return job;
     }
 
+    /**
+     * Returns the batchSize associated with the JobBuilder
+     * @return batchSize as integer
+     */
     public Integer batchSize() {
 	return batchSize;
     }
 
+    /**
+     * Returns the batchTimeout associated with the JobBuilder
+     * @return batchTimeout as integer
+     */
     public Integer batchTimeout() {
 	return batchTimeout;
     }
 
+    /**
+     * Abstract method must be extended by extending subclass to add other
+     * catalog entries to the JobBuilder catalog
+     */
     public abstract void configureCatalog();
 
+    /**
+     * Runs a job without collecting any outputs - returns a Map representing
+     * the started (running) job
+     * @param  inputs        A PersistentVector of input segments to use for running the Job
+     * @return               an IPersistentMap representing the running job
+     */
     public IPersistentMap runJob(PersistentVector inputs) {
 	    try {
 	    	configureCatalog();
@@ -81,11 +128,19 @@ public abstract class JobBuilder {
 	    }
     }
 
+    /**
+     * Runs a job and collects the outputs, returning them inside an IPersistentMap.
+     * @param  inputs    A PersistentVector of input segments to use for running the Job
+     * @return          An IPersistentMap containing the outputs produced by the job
+     */
     public IPersistentMap runJobCollectOutputs(PersistentVector inputs) {
 	    IPersistentMap jmeta = runJob(inputs);
-	    return AsyncLifecycles.collectOutputs(job.getLifecycles(), "out"); 
+	    return AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
     }
 
+    /**
+     * Completely shuts down the environment associated with the JobBuilder
+     */
     public void shutdown() {
 	    onyxEnv.stopEnv();
     }
