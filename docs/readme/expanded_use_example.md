@@ -25,6 +25,7 @@ One of the tests here is called single-java-test:
 <br>
 In this test, we set up the SingleJavaTest object based on the onyxplatform.test.SingleJavaTest class:
 <br>
+
 ```
 package onyxplatform.test;
 
@@ -66,10 +67,12 @@ public class SingleJavaTest extends JobBuilder {
 	}
 }
 ```
+
 <br>
 This class constructor takes a string path to an EDN file, which is a map that contains environment set-up conditions.
 The contents of the EDN file look like this:
 <br>
+
 ```
 {
     :generateTenancyId true
