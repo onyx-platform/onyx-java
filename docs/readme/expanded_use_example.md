@@ -87,8 +87,8 @@ The contents of the EDN file look like this:
 Note that the structure of the set-up is just a map containing keys used by the environment set-up, and the values they should be set to.
 <br><br>
 This is true in all cases except for the peerEdn and envEdn keywords, which point to their own EDN set-up maps; these maps are in turn unpacked by
-a set-up method in *OnyxEnv*, contained in the extended base class *JobBuilder*. Note above that the *SingleJavaTest* class calls the *JobBuilder* super constructor.
-This super constructor creates a new *OnyxEnv* object associated with the *JobBuilder*, as well as a new *Job*:
+a set-up method in <em>OnyxEnv</em>, contained in the extended base class <em>JobBuilder</em>. Note above that the <em>SingleJavaTest</em> class calls the <em>JobBuilder</em> super constructor.
+This super constructor creates a new <em>OnyxEnv</em> object associated with the <em>JobBuilder</em>, as well as a new <em>Job</em>:
 <br><br>
 
 ```
