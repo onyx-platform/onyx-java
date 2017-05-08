@@ -3,12 +3,12 @@
 This section contains a more complete description of the underlying system, attempting
 to provide the user with an idea on how the system can be used.
 <br><br>
-All tests in the package are run using leiningen, in the test/onyx_java/test directory.
+All tests in the package are run using leiningen, in the <strong>test/onyx_java/test</strong> directory.
 <br><br>
-This directory contains a namespace called pure_java.clj - all of the tests in this namespace
-do nothing but wrap behavior contained in the test/java/onyxplatform/test directory (the onyxplatform.test package).
+This directory contains a namespace called <em>pure_java.clj</em> - all of the tests in this namespace
+do nothing but wrap behavior contained in the test/java/onyxplatform/test directory (the <strong>onyxplatform.test</strong> package).
 <br><br>
-Opening the clj file shows several unit tests, covering all behaviors in the org.onyxplatform.api.java.API class.
+Opening the clj file shows several unit tests, covering all behaviors in the <strong><em>org.onyxplatform.api.java.API</em></strong> class.
 Each test follows the same essential pattern - set up, run, and tear down.
 <br><br>
 One of the tests here is called single-java-test:
@@ -23,7 +23,7 @@ One of the tests here is called single-java-test:
         (is (= (first inputs) (first (:out outputs))))))
 ```
 <br>
-In this test, we set up the SingleJavaTest object based on the onyxplatform.test.SingleJavaTest class:
+In this test, we set up the <em>SingleJavaTest</em> object based on the <strong><em>onyxplatform.test.SingleJavaTest</em></strong> class:
 <br><br>
 
 ```
@@ -140,13 +140,13 @@ return job;
 ```
 
 <br>
-Our *JobBuilder* class is a convenient aggregator class that is not part of the standard Onyx-Java package - but
+Our <em>JobBuilder</em> class is a convenient aggregator class that is not part of the standard Onyx-Java package - but
 it does make it obvious how a user could implement all of their Onyx-Java code in a centralized way.
 <br><br>
-In our example *JobBuilder*, the *Job* is assembled with automatically added Async inputs and outputs.
+In our example <em>JobBuilder</em>, the <em>Job</em> is assembled with automatically added Async inputs and outputs.
 As seen above, the workflow edges are added, inputs are added, and outputs are added very easily using the proper API and helper classes and methods.
 <br>
-Our *JobBuilder* class provides an abstract method that needs to be overridden:
+Our <em>JobBuilder</em> class provides an abstract method that needs to be overridden:
 <br><br>
 
 ```
@@ -158,7 +158,7 @@ public abstract void configureCatalog();
 ```
 
 <br>
-This method is overridden by our *SingleJavaTest* class seen above, using the *BindUtils* utility class
+This method is overridden by our <em>SingleJavaTest</em> class seen above, using the <em>BindUtils</em> utility class
 to add a new catalog entry (which is based on our fully qualified pure Java example class, called "PassFn"):
 <br><br>
 
@@ -200,19 +200,19 @@ public class PassFn extends OnyxFn {
 ```
 
 <br><br>
-Notice that this test class extends *OnyxFn*, which is required when using pure Java objects with Onyx-Java.
+Notice that this test class extends <em>OnyxFn</em>, which is required when using pure Java objects with Onyx-Java.
 Also notice the other requirements for user classes used as tasks -
 <ul>
-<li>The overridden constructor, which calls the *OnyxFn* super constructor</li>
+<li>The overridden constructor, which calls the <em>OnyxFn</em> super constructor</li>
 <li>The constructor argument, which must be an IPersistentMap containing constructor arguments</li>
-<li>The consumeSegment method, which overrides an abstract method from *OnyxFn*</li>
+<li>The consumeSegment method, which overrides an abstract method from <em>OnyxFn</em></li>
 <li>consumeSegment must take an IPersistentMap and return either a PersistentVector of IPersistentMaps or a single IPersistentMap</li>
 </ul>
 <br>
 In this simple case, consumeSegment simply passes through the input - in practice, this method can do literally anything with the input segments,
 as long as it conforms to the input/output requirements. I.e., it can call other classes, create new/unused data, etc.
 <br><br>
-Going back to the single-java-test clojure test function, we see that the inputs (input segments) are passed as a PersistentVector. This is how *JobBuilder*
+Going back to the single-java-test clojure test function, we see that the inputs (input segments) are passed as a PersistentVector. This is how <em>JobBuilder</em>
 consumes input segments in its two job running methods. Both of these are similar - in this example, we are using the method that runs the job and collects outputs:
 <br><br>
 
@@ -236,8 +236,8 @@ keyword. This keyword is produced by the Onyx Platform itself, and is called a s
 been processed and returned. It will always be present on a properly processed and gathered output, and thus should always be accounted for
 when doing applications programming with Onyx-Java.
 <br><br>
-Finally in our single-java-test test method, note that we call a shutdown method on our *JobBuilder* class. This class simply shuts down the *OnyxEnv* object
-associated with the *JobBuilder*, and should always be used when jobs are finished. In *JobBuilder* it looks like:
+Finally in our single-java-test test method, note that we call a shutdown method on our <em>JobBuilder</em> class. This class simply shuts down the <em>OnyxEnv</em> object
+associated with the <em>JobBuilder</em>, and should always be used when jobs are finished. In <em>JobBuilder</em> it looks like:
 <br><br>
 
 ```
@@ -250,8 +250,8 @@ public void shutdown() {
 ```
 
 <br>
-Notice that in our onyxplatform.test package, we have a similar class to *SingleJavaTest*, called *SingleCljTest*, which also
-extends our *JobBuilder* convenience class. this class demonstrates how to add and use a pure clojure function in an Onyx workflow using Onyx-Java.
+Notice that in our onyxplatform.test package, we have a similar class to <em>SingleJavaTest</em>, called <em>SingleCljTest</em>, which also
+extends our <em>JobBuilder</em> convenience class. this class demonstrates how to add and use a pure clojure function in an Onyx workflow using Onyx-Java.
 
 
 <br><br>
