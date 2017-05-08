@@ -5,7 +5,7 @@
   {:onyx/name (keyword task-name)
    :onyx/fn :onyx-java.instance.bind/method
    :onyx/type :function
-   :onyx/batch-size batch-size   
+   :onyx/batch-size batch-size
    :onyx/batch-timeout batch-timeout
 
    ; Instance binding bootstrapping
