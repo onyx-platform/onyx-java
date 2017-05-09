@@ -12,17 +12,23 @@
 
 (def instances (atom {}))
 
-(defn- keyname [id]
+(defn keyname [id]
   (keyword (str id)))
 
-(defn instance [id fq-class-name ctr-args]
-  (let [k (keyname id)]
-    (if (contains? @instances k)
-      (get @instances k) 
-      (let [i (Loader/loadOnyxFn fq-class-name ctr-args)]
-        (swap! instances assoc k i)
-        i))))
-
+(defn instance 
+  ([id]
+   (let [k (keyname id)]
+     (if-not (contains? @instances k)
+       nil
+       (get @instances k))))
+  ([id fq-class-name ctr-args]
+    (let [k (keyname id)]
+      (if (contains? @instances k)
+        (get @instances k) 
+        (let [i (Loader/loadOnyxFn fq-class-name ctr-args)]
+          (swap! instances assoc k i)
+          i)))))
+  
 (defn method [id fq-class-name ctr-args segment]
   (let [inst-ifn (instance id fq-class-name ctr-args)]
     (inst-ifn segment)))
