@@ -32,11 +32,14 @@ public class BindUtils implements OnyxNames {
  	* Loads the clojure namespaces.
  	*/
 	static {
-    	IFn requireFn = Clojure.var(CORE, Require);
+    		IFn requireFn = Clojure.var(CORE, Require);
+
 		requireFn.invoke(Clojure.read(INSTANCE_CATALOG));
 		instcatFn = Clojure.var(INSTANCE_CATALOG, CreateMethod);
-		releaseFn = Clojure.var(INSTANCE_CATALOG, ReleaseInst);
-		releaseAllFn = Clojure.var(INSTANCE_CATALOG, ReleaseAllInst);
+
+		requireFn.invoke(Clojure.read(INSTANCE_BIND));
+		releaseFn = Clojure.var(INSTANCE_BIND, ReleaseInst);
+		releaseAllFn = Clojure.var(INSTANCE_BIND, ReleaseAllInst);
 	}
 
 	/**
