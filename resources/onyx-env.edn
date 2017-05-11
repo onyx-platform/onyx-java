@@ -2,6 +2,7 @@
     :generateTenancyId true
     :peerEdn "dev-peer-config.edn"
     :envEdn "env-config.edn"
+    :logEdn "log-config.edn"
     :virtualPeerCount 3
     :taskScheduler "onyx.task-scheduler/balanced"
 }

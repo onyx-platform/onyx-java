@@ -122,4 +122,8 @@ public interface OnyxNames {
 	public static final String Method 		= "method";
 	public static final String ReleaseInst 		= "release";
 	public static final String ReleaseAllInst 	= "release-all";
+
+	public static final String TIMBRE = "onyx-java.utils.timbre";
+	public static final String TIMBRE_LOG_KEY = "onyx.log/config";
+	public static final String MessageFn = "info-message";
 }

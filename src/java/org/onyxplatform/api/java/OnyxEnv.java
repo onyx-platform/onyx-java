@@ -9,6 +9,7 @@ import clojure.lang.PersistentVector;
 import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
 import org.onyxplatform.api.java.utils.MapFns;
+import org.onyxplatform.api.java.utils.Timbre;
 
 
 /**
@@ -80,6 +81,7 @@ public class OnyxEnv {
 		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
 		loadEnvConfig((String) MapFns.get(setupMap, "envEdn"));
 		loadPeerConfig((String) MapFns.get(setupMap, "peerEdn"));
+		configureLog((String) MapFns.get(setupMap, "logEdn"));
 		return this;
 	}
 
@@ -142,7 +144,6 @@ public class OnyxEnv {
 	 */
 	public OnyxEnv setTaskScheduler(TaskScheduler ts) {
 		taskScheduler = ts;
-		System.out.println("Task Scheduler Created: " + taskScheduler);
 		return this;
 	}
 
@@ -161,7 +162,6 @@ public class OnyxEnv {
 	 */
 	public OnyxEnv setEnvConfig(EnvConfiguration ec) {
 		envConfig = ec;
-		System.out.println("EnvConfig set: " + envConfig);
 		return this;
 	}
 
@@ -193,7 +193,6 @@ public class OnyxEnv {
 	 */
 	public OnyxEnv setPeerConfig(PeerConfiguration pc){
 		peerConfig = pc;
-		System.out.println("PeerConfig set: " + peerConfig);
 		return this;
 	}
 
@@ -208,6 +207,16 @@ public class OnyxEnv {
 		OnyxMap peerMap = MapFns.fromResources(peerEdn);
 		PeerConfiguration pc = new PeerConfiguration(tenancyId, peerMap);
 		return setPeerConfig(pc);
+	}
+
+	/**
+	 * Loads the log configuration from the log configuration keyword in the
+	 * environment set-up map. Configures the log to the specification found in
+	 * the map.
+	 * @param logEdn A string containing the path to the log configuration EDN map
+	 */
+	public void configureLog(String logEdn){
+		Timbre.configure(peerConfig, logEdn);
 	}
 
 	/**

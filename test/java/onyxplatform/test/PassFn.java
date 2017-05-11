@@ -3,6 +3,7 @@ package onyxplatform.test;
 import clojure.lang.IPersistentMap;
 
 import org.onyxplatform.api.java.instance.OnyxFn;
+import org.onyxplatform.api.java.utils.Timbre;
 
 /**
  * PassFn is a simple test class extending OnyxFn which is used to test
@@ -17,6 +18,7 @@ public class PassFn extends OnyxFn {
 	 */
 	public PassFn(IPersistentMap m) {
 		super(m);
+		Timbre.info("Finished constructing the PassFn.");
 	}
 
 	/**
@@ -29,6 +31,7 @@ public class PassFn extends OnyxFn {
 	 * @return     an IPersistentMap or PersistentVector of IPersistentMaps containing method output
 	 */
 	public Object consumeSegment(IPersistentMap m) {
+		Timbre.info("Consuming a segment, simply passing through...");
 		return m;
 	}
 }
