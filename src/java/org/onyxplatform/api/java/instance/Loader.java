@@ -30,6 +30,7 @@ public class Loader {
 	public static Class<?> findClass(ClassLoader cl, String fqClassName)
 		throws ClassNotFoundException
 	{
+		System.out.println("Loader::findClass> fqClassName=" + fqClassName);
 		if (cl == null) {
 			return Class.forName(fqClassName);
 		}
