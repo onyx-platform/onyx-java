@@ -45,9 +45,10 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 		classLoader = null;
 	}
 
-	public static Class<?> findClass(String fqClassName)
+	public static Class findClass(String fqClassName)
 		throws ClassNotFoundException
 	{
+		System.out.println("OnyxFn::findClass> " + fqClassName);
 		return Loader.findClass(classLoader, fqClassName);
 	}
 
