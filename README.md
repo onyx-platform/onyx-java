@@ -85,7 +85,7 @@ This section outlines out a general approach for using Onyx-Java by providing a 
 More detailed examples can be found in the test documentation [here](docs/readme/expanded_use_example.md).
 <br><br>
 
-```
+```java
 import clojure.lang.IPersistentMap;
 import clojure.lang.PersistentVector;
 
@@ -150,7 +150,7 @@ BindUtils.releaseInstances(job);
 Inclusion of Java task objects in a workflow requires that you provide a concrete subclass of *OnyxFn*:
 <br><br>
 
-```
+```java
 package onyxplatform.test;
 
 import clojure.lang.IPersistentMap;
@@ -173,7 +173,7 @@ public class PassFn extends OnyxFn {
 Then, using the fully qualified name of your class and any constructor parameters, you use *BindUtils* to generate a matching catalog entry:
 <br><br>
 
-```
+```java
 import org.onyxplatform.api.java.instance.BindUtils;
 
 Catalog catalog = new Catalog();
@@ -194,7 +194,7 @@ This will add the appropriate entry to bind task processing to a specific instan
 You are responsible for instance management as your instances are cached in memory. This is accomplished via the release static methods provided by *BindUtils*:
 <br><br>
 
-```
+```java
 BindUtils.releaseInstances(job);
 ```
 
