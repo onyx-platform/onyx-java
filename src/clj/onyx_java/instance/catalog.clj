@@ -20,6 +20,4 @@
   (contains? task :java-instance/id))
 
 (defn id [task]
-  (let [id (get task :java-instance/id "MISSING")]
-    (println "id> " id)
-    id))
+  (get task :java-instance/id "MISSING"))
