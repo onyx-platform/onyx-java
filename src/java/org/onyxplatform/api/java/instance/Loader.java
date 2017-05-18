@@ -12,7 +12,7 @@ import java.lang.reflect.Constructor;
  */
 public class Loader {
 
-	// Custom Class Loader ----------------------------------------
+	// Custom Class Loader ------------------------------------
 	//
 	// We use a custom class loader so that
 	// the class will be garbage collected
@@ -23,14 +23,15 @@ public class Loader {
 	// loaded into it will never be released.
 	//
 
-	// TODO: Add releaseClasses method to custom class loader
-	//       which nukes the Class cache.
+
+	// Find Class ---------------------------------------------
+	// leverages the custom class loader defaulting to the 
+	// system class class loader if there isn't one.
 	//
 
-	public static Class<?> findClass(ClassLoader cl, String fqClassName)
+	public static Class findClass(ClassLoader cl, String fqClassName)
 		throws ClassNotFoundException
 	{
-		System.out.println("Loader::findClass> fqClassName=" + fqClassName);
 		if (cl == null) {
 			return Class.forName(fqClassName);
 		}
@@ -39,6 +40,7 @@ public class Loader {
 			return null;
 		}
 	}
+
 
 	/**
 	 * Returns an IFn representation of a dynamically loaded object instance derived
@@ -61,7 +63,8 @@ public class Loader {
 	{
 		// Use the environment-wide default class loader for
 		// general classes we want permanently cached.
-	        Class<?> ipmClazz = findClass(null, "clojure.lang.IPersistentMap");
+		ClassLoader cl = null;
+	        Class<?> ipmClazz = findClass(cl, "clojure.lang.IPersistentMap");
 
 		// Use a custom class loader for instances we want to
 		// unload during gc.

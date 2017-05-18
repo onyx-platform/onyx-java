@@ -36,7 +36,7 @@ public class MapFns implements OnyxNames {
  	* Loads the clojure namespaces.
  	*/
 	static {
-    	IFn requireFn = Clojure.var(CORE, Require);
+    		IFn requireFn = Clojure.var(CORE, Require);
 		kwFn = Clojure.var(CORE, Keyword);
 
 		requireFn.invoke(Clojure.read(MAP_FNS));
