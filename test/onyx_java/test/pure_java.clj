@@ -8,16 +8,18 @@
           inputs [{:pass-through "PASSTHROUGH"}]
           expected {:out [{:pass-through "PASSTHROUGH"} :done]}
           outputs (.runJobCollectOutputs testObject [{:pass-through "PASSTHROUGH"}])]
-        (.shutdown testObject)
-        (is (= (first inputs) (first (:out outputs))))))
+      (.releaseAll testObject)
+      (.shutdown testObject)
+      (is (= (first inputs) (first (:out outputs))))))
 
 (deftest single-clj-test
     (let [testObject (SingleCljTest. "onyx-env.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected {:out [{:pass-through "PASSTHROUGH"} :done]}
           outputs (.runJobCollectOutputs testObject [{:pass-through "PASSTHROUGH"}])]
-        (.shutdown testObject)
-        (is (= (first inputs) (first (:out outputs))))))
+      (.releaseAll testObject)
+      (.shutdown testObject)
+      (is (= (first inputs) (first (:out outputs))))))
 
 (deftest kill-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
@@ -27,7 +29,10 @@
           env (.getOnyx testObject) ]
       (try
         (is (.killJob env job-meta))
-        (finally (.shutdown testObject)))))
+        (finally 
+          (do
+            (.releaseAll testObject)
+            (.shutdown testObject))))))
 
 (deftest await-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
@@ -37,7 +42,10 @@
           env (.getOnyx testObject)]
       (try
         (is (.awaitJobCompletion env job-meta))
-        (finally (.shutdown testObject)))))
+        (finally 
+          (do
+            (.releaseAll testObject)
+            (.shutdown testObject))))))
 
 (deftest gc-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
@@ -47,5 +55,8 @@
           env (.getOnyx testObject) ]
       (try
         (is (.gc env))
-        (finally (.shutdown testObject)))))
+        (finally 
+          (do
+            (.releaseAll testObject)
+            (.shutdown testObject))))))
 

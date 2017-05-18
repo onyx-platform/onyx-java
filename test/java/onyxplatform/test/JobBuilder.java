@@ -12,6 +12,8 @@ import org.onyxplatform.api.java.utils.MapFns;
 import org.onyxplatform.api.java.utils.AsyncCatalog;
 import org.onyxplatform.api.java.utils.AsyncLifecycles;
 
+import org.onyxplatform.api.java.instance.BindUtils;
+
 /**
  * JobBuilder is a simple centralized abstract test class useful (and used)
  * for testing single functions in the context of a job backed by simple inputs
@@ -136,6 +138,15 @@ public abstract class JobBuilder {
     public IPersistentMap runJobCollectOutputs(PersistentVector inputs) {
 	    IPersistentMap jmeta = runJob(inputs);
 	    return AsyncLifecycles.collectOutputs(job.getLifecycles(), "out");
+    }
+
+    /**
+     * Releases all native-backed instances 
+     * and invokes gc.
+     */
+    public void releaseAll() {
+	System.out.println("JobBuilder::releaseAll> called");
+	BindUtils.releaseInstances(job);
     }
 
     /**
