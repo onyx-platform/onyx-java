@@ -74,7 +74,6 @@ public class BindUtils implements OnyxNames {
 	 * @param task task associated with the object instance to release for gc
 	 */
 	public static void releaseInstance(Task task) {
-		System.out.println("BindUtils::releaseInstances> called");
 		IPersistentMap e = task.toMap();
 		releaseFn.invoke(e);
 		System.gc();
@@ -86,7 +85,6 @@ public class BindUtils implements OnyxNames {
 	 * @param j the job containing a catalog of tasks to release for gc
 	 */
 	public static void releaseInstances(Job j) {
-		System.out.println("BindUtils::releaseInstances> called");
 		PersistentVector at = j.getCatalog().tasks();
 		releaseAllFn.invoke(at);
 		System.gc();

@@ -52,7 +52,6 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 	}
 
 	public void releaseClassLoader() {
-		System.out.println("OnyxFn::releaseClassLoader> called.");
 		classLoader = null;
 	}
 
