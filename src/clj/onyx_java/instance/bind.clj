@@ -15,6 +15,9 @@
 (defn keyname [id]
   (keyword (str id)))
 
+(defn task-id [task]
+  (keyname (cat/id task)))
+
 (defn instance 
   ([id]
    (if-not (contains? @instances id)
@@ -33,7 +36,7 @@
     (inst-ifn segment)))
 
 (defn release [task]
-  (let [k (keyname (cat/id task))]
+  (let [k (task-id task)]
     (if (contains? @instances k)
       (let [i (instance k)]
         (.releaseClassLoader i)
