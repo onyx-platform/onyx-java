@@ -56,6 +56,7 @@ public interface OnyxNames {
 	public static final String OnyxWindowEntry		= "window-entry";
 	public static final String OnyxTriggers			= "triggers";
 	public static final String OnyxTriggerEntry		= "trigger-entry";
+	public static final String OnyxMetadata			= "metadata";
 
 	/**
 	 * Environment and Peer Control

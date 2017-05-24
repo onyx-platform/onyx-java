@@ -4,6 +4,7 @@ import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.PersistentHashMap;
 import clojure.lang.PersistentArrayMap;
+import clojure.lang.IPersistentMap;
 import clojure.lang.PersistentVector;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public class Job implements OnyxNames
     public FlowConditions flowConditions;
     public Windows windows;
     public Triggers triggers;
+    public Metadata metadata;
 
     /**
      * Constructs a new Job object. Creating a new Job requires passing an existing
@@ -45,6 +47,7 @@ public class Job implements OnyxNames
         flowConditions = new FlowConditions();
         windows = new Windows();
         triggers = new Triggers();
+        metadata = new Metadata();
     }
 
     /**
@@ -62,6 +65,7 @@ public class Job implements OnyxNames
 	    flowConditions = j.flowConditions;
 	    windows = j.windows;
 	    triggers = j.triggers;
+        metadata = j.metadata;
     }
 
     /**
@@ -247,6 +251,20 @@ public class Job implements OnyxNames
     }
 
     /**
+     * Adds an object property for the given keyword to the metadata map
+     * associated with a job. This is useful for associating job information
+     * to a job before it is submitted for running. Returns the updated
+     * job so that methods can be chained.
+     * @param  k             The metadata property to be added
+     * @param  v             The metadata property value
+     * @return        updated job object.
+     */
+    public Job addMetadataProperty(String k, Object v) {
+        metadata.addObjectParameter(k, v);
+        return this;
+    }
+
+    /**
      * Returns the fully described Job as a PersistentArrayMap of key/value pairs,
      * where the key is the keyword associated with the Job component (Catalog, Windows, etc.)
      * and the values are themselves PersistentArrayMaps representing the components themselves.
@@ -276,6 +294,9 @@ public class Job implements OnyxNames
 
     	PersistentVector t = triggers.triggers();
     	job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxTriggers), t);
+
+        IPersistentMap m = metadata.toMap();
+        job = (PersistentArrayMap) job.assoc(kwFn.invoke(OnyxMetadata), m);
 
     	return job;
     }
