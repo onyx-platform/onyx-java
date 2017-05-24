@@ -16,8 +16,8 @@
                  :java-instance/class
                  :java-instance/ctr-args] })
 
-(defn instance? [task-entry]
-  (contains? task-entry :java-instance/id))
+(defn instance? [task]
+  (contains? task :java-instance/id))
 
-(defn id [task-entry]
-  (:java-instance/id task-entry))
+(defn id [task]
+  (get task :java-instance/id "MISSING"))

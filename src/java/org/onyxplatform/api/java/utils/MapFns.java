@@ -21,6 +21,7 @@ import org.onyxplatform.api.java.utils.VectorFns;
 public class MapFns implements OnyxNames {
 
 	protected final static IFn emptyFn;
+	protected final static IFn isEmptyFn;
 	protected final static IFn eMapFn;
 	protected final static IFn ednFn;
 
@@ -36,11 +37,12 @@ public class MapFns implements OnyxNames {
  	* Loads the clojure namespaces.
  	*/
 	static {
-    	IFn requireFn = Clojure.var(CORE, Require);
+    		IFn requireFn = Clojure.var(CORE, Require);
 		kwFn = Clojure.var(CORE, Keyword);
 
 		requireFn.invoke(Clojure.read(MAP_FNS));
 		emptyFn = Clojure.var(MAP_FNS, EmptyMap);
+		isEmptyFn = Clojure.var(MAP_FNS, IsEmptyMap);
 		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
 		ednFn = Clojure.var(MAP_FNS, EdnFromRsrc);
 
@@ -58,6 +60,10 @@ public class MapFns implements OnyxNames {
 	 */
 	public static IPersistentMap emptyMap() {
 		return (IPersistentMap) emptyFn.invoke();
+	}
+
+	public static boolean isEmpty(IPersistentMap m) {
+		return (boolean) isEmptyFn.invoke(m);
 	}
 
 	/**

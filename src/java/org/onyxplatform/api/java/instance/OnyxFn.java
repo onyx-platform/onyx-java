@@ -33,6 +33,9 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 	// and the class itself is never gc'ed if loaded by
 	// the default class loader which is always reachable.
 	//
+	// This basically binds a classloader to an instance
+	// which compartmentalizes each class by instance. 
+	//
 
 	protected static ClassLoader classLoader = null;
 
@@ -40,21 +43,17 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 		classLoader = cl;
 	}
 
-	public void releaseClassLoader() {
-		// TODO: Release all class references in the class loader
-		classLoader = null;
-	}
-
-	public static Class findClass(String fqClassName)
-		throws ClassNotFoundException
-	{
-		System.out.println("OnyxFn::findClass> " + fqClassName);
-		return Loader.findClass(classLoader, fqClassName);
-	}
-
 
 	// Instance --------------------------------------
 	//
+
+	public ClassLoader getClassLoader() {
+		return classLoader;
+	}
+
+	public void releaseClassLoader() {
+		classLoader = null;
+	}
 
 	protected IPersistentMap cntrArgs;
 

@@ -46,6 +46,9 @@
 (defn empty-map []
   {})
 
+(defn empty-map? [m]
+  (empty? m))
+
 (defn edn-from-resources [rsrc-path]
   (to-onyx-map (-> rsrc-path resource slurp read-string)))
 

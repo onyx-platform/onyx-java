@@ -81,7 +81,13 @@ public class OnyxEnv {
 		setVirtualPeerCount(((Long) MapFns.get(setupMap, "virtualPeerCount")).intValue());
 		loadEnvConfig((String) MapFns.get(setupMap, "envEdn"));
 		loadPeerConfig((String) MapFns.get(setupMap, "peerEdn"));
-		configureLog((String) MapFns.get(setupMap, "logEdn"));
+		String logEdn = (String) MapFns.get(setupMap, "logEdn");
+
+		// Don't force people to use logging
+		if (null != logEdn) {
+			configureLog(logEdn);
+		}
+
 		return this;
 	}
 

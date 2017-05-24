@@ -24,7 +24,7 @@ public class SingleJavaTest extends JobBuilder {
      * @param  onyxEnvConfig path to the EDN file specifying how to set up the job
      */
 	public SingleJavaTest(String onyxEnvConfig) {
-	super(onyxEnvConfig, 5, 50);
+		super(onyxEnvConfig, 5, 50);
 	}
 
     /**

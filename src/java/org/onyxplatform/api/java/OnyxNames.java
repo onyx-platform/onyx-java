@@ -56,6 +56,7 @@ public interface OnyxNames {
 	public static final String OnyxWindowEntry		= "window-entry";
 	public static final String OnyxTriggers			= "triggers";
 	public static final String OnyxTriggerEntry		= "trigger-entry";
+	public static final String OnyxMetadata			= "metadata";
 
 	/**
 	 * Environment and Peer Control
@@ -109,6 +110,7 @@ public interface OnyxNames {
 
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
 	public static final String EmptyMap 		= "empty-map";
+	public static final String IsEmptyMap 		= "empty-map?";
 	public static final String ToOnyxMap 		= "to-onyx-map";
 	public static final String EdnFromRsrc 		= "edn-from-resources";
 

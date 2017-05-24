@@ -1,7 +1,7 @@
 (ns onyx-java.instance.bind
   (:gen-class)
   (:require [onyx-java.instance.catalog :as cat])
-  (:import org.onyxplatform.api.java.instance.Loader))
+  (:import [org.onyxplatform.api.java.instance Loader OnyxFn]))
 
 (defn exists?  [c]
   (let [loader (.getContextClassLoader (Thread/currentThread))]
@@ -15,12 +15,14 @@
 (defn keyname [id]
   (keyword (str id)))
 
+(defn task-id [task]
+  (keyname (cat/id task)))
+
 (defn instance 
   ([id]
-   (let [k (keyname id)]
-     (if-not (contains? @instances k)
-       nil
-       (get @instances k))))
+   (if-not (contains? @instances id)
+     nil 
+     (get @instances id)))
   ([id fq-class-name ctr-args]
     (let [k (keyname id)]
       (if (contains? @instances k)
@@ -34,9 +36,11 @@
     (inst-ifn segment)))
 
 (defn release [task]
-  (let [k (keyname (cat/id task))]
+  (let [k (task-id task)]
     (if (contains? @instances k)
-      (swap! instances dissoc k))))
+      (let [i (instance k)]
+        (.releaseClassLoader i)
+        (swap! instances dissoc k)))))
 
 (defn release-all [catalog]
   (doseq [task catalog]
