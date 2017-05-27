@@ -1,5 +1,9 @@
 package org.onyxplatform.api.java.instance;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.Thread;
+
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.IPersistentMap;
@@ -66,6 +70,64 @@ public class BindUtils implements OnyxNames {
 		OnyxMap e = MapFns.toOnyxMap(methodCat);
 		Task methodTask = new Task(e);
 		return catalog.addTask(methodTask);
+	}
+
+	/**
+	 * Returns an IFn representation of a dynamically loaded object instance derived
+	 * from a user class extending OnyxFn.
+	 * @param  fqClassName   The fully qualified classname of the class from which to derive an object instance
+	 * @param  args          An IPersistentMap of constructor args to use in object instance creation
+	 * @return                                             IFn representation of the object instance
+	 * @throws ClassNotFoundException                      Class cannot be found
+	 * @throws NoSuchMethodException                       Class doesnt have a proper constructor
+	 * @throws InstantiationException                      Object cannot be instantiated do to any instantiation error
+	 * @throws IllegalAccessException                      method or class definition was unavailable
+	 * @throws java.lang.reflect.InvocationTargetException an abstracted error in the method call, unpack to see actual cause
+	 */
+	public static IFn loadOnyxFn(String fqClassName, IPersistentMap args)
+		throws ClassNotFoundException,
+		NoSuchMethodException,
+		InstantiationException,
+		IllegalAccessException,
+		java.lang.reflect.InvocationTargetException
+	{
+		System.out.println("fqClassName=" + fqClassName);
+
+		ClassLoader parent = Thread.currentThread().getContextClassLoader();
+		Loader loader = new Loader(parent);
+
+		Class<?> ifnClazz = loader.loadOnyxFnClass(fqClassName);
+
+		System.out.println("ifnClazz=" + ifnClazz);
+
+		final Constructor[] declaredCtrs = ifnClazz.getDeclaredConstructors();
+		for (Constructor c : declaredCtrs) {
+			System.out.println("ifnClazz ctr=" + c.getName());
+		}
+
+	        Class<?> ipmClazz = loader.loadClass("clojure.lang.IPersistentMap");
+
+		Class<?> ofClazz = loader.loadClass("org.onyxplatform.api.java.instance.OnyxFn");
+
+		System.out.println("ipmClazz=" + ipmClazz);
+
+		Constructor ctr = ifnClazz.getConstructor(new Class[] { ipmClazz });
+
+		System.out.println("ctr=" + ctr);
+
+		Object instance = ctr.newInstance(new Object[] { args });
+
+		System.out.println("inst=" + instance);
+
+		System.out.println("ofClazz=" + ofClazz);
+
+		//OnyxFn ofInst = (OnyxFn)instance;
+		//ofInst.setClassLoader(loader);
+
+		System.out.println("set instance");
+
+		//return (IFn)ofInst;
+		return (IFn)instance;
 	}
 
 	/**

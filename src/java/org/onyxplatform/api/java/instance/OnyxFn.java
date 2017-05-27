@@ -21,9 +21,8 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 
 	// Class -------------------------------------------
 	//
-	// The ClassLoader member is added by the Loader
-	// with affordance for null-ing it out when this object
-	// is removed. This ensures that when all instances
+	// The ClassLoader member is added during instance 
+	// creation.
 	// of the class are no longer referenced the class
 	// itself will also be garbage collected.
 	//
@@ -37,25 +36,10 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 	// which compartmentalizes each class by instance. 
 	//
 
-	protected static ClassLoader classLoader = null;
-
-	public static void setClassLoader(ClassLoader cl) {
-		classLoader = cl;
-	}
-
-
-	// Instance --------------------------------------
-	//
-
-	public ClassLoader getClassLoader() {
-		return classLoader;
-	}
-
-	public void releaseClassLoader() {
-		classLoader = null;
-	}
+	protected ClassLoader classLoader = null;
 
 	protected IPersistentMap cntrArgs;
+
 
 	/**
 	 * The constructor MUST be overridden by the concrete subclass.
@@ -66,6 +50,18 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 	 */
 	public OnyxFn(IPersistentMap m) {
 		cntrArgs = m;
+	}
+
+	public void setClassLoader(ClassLoader cl) {
+		classLoader = cl;
+	}
+
+	public ClassLoader getClassLoader() {
+		return classLoader;
+	}
+
+	public void releaseClassLoader() {
+		classLoader = null;
 	}
 
 	/**

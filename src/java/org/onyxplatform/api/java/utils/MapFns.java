@@ -22,6 +22,7 @@ public class MapFns implements OnyxNames {
 
 	protected final static IFn emptyFn;
 	protected final static IFn isEmptyFn;
+	protected final static IFn containsFn;
 	protected final static IFn eMapFn;
 	protected final static IFn ednFn;
 
@@ -43,6 +44,7 @@ public class MapFns implements OnyxNames {
 		requireFn.invoke(Clojure.read(MAP_FNS));
 		emptyFn = Clojure.var(MAP_FNS, EmptyMap);
 		isEmptyFn = Clojure.var(MAP_FNS, IsEmptyMap);
+		containsFn = Clojure.var(MAP_FNS, Contains);
 		eMapFn = Clojure.var(MAP_FNS, ToOnyxMap);
 		ednFn = Clojure.var(MAP_FNS, EdnFromRsrc);
 
@@ -65,6 +67,20 @@ public class MapFns implements OnyxNames {
 	public static boolean isEmpty(IPersistentMap m) {
 		return (boolean) isEmptyFn.invoke(m);
 	}
+
+	public static boolean isEmpty(OnyxMap m) {
+		return isEmpty(m.toMap());
+	}
+
+	public static boolean contains(IPersistentMap m, String key) {
+		Object k = kwFn.invoke(key);
+		return (boolean) containsFn.invoke(m, k);
+	}
+
+	public static boolean contains(OnyxMap m, String key) {
+		return contains(m.toMap(), key);
+	}
+
 
 	/**
 	 * Converts an IPersistentMap to an OnyxMap object.
@@ -98,6 +114,17 @@ public class MapFns implements OnyxNames {
 	}
 
 	/**
+	 * Retrieves a value for the specified key from the given IPersistentMap.
+	 * Does not alter the map.
+	 * @param  m             source map
+	 * @param  key           key to retrive the value for
+	 * @return                value Object associated by key
+	 */
+	public static Object get(OnyxMap m, String key) {
+		return get(m.toMap(), key);
+	}
+
+	/**
 	 * Adds a new key-value pair (string-object) to the given IPersistentMap.
 	 * @param  m             map to add the new pair
 	 * @param  key           key string to add
@@ -110,6 +137,17 @@ public class MapFns implements OnyxNames {
 	}
 
 	/**
+	 * Adds a new key-value pair (string-object) to the given IPersistentMap.
+	 * @param  m             map to add the new pair
+	 * @param  key           key string to add
+	 * @param  value         value object to add
+	 * @return               updated map with new key-value pair
+	 */
+	public static OnyxMap assoc(OnyxMap m, String key, Object value) {
+		return toOnyxMap( assoc(m.toMap(), key, value) );
+	}
+
+	/**
 	 * Removes a key-value pair (string-object) from the given IPersistentMap.
 	 * @param  m             The map for which to remove the key-value pair
 	 * @param  key          The name of the key to remove
@@ -118,6 +156,16 @@ public class MapFns implements OnyxNames {
 	public static IPersistentMap dissoc(IPersistentMap m, String key) {
 		Object k = kwFn.invoke(key);
 		return (IPersistentMap)rawDissocFn.invoke(m, k);
+	}
+
+	/**
+	 * Removes a key-value pair (string-object) from the given IPersistentMap.
+	 * @param  m             The map for which to remove the key-value pair
+	 * @param  key          The name of the key to remove
+	 * @return                The updated map without the key-value pair
+	 */
+	public static OnyxMap dissoc(OnyxMap m, String key) {
+		return toOnyxMap( dissoc(m.toMap(), key) );
 	}
 
 	/**
@@ -159,5 +207,16 @@ public class MapFns implements OnyxNames {
 	 */
 	public static IPersistentMap merge(IPersistentMap m, IPersistentMap m2) {
 		return (IPersistentMap)rawMergeFn.invoke(m, m2);
+	}
+
+	/**
+	 * Merges two maps together, combining their key/value pairs. The result
+	 * map will have a set of keys as (kset1 + kset2). Returns the new map.
+	 * @param  m             First map to merge
+	 * @param  m2            Second map to merge
+	 * @return              The merged map
+	 */
+	public static OnyxMap merge(OnyxMap m, OnyxMap m2) {
+		return toOnyxMap( merge(m.toMap(), m2.toMap()) );
 	}
 }

@@ -1,7 +1,7 @@
 (ns onyx-java.instance.bind
   (:gen-class)
   (:require [onyx-java.instance.catalog :as cat])
-  (:import [org.onyxplatform.api.java.instance Loader OnyxFn]))
+  (:import [org.onyxplatform.api.java.instance BindUtils OnyxFn]))
 
 (defn exists?  [c]
   (let [loader (.getContextClassLoader (Thread/currentThread))]
@@ -25,9 +25,11 @@
      (get @instances id)))
   ([id fq-class-name ctr-args]
     (let [k (keyname id)]
+      (println "bind> loading class=" fq-class-name)
       (if (contains? @instances k)
         (get @instances k) 
-        (let [i (Loader/loadOnyxFn fq-class-name ctr-args)]
+        (let [i (BindUtils/loadOnyxFn fq-class-name ctr-args)]
+          (println "bind> instance=" i)
           (swap! instances assoc k i)
           i)))))
   

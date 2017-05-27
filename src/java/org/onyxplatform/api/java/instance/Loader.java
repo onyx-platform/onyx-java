@@ -5,75 +5,89 @@ import clojure.lang.IFn;
 
 import java.lang.reflect.Constructor;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.DataInputStream;
+
+import org.onyxplatform.api.java.OnyxMap;
+import org.onyxplatform.api.java.utils.MapFns;
+
 /**
- * Loader is an internally used class that dynamically loads object instances
- * derived from user classes which extend OnyxFn.
- * This class should not be used by applications programmers using the Onyx-Java package.
- */
-public class Loader {
+* Loader is a basic custom class loader used by BindUtils during 
+* instance creation ensuring that the OnyxFn class (and its derived classes) 
+* will be garbage collected when the instance is released. 
+*
+* This is to ensure that the class will be unloaded from memory along
+* with any native library loaded into it. If this is not done then the
+* default system class loader will always have a reachable reference to
+* any class loaded preventing memory reclimation of underlying native
+* libraries.
+*/
+public class Loader extends ClassLoader {
+	
+	protected OnyxMap cache = new OnyxMap();
 
-	// Custom Class Loader ------------------------------------
-	//
-	// We use a custom class loader so that
-	// the class will be garbage collected
-	// when its no longer referenced.
-	//
-	// Otherwise the class will remain in
-	// memory and any native library
-	// loaded into it will never be released.
-	//
-
-
-	// Find Class ---------------------------------------------
-	// leverages the custom class loader defaulting to the 
-	// system class class loader if there isn't one.
-	//
-
-	public static Class findClass(ClassLoader cl, String fqClassName)
-		throws ClassNotFoundException
-	{
-		if (cl == null) {
-			return Class.forName(fqClassName);
-		}
-		else {
-
-			return null;
-		}
+	public Loader(ClassLoader parent) {
+		super(parent);
 	}
 
 
-	/**
-	 * Returns an IFn representation of a dynamically loaded object instance derived
-	 * from a user class extending OnyxFn.
-	 * @param  fqClassName   The fully qualified classname of the class from which to derive an object instance
-	 * @param  args          An IPersistentMap of constructor args to use in object instance creation
-	 * @return                                             IFn representation of the object instance
-	 * @throws ClassNotFoundException                      Class cannot be found
-	 * @throws NoSuchMethodException                       Class doesnt have a proper constructor
-	 * @throws InstantiationException                      Object cannot be instantiated do to any instantiation error
-	 * @throws IllegalAccessException                      method or class definition was unavailable
-	 * @throws java.lang.reflect.InvocationTargetException an abstracted error in the method call, unpack to see actual cause
-	 */
-	public static IFn loadOnyxFn(String fqClassName, IPersistentMap args)
-		throws ClassNotFoundException,
-		NoSuchMethodException,
-		InstantiationException,
-		IllegalAccessException,
-		java.lang.reflect.InvocationTargetException
+	public Class loadOnyxFnClass(String name) 
+		throws ClassNotFoundException, java.lang.SecurityException
 	{
-		// Use the environment-wide default class loader for
-		// general classes we want permanently cached.
-		ClassLoader cl = null;
-	        Class<?> ipmClazz = findClass(cl, "clojure.lang.IPersistentMap");
+		return loadClass(name);
+	}
 
-		// Use a custom class loader for instances we want to
-		// unload during gc.
-		ClassLoader loader = null;
-		Class<?> ifnClazz = findClass(loader, fqClassName);
 
-		Constructor ctr = ifnClazz.getConstructor(new Class[] { ipmClazz });
-		OnyxFn instance = (OnyxFn)ctr.newInstance(new Object[] { args });
-		instance.setClassLoader(loader);
-		return (IFn)instance;
+	@Override
+	public Class loadClass(String n) 
+		throws ClassNotFoundException, java.lang.SecurityException
+	{
+		if (n.startsWith("java.") || n.startsWith("clojure.")) {
+
+			return super.loadClass(n);
+
+		} else if (MapFns.contains(cache, n)) {
+
+			return (Class)MapFns.get(cache, n);
+
+		} else {
+
+			// Convert '.' to '/'
+			String file = n.replace('.', File.separatorChar) + ".class";
+			byte[] b = null;
+			try {
+			//	System.out.println("Loader::loadClass> file=" + file);
+				b = loadClassData(file);
+				Class c = defineClass(n, b, 0, b.length);
+				resolveClass(c);
+				System.out.println("Loader::loadClass> resolved c=" + c);
+				cache = MapFns.assoc(cache, n, c);
+				return c;
+	
+			} catch (IOException e) {
+				System.out.println("Loader::loadClass> IOEXCEPTION! n=" + n);
+				e.printStackTrace();
+				return null;
+			}
+		}	
+	}
+
+	private byte[] loadClassData(String name) 
+		throws IOException 
+	{
+		InputStream stream = getClass().getClassLoader().getResourceAsStream(name);
+
+		int size = stream.available();
+		byte buff[] = new byte[size];
+		DataInputStream in = new DataInputStream(stream);
+		in.readFully(buff);
+		in.close();
+		return buff;
+	}
+
+	public void clearCache() {
+		cache = new OnyxMap();
 	}
 }
