@@ -1,14 +1,13 @@
 package org.onyxplatform.api.java.instance;
 
-import clojure.lang.IPersistentMap;
-import clojure.lang.IFn;
-
-import java.lang.reflect.Constructor;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.DataInputStream;
+import java.lang.Thread;
+
+import clojure.lang.IPersistentMap;
+import clojure.lang.IFn;
 
 import org.onyxplatform.api.java.OnyxMap;
 import org.onyxplatform.api.java.utils.MapFns;
@@ -28,24 +27,20 @@ public class Loader extends ClassLoader {
 	
 	protected OnyxMap cache = new OnyxMap();
 
-	public Loader(ClassLoader parent) {
-		super(parent);
+	public Loader() {
+		super(Thread.currentThread().getContextClassLoader());
 	}
-
-
-	public Class loadOnyxFnClass(String name) 
-		throws ClassNotFoundException, java.lang.SecurityException
-	{
-		return loadClass(name);
-	}
-
 
 	@Override
-	public Class loadClass(String n) 
+	public Class<?> loadClass(String n) 
 		throws ClassNotFoundException, java.lang.SecurityException
 	{
-		if (n.startsWith("java.") || n.startsWith("clojure.")) {
-
+		if (n.startsWith("java.") 
+			|| 
+		    n.startsWith("clojure.")
+		    	||
+		    n.startsWith("org.onyxplatform.api.java.")) 
+		{
 			return super.loadClass(n);
 
 		} else if (MapFns.contains(cache, n)) {
@@ -58,11 +53,9 @@ public class Loader extends ClassLoader {
 			String file = n.replace('.', File.separatorChar) + ".class";
 			byte[] b = null;
 			try {
-			//	System.out.println("Loader::loadClass> file=" + file);
 				b = loadClassData(file);
 				Class c = defineClass(n, b, 0, b.length);
 				resolveClass(c);
-				System.out.println("Loader::loadClass> resolved c=" + c);
 				cache = MapFns.assoc(cache, n, c);
 				return c;
 	
@@ -85,9 +78,5 @@ public class Loader extends ClassLoader {
 		in.readFully(buff);
 		in.close();
 		return buff;
-	}
-
-	public void clearCache() {
-		cache = new OnyxMap();
 	}
 }

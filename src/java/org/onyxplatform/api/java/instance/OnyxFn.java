@@ -19,27 +19,7 @@ import org.onyxplatform.api.java.utils.MapFns;
  */
 public abstract class OnyxFn extends AFn implements OnyxNames {
 
-	// Class -------------------------------------------
-	//
-	// The ClassLoader member is added during instance 
-	// creation.
-	// of the class are no longer referenced the class
-	// itself will also be garbage collected.
-	//
-	// This matters for native code-backed class loading.
-	// Java has no affordances for unloading libraries
-	// pulled in by classes because the library is class-level bound
-	// and the class itself is never gc'ed if loaded by
-	// the default class loader which is always reachable.
-	//
-	// This basically binds a classloader to an instance
-	// which compartmentalizes each class by instance. 
-	//
-
-	protected ClassLoader classLoader = null;
-
 	protected IPersistentMap cntrArgs;
-
 
 	/**
 	 * The constructor MUST be overridden by the concrete subclass.
@@ -50,18 +30,6 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 	 */
 	public OnyxFn(IPersistentMap m) {
 		cntrArgs = m;
-	}
-
-	public void setClassLoader(ClassLoader cl) {
-		classLoader = cl;
-	}
-
-	public ClassLoader getClassLoader() {
-		return classLoader;
-	}
-
-	public void releaseClassLoader() {
-		classLoader = null;
 	}
 
 	/**
@@ -87,7 +55,6 @@ public abstract class OnyxFn extends AFn implements OnyxNames {
 
 	public Object invoke(Object arg1) {
 		IPersistentMap segment = (IPersistentMap) arg1;
-		// TODO: check return type.
 		return consumeSegment(segment);
 	}
 }

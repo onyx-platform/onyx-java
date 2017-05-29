@@ -111,7 +111,7 @@ public interface OnyxNames {
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
 	public static final String EmptyMap 		= "empty-map";
 	public static final String IsEmptyMap 		= "empty-map?";
-	public static final String Contains 		= "contains?";
+	public static final String Contains 		= "contains-key?";
 	public static final String ToOnyxMap 		= "to-onyx-map";
 	public static final String EdnFromRsrc 		= "edn-from-resources";
 

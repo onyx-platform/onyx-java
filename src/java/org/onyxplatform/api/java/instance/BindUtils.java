@@ -84,50 +84,19 @@ public class BindUtils implements OnyxNames {
 	 * @throws IllegalAccessException                      method or class definition was unavailable
 	 * @throws java.lang.reflect.InvocationTargetException an abstracted error in the method call, unpack to see actual cause
 	 */
-	public static IFn loadOnyxFn(String fqClassName, IPersistentMap args)
+	public static IFn loadOnyxFn(Loader loader, String fqClassName, IPersistentMap args)
 		throws ClassNotFoundException,
 		NoSuchMethodException,
 		InstantiationException,
 		IllegalAccessException,
 		java.lang.reflect.InvocationTargetException
 	{
-		System.out.println("fqClassName=" + fqClassName);
-
-		ClassLoader parent = Thread.currentThread().getContextClassLoader();
-		Loader loader = new Loader(parent);
-
-		Class<?> ifnClazz = loader.loadOnyxFnClass(fqClassName);
-
-		System.out.println("ifnClazz=" + ifnClazz);
-
-		final Constructor[] declaredCtrs = ifnClazz.getDeclaredConstructors();
-		for (Constructor c : declaredCtrs) {
-			System.out.println("ifnClazz ctr=" + c.getName());
-		}
+		Class<?> ifnClazz = loader.loadClass(fqClassName);
+		System.out.println("class " + ifnClazz);
 
 	        Class<?> ipmClazz = loader.loadClass("clojure.lang.IPersistentMap");
-
-		Class<?> ofClazz = loader.loadClass("org.onyxplatform.api.java.instance.OnyxFn");
-
-		System.out.println("ipmClazz=" + ipmClazz);
-
 		Constructor ctr = ifnClazz.getConstructor(new Class[] { ipmClazz });
-
-		System.out.println("ctr=" + ctr);
-
-		Object instance = ctr.newInstance(new Object[] { args });
-
-		System.out.println("inst=" + instance);
-
-		System.out.println("ofClazz=" + ofClazz);
-
-		//OnyxFn ofInst = (OnyxFn)instance;
-		//ofInst.setClassLoader(loader);
-
-		System.out.println("set instance");
-
-		//return (IFn)ofInst;
-		return (IFn)instance;
+		return (IFn) ctr.newInstance(new Object[] { args });
 	}
 
 	/**
