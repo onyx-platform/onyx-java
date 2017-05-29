@@ -22,7 +22,7 @@
       (if (contains? @instances k)
         (get @instances k) 
         (let [loader (Loader.)
-              i (BindUtils/loadOnyxFn loader fq-class-name ctr-args)]
+              i (BindUtils/loadFn loader fq-class-name ctr-args)]
           (swap! loaders assoc k loader)
           (swap! instances assoc k i)
           i)))))

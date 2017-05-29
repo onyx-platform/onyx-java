@@ -84,7 +84,7 @@ public class BindUtils implements OnyxNames {
 	 * @throws IllegalAccessException                      method or class definition was unavailable
 	 * @throws java.lang.reflect.InvocationTargetException an abstracted error in the method call, unpack to see actual cause
 	 */
-	public static IFn loadOnyxFn(Loader loader, String fqClassName, IPersistentMap args)
+	public static IFn loadFn(Loader loader, String fqClassName, IPersistentMap args)
 		throws ClassNotFoundException,
 		NoSuchMethodException,
 		InstantiationException,
