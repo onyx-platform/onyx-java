@@ -3,13 +3,6 @@
   (:require [onyx-java.instance.catalog :as cat])
   (:import [org.onyxplatform.api.java.instance BindUtils Loader OnyxFn]))
 
-(defn exists?  [c]
-  (let [loader (.getContextClassLoader (Thread/currentThread))]
-    (try
-      (Class/forName c false loader)
-      true
-      (catch ClassNotFoundException cnfe false))))
-
 (def instances (atom {}))
 (def loaders (atom {}))
 
