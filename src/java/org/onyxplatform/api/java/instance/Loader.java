@@ -35,6 +35,9 @@ public class Loader extends ClassLoader {
 	public Class<?> loadClass(String n) 
 		throws ClassNotFoundException, java.lang.SecurityException
 	{
+		return super.loadClass(n);
+
+		/*
 		if (n.startsWith("java.") 
 			|| 
 		    n.startsWith("clojure.")
@@ -65,6 +68,8 @@ public class Loader extends ClassLoader {
 				return null;
 			}
 		}	
+		*/
+
 	}
 
 	private byte[] loadClassData(String name) 
