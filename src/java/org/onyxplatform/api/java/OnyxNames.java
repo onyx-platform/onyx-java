@@ -128,4 +128,8 @@ public interface OnyxNames {
 	public static final String TIMBRE = "onyx-java.utils.timbre";
 	public static final String TIMBRE_LOG_KEY = "onyx.log/config";
 	public static final String MessageFn = "info-message";
+	public static final String ErrorFn = "error-message";
+	public static final String DebugFn = "debug-message";
+	public static final String TraceFn = "trace-message";
+	public static final String WarnFn = "warn-message";
 }
