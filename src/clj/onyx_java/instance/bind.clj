@@ -1,16 +1,10 @@
 (ns onyx-java.instance.bind
   (:gen-class)
   (:require [onyx-java.instance.catalog :as cat])
-  (:import [org.onyxplatform.api.java.instance Loader OnyxFn]))
-
-(defn exists?  [c]
-  (let [loader (.getContextClassLoader (Thread/currentThread))]
-    (try
-      (Class/forName c false loader)
-      true
-      (catch ClassNotFoundException cnfe false))))
+  (:import [org.onyxplatform.api.java.instance BindUtils Loader OnyxFn]))
 
 (def instances (atom {}))
+(def loaders (atom {}))
 
 (defn keyname [id]
   (keyword (str id)))
@@ -27,7 +21,9 @@
     (let [k (keyname id)]
       (if (contains? @instances k)
         (get @instances k) 
-        (let [i (Loader/loadOnyxFn fq-class-name ctr-args)]
+        (let [loader (Loader.)
+              i (BindUtils/loadFn loader fq-class-name ctr-args)]
+          (swap! loaders assoc k loader)
           (swap! instances assoc k i)
           i)))))
   
@@ -39,7 +35,7 @@
   (let [k (task-id task)]
     (if (contains? @instances k)
       (let [i (instance k)]
-        (.releaseClassLoader i)
+        (swap! loaders dissoc k)    
         (swap! instances dissoc k)))))
 
 (defn release-all [catalog]
