@@ -111,6 +111,7 @@ public interface OnyxNames {
 	public static final String MAP_FNS     		= "onyx-java.utils.map-fns";
 	public static final String EmptyMap 		= "empty-map";
 	public static final String IsEmptyMap 		= "empty-map?";
+	public static final String Contains 		= "contains-key?";
 	public static final String ToOnyxMap 		= "to-onyx-map";
 	public static final String EdnFromRsrc 		= "edn-from-resources";
 
@@ -128,4 +129,8 @@ public interface OnyxNames {
 	public static final String TIMBRE = "onyx-java.utils.timbre";
 	public static final String TIMBRE_LOG_KEY = "onyx.log/config";
 	public static final String MessageFn = "info-message";
+	public static final String ErrorFn = "error-message";
+	public static final String DebugFn = "debug-message";
+	public static final String TraceFn = "trace-message";
+	public static final String WarnFn = "warn-message";
 }

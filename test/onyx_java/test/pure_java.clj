@@ -12,7 +12,7 @@
       (.shutdown testObject)
       (is (= (first inputs) (first (:out outputs))))))
 
-(deftest single-clj-test
+#_(deftest single-clj-test
     (let [testObject (SingleCljTest. "onyx-env.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected {:out [{:pass-through "PASSTHROUGH"} :done]}
@@ -21,7 +21,7 @@
       (.shutdown testObject)
       (is (= (first inputs) (first (:out outputs))))))
 
-(deftest kill-test
+#_(deftest kill-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected true
@@ -34,7 +34,7 @@
             (.releaseAll testObject)
             (.shutdown testObject))))))
 
-(deftest await-test
+#_(deftest await-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected "Success!"
@@ -47,7 +47,7 @@
             (.releaseAll testObject)
             (.shutdown testObject))))))
 
-(deftest gc-test
+#_(deftest gc-test
     (let [testObject (SingleJavaTest. "onyx-env.edn")
           inputs [{:pass-through "PASSTHROUGH"}]
           expected "Success!"

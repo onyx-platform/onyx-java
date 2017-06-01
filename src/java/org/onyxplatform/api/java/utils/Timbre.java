@@ -61,4 +61,52 @@ public class Timbre implements OnyxNames {
         messageFn.invoke(message);
     }
 
+    /**
+     * Passes the contents as a debug level message to the log.
+     * @param message An object containing a debug level message to be passed to the log
+     */
+    public static void debug(Object message){
+        IFn requireFn = Clojure.var(CORE, Require);
+        requireFn.invoke(Clojure.read(TIMBRE));
+        IFn debugFn = Clojure.var(TIMBRE, DebugFn);
+        debugFn.invoke(message);
+    }
+
+
+    /**
+     * Passes the contents as an error level message to the log.
+     * @param message An object containing an error level message to be passed to the log
+     */
+    public static void error(Object message){
+        IFn requireFn = Clojure.var(CORE, Require);
+        requireFn.invoke(Clojure.read(TIMBRE));
+        IFn errorFn = Clojure.var(TIMBRE, ErrorFn);
+        errorFn.invoke(message);
+    }
+
+
+    /**
+     * Passes the contents as a trace level message to the log.
+     * @param message An object containing a trace level message to be passed to the log
+     */
+    public static void trace(Object message){
+        IFn requireFn = Clojure.var(CORE, Require);
+        requireFn.invoke(Clojure.read(TIMBRE));
+        IFn traceFn = Clojure.var(TIMBRE, TraceFn);
+        traceFn.invoke(message);
+    }
+
+
+    /**
+     * Passes the contents as a warn level message to the log.
+     * @param message An object containing a warn level message to be passed to the log
+     */
+    public static void warn(Object message){
+        IFn requireFn = Clojure.var(CORE, Require);
+        requireFn.invoke(Clojure.read(TIMBRE));
+        IFn warnFn = Clojure.var(TIMBRE, WarnFn);
+        warnFn.invoke(message);
+    }
+
+
 }

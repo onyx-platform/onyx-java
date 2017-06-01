@@ -1,5 +1,9 @@
 package org.onyxplatform.api.java.instance;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.Thread;
+
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import clojure.lang.IPersistentMap;
@@ -66,6 +70,33 @@ public class BindUtils implements OnyxNames {
 		OnyxMap e = MapFns.toOnyxMap(methodCat);
 		Task methodTask = new Task(e);
 		return catalog.addTask(methodTask);
+	}
+
+	/**
+	 * Returns an IFn representation of a dynamically loaded object instance derived
+	 * from a user class extending OnyxFn.
+	 * @param  fqClassName   The fully qualified classname of the class from which to derive an object instance
+	 * @param  args          An IPersistentMap of constructor args to use in object instance creation
+	 * @return                                             IFn representation of the object instance
+	 * @throws ClassNotFoundException                      Class cannot be found
+	 * @throws NoSuchMethodException                       Class doesnt have a proper constructor
+	 * @throws InstantiationException                      Object cannot be instantiated do to any instantiation error
+	 * @throws IllegalAccessException                      method or class definition was unavailable
+	 * @throws java.lang.reflect.InvocationTargetException an abstracted error in the method call, unpack to see actual cause
+	 */
+	public static IFn loadFn(Loader loader, String fqClassName, IPersistentMap args)
+		throws ClassNotFoundException,
+		NoSuchMethodException,
+		InstantiationException,
+		IllegalAccessException,
+		java.lang.reflect.InvocationTargetException
+	{
+		Class<?> ifnClazz = loader.loadClass(fqClassName);
+		System.out.println("class " + ifnClazz);
+
+	        Class<?> ipmClazz = loader.loadClass("clojure.lang.IPersistentMap");
+		Constructor ctr = ifnClazz.getConstructor(new Class[] { ipmClazz });
+		return (IFn) ctr.newInstance(new Object[] { args });
 	}
 
 	/**
