@@ -11,6 +11,12 @@ The package provides the following features:
 </ul>
 <br>
 
+## Installation
+
+```
+[org.onyxplatform/onyx-java "0.1.0"]
+```
+
 ## Build Status
 
 CircleCI Tests:  [![CircleCI](https://circleci.com/gh/RBerkheimer/onyx-java.svg?style=svg)](https://circleci.com/gh/RBerkheimer/onyx-java)
